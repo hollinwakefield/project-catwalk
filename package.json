@@ -1,0 +1,25 @@
+{
+  "name": "project-catwalk",
+  "version": "1.0.0",
+  "description": "FEC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KFCNuggets/project-catwalk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KFCNuggets/project-catwalk/issues"
+  },
+  "homepage": "https://github.com/KFCNuggets/project-catwalk#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.12",
+    "webpack": "^5.38.1"
+  }
+}
