@@ -1,3 +1,7 @@
+# manual ignore
+bundle.js
+config.js
+
 # Logs
 logs
 *.log
@@ -80,7 +84,7 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+#dist
 
 # Gatsby files
 .cache/
