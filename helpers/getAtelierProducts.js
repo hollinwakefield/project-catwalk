@@ -10,14 +10,16 @@ const getAtelierProducts = () => {
   };
 
   axios(options)
-    .then('publiclydissed')
     .then((res) => {
       console.log(res.data);
+    })
+    .catch((err) => {
+      console.log('ERROR: ', err);
     });
 };
 
+// getAtelierProducts();
 
 module.exports = {
   getAtelierProducts,
-  getAtelierReview
-}
+};
