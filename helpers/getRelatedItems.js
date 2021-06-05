@@ -3,7 +3,7 @@ const config = require('./config');
 
 const getRelatedItems = (ID) => {
   const options = {
-    url: `${config.APIURL}products/${ID}`,
+    url: `${config.APIURL}products/${ID}/related`,
     headers: {
       Authorization: config.APITOKEN,
     },
