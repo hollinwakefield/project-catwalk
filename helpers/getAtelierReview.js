@@ -4,7 +4,7 @@ const config = require('./config');
 // Gets reviews for a specific product
 // Pass in product ID to get that data
 
-const getAtelierReviews = (ID) => {
+const getAtelierReview = (ID) => {
   const options = {
     url: `${config.APIURL}reviews/?product_id=${ID}`,
     headers: {
@@ -14,17 +14,19 @@ const getAtelierReviews = (ID) => {
 
   axios(options)
     .then((res) => {
+      // eslint-disable-next-line no-console
       console.log(res.data);
     })
     .catch((err) => {
-      console.log("Error: ", err);
+      // eslint-disable-next-line no-console
+      console.log('Error: ', err);
     });
 };
 // product id for Slacker's Slacks
-const productID = 25170;
+// const productID = 25170;
 
-getAtelierReviews(productID);
+// getAtelierReviews(productID);
 
 module.exports = {
-  getAtelierReviews,
+  getAtelierReview,
 };

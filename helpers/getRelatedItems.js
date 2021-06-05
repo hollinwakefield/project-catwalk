@@ -10,9 +10,11 @@ const getRelatedItems = (ID) => {
   };
   axios(options)
     .then((res) => {
+      // eslint-disable-next-line no-console
       console.log(res.data);
     })
     .catch((err) => {
+      // eslint-disable-next-line no-console
       console.log('Error: ', err);
     });
 };
