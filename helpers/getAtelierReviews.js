@@ -6,13 +6,13 @@ const config = require('./config');
 
 const getAtelierReviews = (ID) => {
   const options = {
-    url: `${config.APIURL}reviews`,
+    url: `${config.APIURL}reviews/?product_id=${ID}`,
     headers: {
       Authorization: config.APITOKEN,
     },
   };
 
-  axios.get(`/?product_id=${ID}`)
+  axios(options)
     .then((res) => {
       console.log(res.data);
     })
