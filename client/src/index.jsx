@@ -1,4 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/App';
 
-ReactDOM.render(<span>Hi steven</span>, document.body);
+ReactDOM.render(<App />, document.body);
