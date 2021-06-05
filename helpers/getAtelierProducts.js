@@ -18,7 +18,7 @@ const getAtelierProducts = () => {
     });
 };
 
-// getAtelierProducts();
+getAtelierProducts();
 
 module.exports = {
   getAtelierProducts,
