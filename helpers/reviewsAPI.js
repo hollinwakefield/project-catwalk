@@ -4,6 +4,25 @@ const config = require('./config');
 // Gets reviews for a specific product
 // Pass in product ID to get that data
 
+const getAtelierReview = (ID) => {
+  const options = {
+    url: `${config.APIURL}reviews/?product_id=${ID}`,
+    headers: {
+      Authorization: config.APITOKEN,
+    },
+  };
+
+  axios(options)
+    .then((res) => {
+      // eslint-disable-next-line no-console
+      console.log(res.data);
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log('Error: ', err);
+    });
+};
+
 const getAverageRatingById = (ID) => {
   const options = {
     url: `${config.APIURL}reviews/?product_id=${ID}`,
@@ -29,8 +48,8 @@ const getAverageRatingById = (ID) => {
         return sum / (arr.length);
       };
       // Store the average rating, rounded to 2 decimals
+      // eslint-disable-next-line no-unused-vars
       const avg = Math.round(average(ratings) * 100) / 100;
-
       // eslint-disable-next-line no-console
       // console.log(avg); // should return 3.67 for slacker's slacks
     })
@@ -43,8 +62,9 @@ const getAverageRatingById = (ID) => {
 // product id for Slacker's Slacks
 // const productID = 25170;
 
-// getAverageRatingById(productID);
+// getAtelierReviews(productID);
 
 module.exports = {
+  getAtelierReview,
   getAverageRatingById,
 };
