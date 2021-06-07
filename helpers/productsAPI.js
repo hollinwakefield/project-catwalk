@@ -22,7 +22,7 @@ const getAllProducts = () => {
     });
 };
 
-const getProductsById = (id) => {
+const getProductById = (id) => {
   const options = {
     url: `${config.APIURL}products/${id}/`,
     headers: {
@@ -62,6 +62,6 @@ const getRelatedItems = (id) => {
 
 module.exports = {
   getAllProducts,
-  getProductsById,
+  getProductById,
   getRelatedItems,
 };
