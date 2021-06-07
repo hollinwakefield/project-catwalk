@@ -23,7 +23,7 @@ const getAllReviews = (id) => {
     });
 };
 
-const getAverageRatingById = (id) => {
+const getAverageRating = (id) => {
   const options = {
     url: `${config.APIURL}reviews/?product_id=${id}`,
     headers: {
@@ -69,5 +69,5 @@ const getAverageRatingById = (id) => {
 
 module.exports = {
   getAllReviews,
-  getAverageRatingById,
+  getAverageRating,
 };
