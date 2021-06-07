@@ -1,4 +1,5 @@
 import React from 'react';
+import RelatedItems from './RelatedItems';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends React.Component {
       <>
         <div>Hullo</div>
         <div>{counter}</div>
+        <RelatedItems />
       </>
     );
   }
