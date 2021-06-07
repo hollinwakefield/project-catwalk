@@ -22,13 +22,14 @@ const getAllProducts = () => {
     });
 };
 
-const getProductsById = (ID) => {
+const getProductInfo = (productId) => {
   const options = {
-    url: `${config.APIURL}products/${ID}/`,
+    url: `${config.APIURL}products/${productId}/`,
     headers: {
       Authorization: config.APITOKEN,
     },
   };
+
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console
@@ -40,13 +41,14 @@ const getProductsById = (ID) => {
     });
 };
 
-const getRelatedItems = (ID) => {
+const getAllStyles = (productId) => {
   const options = {
-    url: `${config.APIURL}products/${ID}/related`,
+    url: `${config.APIURL}products/${productId}/styles`,
     headers: {
       Authorization: config.APITOKEN,
     },
   };
+
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console
@@ -58,10 +60,28 @@ const getRelatedItems = (ID) => {
     });
 };
 
-// getAtelierProducts();
+const getRelatedItems = (productId) => {
+  const options = {
+    url: `${config.APIURL}products/${productId}/related`,
+    headers: {
+      Authorization: config.APITOKEN,
+    },
+  };
+
+  axios(options)
+    .then((res) => {
+      // eslint-disable-next-line no-console
+      console.log(res.data);
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log('Error: ', err);
+    });
+};
 
 module.exports = {
   getAllProducts,
-  getProductsById,
+  getProductInfo,
+  getAllStyles,
   getRelatedItems,
 };
