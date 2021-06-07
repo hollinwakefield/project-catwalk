@@ -1,4 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  padding: 4em;
+  color: blue;
+  background: papayawhip;
+  font-size: 1.5em;
+  text-align: center;
+  border: solid;
+  border-color: black;
+  border-radius: 20px;
+`;
 
 class RatingAndReviews extends React.Component {
   constructor(props) {
@@ -12,7 +24,7 @@ class RatingAndReviews extends React.Component {
     const { placeholder } = this.state;
     return (
       <>
-        <div>{placeholder}</div>
+        <StyledDiv>{placeholder}</StyledDiv>
       </>
     );
   }
