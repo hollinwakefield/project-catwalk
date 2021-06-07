@@ -22,9 +22,9 @@ const getAllProducts = () => {
     });
 };
 
-const getProductInfo = (product_id) => {
+const getProductInfo = (productId) => {
   const options = {
-    url: `${config.APIURL}products/${product_id}/`,
+    url: `${config.APIURL}products/${productId}/`,
     headers: {
       Authorization: config.APITOKEN,
     },
@@ -41,9 +41,9 @@ const getProductInfo = (product_id) => {
     });
 };
 
-const getAllStyles = (product_id) => {
+const getAllStyles = (productId) => {
   const options = {
-    url: `${config.APIURL}products/${product_id}/styles`,
+    url: `${config.APIURL}products/${productId}/styles`,
     headers: {
       Authorization: config.APITOKEN,
     },
@@ -60,9 +60,9 @@ const getAllStyles = (product_id) => {
     });
 };
 
-const getRelatedItems = (product_id) => {
+const getRelatedItems = (productId) => {
   const options = {
-    url: `${config.APIURL}products/${product_id}/related`,
+    url: `${config.APIURL}products/${productId}/related`,
     headers: {
       Authorization: config.APITOKEN,
     },
