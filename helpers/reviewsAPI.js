@@ -34,6 +34,7 @@ const getAverageRatingById = (ID) => {
   axios(options)
     .then((res) => {
       // store the results array from the data that was recieved
+      // console.log(res.data);
       const resultsArr = res.data.results;
       // Make an array of ratings
       const ratings = resultsArr.map((result) => result.rating);
@@ -52,6 +53,7 @@ const getAverageRatingById = (ID) => {
       const avg = Math.round(average(ratings) * 100) / 100;
       // eslint-disable-next-line no-console
       // console.log(avg); // should return 3.67 for slacker's slacks
+      return avg;
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
@@ -59,10 +61,11 @@ const getAverageRatingById = (ID) => {
     });
 };
 
-// product id for Slacker's Slacks
+// // product id for Slacker's Slacks
 // const productID = 25170;
 
-// getAtelierReviews(productID);
+// // getAtelierReview(productID);
+// getAverageRatingById(25170);
 
 module.exports = {
   getAtelierReview,
