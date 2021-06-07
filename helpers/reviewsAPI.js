@@ -2,11 +2,11 @@ const axios = require('axios');
 const config = require('./config');
 
 // Gets reviews for a specific product
-// Pass in product ID to get that data
+// Pass in product id to get that data
 
-const getAtelierReview = (ID) => {
+const getAtelierReview = (id) => {
   const options = {
-    url: `${config.APIURL}reviews/?product_id=${ID}`,
+    url: `${config.APIURL}reviews/?product_id=${id}`,
     headers: {
       Authorization: config.APITOKEN,
     },
@@ -23,9 +23,9 @@ const getAtelierReview = (ID) => {
     });
 };
 
-const getAverageRatingById = (ID) => {
+const getAverageRatingById = (id) => {
   const options = {
-    url: `${config.APIURL}reviews/?product_id=${ID}`,
+    url: `${config.APIURL}reviews/?product_id=${id}`,
     headers: {
       Authorization: config.APITOKEN,
     },
@@ -62,9 +62,9 @@ const getAverageRatingById = (ID) => {
 };
 
 // // product id for Slacker's Slacks
-// const productID = 25170;
+// const id = 25170;
 
-// // getAtelierReview(productID);
+// // getAtelierReview(id);
 // getAverageRatingById(25170);
 
 module.exports = {

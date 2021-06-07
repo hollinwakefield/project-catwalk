@@ -22,9 +22,9 @@ const getAllProducts = () => {
     });
 };
 
-const getProductsById = (ID) => {
+const getProductsById = (id) => {
   const options = {
-    url: `${config.APIURL}products/${ID}/`,
+    url: `${config.APIURL}products/${id}/`,
     headers: {
       Authorization: config.APITOKEN,
     },
@@ -40,9 +40,9 @@ const getProductsById = (ID) => {
     });
 };
 
-const getRelatedItems = (ID) => {
+const getRelatedItems = (id) => {
   const options = {
-    url: `${config.APIURL}products/${ID}/related`,
+    url: `${config.APIURL}products/${id}/related`,
     headers: {
       Authorization: config.APITOKEN,
     },
