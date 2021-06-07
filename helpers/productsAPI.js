@@ -22,13 +22,14 @@ const getAllProducts = () => {
     });
 };
 
-const getProductInfo = (id) => {
+const getProductInfo = (product_id) => {
   const options = {
-    url: `${config.APIURL}products/${id}/`,
+    url: `${config.APIURL}products/${product_id}/`,
     headers: {
       Authorization: config.APITOKEN,
     },
   };
+
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console
@@ -40,13 +41,14 @@ const getProductInfo = (id) => {
     });
 };
 
-const getAllStyles = (id) => {
+const getAllStyles = (product_id) => {
   const options = {
-    url: `${config.APIURL}products/${id}/styles`,
+    url: `${config.APIURL}products/${product_id}/styles`,
     headers: {
       Authorization: config.APITOKEN,
     },
   };
+
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console
@@ -58,13 +60,14 @@ const getAllStyles = (id) => {
     });
 };
 
-const getRelatedItems = (id) => {
+const getRelatedItems = (product_id) => {
   const options = {
-    url: `${config.APIURL}products/${id}/related`,
+    url: `${config.APIURL}products/${product_id}/related`,
     headers: {
       Authorization: config.APITOKEN,
     },
   };
+
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console

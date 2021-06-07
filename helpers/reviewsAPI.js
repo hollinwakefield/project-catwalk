@@ -61,10 +61,10 @@ const getAverageRating = (id) => {
     });
 };
 
-// // product id for Slacker's Slacks
+// product id for Slacker's Slacks
 // const id = 25170;
 
-// // getAllReviews(id);
+// getAllReviews(id);
 // getAverageRatingById(25170);
 
 module.exports = {
