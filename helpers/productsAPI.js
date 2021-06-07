@@ -40,6 +40,24 @@ const getProductInfo = (id) => {
     });
 };
 
+const getAllStyles = (id) => {
+  const options = {
+    url: `${config.APIURL}products/${id}/styles`,
+    headers: {
+      Authorization: config.APITOKEN,
+    },
+  };
+  axios(options)
+    .then((res) => {
+      // eslint-disable-next-line no-console
+      console.log(res.data);
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log('Error: ', err);
+    });
+};
+
 const getRelatedItems = (id) => {
   const options = {
     url: `${config.APIURL}products/${id}/related`,
@@ -58,10 +76,9 @@ const getRelatedItems = (id) => {
     });
 };
 
-// getAtelierProducts();
-
 module.exports = {
   getAllProducts,
   getProductInfo,
+  getAllStyles,
   getRelatedItems,
 };
