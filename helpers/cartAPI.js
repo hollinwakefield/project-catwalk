@@ -20,7 +20,7 @@ const getCart = () => {
     });
 };
 
-const addToCart = (sku_id) => {
+const addToCart = (skuId) => {
   const options = {
     url: `${config.APIURL}cart`,
     headers: {
