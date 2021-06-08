@@ -29,7 +29,7 @@ S.FrontDiv = styled.div`
   top: 0;
   overflow: hidden;
   width: ${(props) => props.rating}%;
-  color: #ffbc0b;
+  color: #9cffaa;
 `;
 
 function Stars(props) {
