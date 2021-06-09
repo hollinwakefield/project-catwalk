@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const products = require('./controllers/products');
 const reviews = require('./controllers/reviews');
 
 const app = express();
@@ -7,9 +8,7 @@ const port = 3000;
 
 app.use(express.static(path.join(__dirname, '../public/dist')));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use('/products', products);
 
 app.use('/reviews', reviews);
 
