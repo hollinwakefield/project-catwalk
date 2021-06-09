@@ -7,16 +7,21 @@ const ProductInfoArea = styled.div`
 `;
 
 const ProductInfo = (props) => {
- const { avgRating, category, productName, price } = props;
+  const {
+    avgRating,
+    category,
+    productName,
+    price
+  } = props;
 
- return(
-   <ProductInfoArea>
-    <div>{avgRating}</div>
-    <div>{category}</div>
-    <div>{productName}</div>
-    <div>{price}</div>
-   </ProductInfoArea>
- );
+  return(
+    <ProductInfoArea>
+      <div>{avgRating}</div>
+      <div>{category}</div>
+      <div>{productName}</div>
+      <div>{price}</div>
+    </ProductInfoArea>
+  );
 };
 
 export default ProductInfo;
