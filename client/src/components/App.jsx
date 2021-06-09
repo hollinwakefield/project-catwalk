@@ -1,21 +1,21 @@
 import React from 'react';
-import RatingAndReviews from './RatingAndReviews';
+import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       counter: 0,
+      reviews: [],
     };
   }
-  
+
   render() {
-    const { counter } = this.state;
+    const { counter, reviews } = this.state;
     return (
       <>
-        <div>Hullo</div>
         <div>{counter}</div>
-        <RatingAndReviews />
+        <RatingAndReviews reviews={reviews} />
       </>
     );
   }

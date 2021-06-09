@@ -1,12 +1,15 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import RatingAndReviews from '../components/RatingAndReviews';
+import { cleanup, render, screen } from '@testing-library/react';
+import RatingAndReviews from '../components/RatingsAndReviews/RatingAndReviews.jsx';
 import '@testing-library/jest-dom';
 
 describe('Rating and Reviews module', () => {
-  test('renders correctly', () => {
+  test.afterEach(cleanup)
+  
+  test('renders', () => {
     render(<RatingAndReviews />);
-
-    screen.debug();
   });
+
+  test('has two ')
+  );
 });
