@@ -14,12 +14,35 @@ const TileArea = styled.div`
   border: solid;
 `;
 
+const ReviewSummary = styled.div`
+  grid-area: Summary
+ `;
+
+const ReviewBody = styled.div`
+  grid-area: Body
+`;
+
+const ReviewResponse = styled.div`
+  grid-area: Response
+`;
+
+const Helpful = styled.div`
+  grid-area: Helpful
+`;
+
+
 const Tile = (props) => {
   const [productInfo, setProductInfo] = useState(props.);
 
   return (
     <TileArea>
-      {FILL_OUT_THE_PROPS_HOW_TO_USE_FOR_HOOKS}
+      <div>{props.STARS}</div>
+      <div>{props.USERNAME}</div>
+      <div>{props.DATE}</div>
+      <ReviewSummary>{props.SUMMARY}</ReviewSummary>
+      <ReviewBody>{props.BODY}</ReviewBody>
+      <ReviewResponse>{props.RESPONSE}</ReviewResponse>
+      <Helpful>{props.HELPFUL}</Helpful>
     </TileArea>
   );
 }
