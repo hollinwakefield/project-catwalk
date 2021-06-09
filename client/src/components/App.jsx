@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductOverview from './productOverview/productOverview';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,11 +10,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { counter } = this.state;
     return (
       <>
-        <div>Hullo</div>
-        <div>{counter}</div>
+        <ProductOverview />
       </>
     );
   }
