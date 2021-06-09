@@ -14,11 +14,9 @@ const average = (arr) => {
 
 // ================== API Helpers ============================= //
 
-// Gets reviews for a specific product
-// Pass in product ID to get that data
-const getAtelierReview = (ID) => {
+const getAllReviews = (id, callback) => {
   const options = {
-    url: `${config.APIURL}reviews/?product_id=${ID}`,
+    url: `${config.APIURL}reviews/?product_id=${id}`,
     headers: {
       Authorization: config.APITOKEN,
     },
@@ -27,19 +25,17 @@ const getAtelierReview = (ID) => {
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console
-      console.log(res.data);
+      callback(null, res.data);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
-      console.log('Error: ', err);
+      callback(err);
     });
 };
 
-// Will return an average of the ratings for a product with
-// the passed in ID
-const getAverageRatingById = (ID) => {
+const getAverageRating = (id, callback) => {
   const options = {
-    url: `${config.APIURL}reviews/?product_id=${ID}`,
+    url: `${config.APIURL}reviews/?product_id=${id}`,
     headers: {
       Authorization: config.APITOKEN,
     },
@@ -52,22 +48,23 @@ const getAverageRatingById = (ID) => {
       const resultsArr = res.data.results;
       // Make an array of ratings
       const ratings = resultsArr.map((result) => result.rating);
-      average(ratings);
+      const avg = average(ratings);
+      callback(null, avg);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
-      console.log('Error: ', err);
+      callback(err);
     });
 };
 
-// // product id for Slacker's Slacks
-// const productID = 25170;
+// product id for Slacker's Slacks
+// const id = 25170;
 
-// // getAtelierReview(productID);
+// getAllReviews(id);
 // getAverageRatingById(25170);
 
 module.exports = {
-  getAtelierReview,
-  getAverageRatingById,
   average,
+  getAllReviews,
+  getAverageRating,
 };
