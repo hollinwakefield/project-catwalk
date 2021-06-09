@@ -9,7 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       product: {},
-      reviews: [],
+      reviews: {},
       cart: [],
     };
   }
@@ -25,7 +25,13 @@ class App extends React.Component {
       });
 
     // fetch reviews from API - Steven
-
+    axios.get('/reviews/25168')
+      .then((res) => {
+        this.setState({ reviews: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     // fetch cart from API - Kate
   }
 
