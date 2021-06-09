@@ -1,9 +1,21 @@
 const axios = require('axios');
 const config = require('./config');
 
+// Helper function to calculate the average rating for the product
+const average = (arr) => {
+  let sum = 0;
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  const avg = (Math.round(sum / (arr.length)) * 100) / 100;
+  return avg;
+};
+
+// ================== API Helpers ============================= //
+
 // Gets reviews for a specific product
 // Pass in product ID to get that data
-
 const getAtelierReview = (ID) => {
   const options = {
     url: `${config.APIURL}reviews/?product_id=${ID}`,
@@ -23,6 +35,8 @@ const getAtelierReview = (ID) => {
     });
 };
 
+// Will return an average of the ratings for a product with
+// the passed in ID
 const getAverageRatingById = (ID) => {
   const options = {
     url: `${config.APIURL}reviews/?product_id=${ID}`,
@@ -38,22 +52,7 @@ const getAverageRatingById = (ID) => {
       const resultsArr = res.data.results;
       // Make an array of ratings
       const ratings = resultsArr.map((result) => result.rating);
-
-      // Helper function to calculate the average rating for the product
-      const average = (arr) => {
-        let sum = 0;
-        // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < arr.length; i++) {
-          sum += ratings[i];
-        }
-        return sum / (arr.length);
-      };
-      // Store the average rating, rounded to 2 decimals
-      // eslint-disable-next-line no-unused-vars
-      const avg = Math.round(average(ratings) * 100) / 100;
-      // eslint-disable-next-line no-console
-      // console.log(avg); // should return 3.67 for slacker's slacks
-      return avg;
+      average(ratings);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
@@ -70,4 +69,5 @@ const getAverageRatingById = (ID) => {
 module.exports = {
   getAtelierReview,
   getAverageRatingById,
+  average,
 };

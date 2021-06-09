@@ -8,7 +8,7 @@ describe('App', () => {
   test('renders App component', () => {
     render(<App />);
 
-    screen.debug();
+    // screen.debug();
     expect(screen.getByText('Hullo')).toBeInTheDocument();
   });
 });

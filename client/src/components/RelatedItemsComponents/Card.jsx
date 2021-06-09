@@ -6,8 +6,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 250px;
-  height: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 250px;
   background-color: #eb9534;
   border-radius: 4px;
 
@@ -32,7 +33,6 @@ const Description = styled.p`
 `;
 
 const Image = styled.img`
-  width: 100%;
   max-height: 100px;
   max-width: 100px;
   margin-left: 75px;
@@ -44,8 +44,10 @@ const Line = styled.hr`
   width: 100%;
 `;
 
-const Card = ({ itemName, description, image, price, rating }) => (
-  <Wrapper>
+const Card = ({
+  itemName, image, price, rating,
+}) => (
+  <Wrapper data-testid="card">
     <Image src={image} alt="Nothing" />
     <div><Line /></div>
     <Name>{itemName}</Name>
