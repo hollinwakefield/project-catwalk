@@ -1,5 +1,6 @@
 import React from 'react';
 import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
+import RelatedItems from './RelatedItems';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class App extends React.Component {
     return (
       <>
         <div>{counter}</div>
+        <RelatedItems />
         <RatingAndReviews reviews={reviews} />
+
       </>
     );
   }
