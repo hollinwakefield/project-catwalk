@@ -9,6 +9,10 @@ const Box = styled.div`
   padding: 0.25em;
   text-align: center;
   font-size: 1vw;
+      &:hover {
+        opacity: 0.5;
+        cursor: grab;
+      }
   `;
 
 const StyledDiv = styled.div`
@@ -45,6 +49,9 @@ class RatingAndReviews extends React.Component {
         <div>kate</div>
         <Box>
           <p>{placeholder}</p>
+          <p>hello</p>
+          <p>more stuff inside place</p>
+          <div>hi</div>
         </Box>
       </StyledDiv>
     );

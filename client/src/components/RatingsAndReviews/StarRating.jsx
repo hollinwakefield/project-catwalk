@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import '@fortawesome/fontawesome-free';
+
+// import '@fortawesome/fontawesome-free';
 
 // this will be for the create review form
 
