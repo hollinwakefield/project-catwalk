@@ -1,8 +1,18 @@
 const axios = require('axios');
 const config = require('./config');
 
-// Gets all reviews for a specific product
-// Pass in product id to get that data
+// Helper function to calculate the average rating for the product
+const average = (arr) => {
+  let sum = 0;
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  const avg = (Math.round(sum / (arr.length)) * 100) / 100;
+  return avg;
+};
+
+// ================== API Helpers ============================= //
 
 const getAllReviews = (id, callback) => {
   const options = {
@@ -38,21 +48,7 @@ const getAverageRating = (id, callback) => {
       const resultsArr = res.data.results;
       // Make an array of ratings
       const ratings = resultsArr.map((result) => result.rating);
-
-      // Helper function to calculate the average rating for the product
-      const average = (arr) => {
-        let sum = 0;
-        // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < arr.length; i++) {
-          sum += ratings[i];
-        }
-        return sum / (arr.length);
-      };
-      // Store the average rating, rounded to 2 decimals
-      // eslint-disable-next-line no-unused-vars
-      const avg = Math.round(average(ratings) * 100) / 100;
-      // eslint-disable-next-line no-console
-      // console.log(avg); // should return 3.67 for slacker's slacks
+      const avg = average(ratings);
       callback(null, avg);
     })
     .catch((err) => {
@@ -68,6 +64,7 @@ const getAverageRating = (id, callback) => {
 // getAverageRatingById(25170);
 
 module.exports = {
+  average,
   getAllReviews,
   getAverageRating,
 };
