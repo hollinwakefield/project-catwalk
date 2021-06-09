@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
 import RelatedItems from './RelatedItems';
 
 class App extends React.Component {
@@ -6,16 +7,18 @@ class App extends React.Component {
     super(props);
     this.state = {
       counter: 0,
+      reviews: [],
     };
   }
 
   render() {
-    const { counter } = this.state;
+    const { counter, reviews } = this.state;
     return (
       <>
-        <div>Hullo</div>
         <div>{counter}</div>
         <RelatedItems />
+        <RatingAndReviews reviews={reviews} />
+
       </>
     );
   }
