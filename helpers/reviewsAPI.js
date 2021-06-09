@@ -4,7 +4,7 @@ const config = require('./config');
 // Gets all reviews for a specific product
 // Pass in product id to get that data
 
-const getAllReviews = (id) => {
+const getAllReviews = (id, callback) => {
   const options = {
     url: `${config.APIURL}reviews/?product_id=${id}`,
     headers: {
@@ -15,15 +15,15 @@ const getAllReviews = (id) => {
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console
-      console.log(res.data);
+      callback(null, res.data);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
-      console.log('Error: ', err);
+      callback(err);
     });
 };
 
-const getAverageRating = (id) => {
+const getAverageRating = (id, callback) => {
   const options = {
     url: `${config.APIURL}reviews/?product_id=${id}`,
     headers: {
@@ -53,11 +53,11 @@ const getAverageRating = (id) => {
       const avg = Math.round(average(ratings) * 100) / 100;
       // eslint-disable-next-line no-console
       // console.log(avg); // should return 3.67 for slacker's slacks
-      return avg;
+      callback(null, avg);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
-      console.log('Error: ', err);
+      callback(err);
     });
 };
 
