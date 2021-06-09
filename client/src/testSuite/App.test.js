@@ -7,7 +7,7 @@ import '@testing-library/jest-dom';
 describe('App', () => {
   test('renders App component', () => {
     render(<App />);
-
+           
     screen.debug();
     expect(screen.getByText('hihi')).toBeInTheDocument();
   });

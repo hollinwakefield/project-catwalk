@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import Stars from '../SharedComponents/Stars';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 250px;
-  height: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 250px;
   background-color: #eb9534;
   border-radius: 4px;
 
@@ -28,13 +30,32 @@ const Name = styled.p`
 
 const Description = styled.p`
   color: white;
-  text-align: center;
 `;
 
-const Card = ({ itemName, description }) => (
-  <Wrapper>
+const Image = styled.img`
+  max-height: 100px;
+  max-width: 100px;
+  margin-left: 75px;
+  border-radius: 5px;
+`;
+
+const Line = styled.hr`
+  color: white;
+  width: 100%;
+`;
+
+const Card = ({
+  itemName, image, price, rating,
+}) => (
+  <Wrapper data-testid="card">
+    <Image src={image} alt="Nothing" />
+    <div><Line /></div>
     <Name>{itemName}</Name>
-    <Description>{description}</Description>
+    <Description>
+      Price:
+      {price}
+    </Description>
+    <Stars stars={rating} />
   </Wrapper>
 );
 

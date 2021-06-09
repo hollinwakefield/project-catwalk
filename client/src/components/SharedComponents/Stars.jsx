@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import IconStar from "./IconStar";
+import React from 'react';
+import styled from 'styled-components';
+import IconStar from './IconStar';
 
 const S = {};
 
@@ -29,7 +29,7 @@ S.FrontDiv = styled.div`
   top: 0;
   overflow: hidden;
   width: ${(props) => props.rating}%;
-  color: #9cffaa;
+  color: #0765d9;
 `;
 
 function Stars(props) {

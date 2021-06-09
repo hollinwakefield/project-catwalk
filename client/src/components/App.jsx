@@ -16,9 +16,6 @@ class App extends React.Component {
     return (
       <>
         <div>{counter}</div>
-        <RelatedItems />
-        <RatingAndReviews reviews={reviews} />
-
       </>
     );
   }
