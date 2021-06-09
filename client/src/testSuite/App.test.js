@@ -9,6 +9,6 @@ describe('App', () => {
     render(<App />);
 
     screen.debug();
-    expect(screen.getByText('Hullo')).toBeInTheDocument();
+    expect(screen.getByText('hihi')).toBeInTheDocument();
   });
 });
