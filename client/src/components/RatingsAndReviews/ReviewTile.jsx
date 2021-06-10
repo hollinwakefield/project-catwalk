@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const TileArea = styled.div`
@@ -20,6 +20,7 @@ const ReviewSummary = styled.div`
 
 const ReviewBody = styled.div`
   grid-area: Body
+  font-size: 1px;
 `;
 
 const ReviewResponse = styled.div`
@@ -31,9 +32,10 @@ const Helpful = styled.div`
 `;
 
 const Tile = (props) => {
-  // const [productInfo, setProductInfo] = useState(props.);
+  // const [productInfo, setProductInfo] = useState(props.); NOOOOooooooo
+  const { data } = props;
   const { body, date, helpfulness, photos, rating,
-    recommend, response, reviewer_name, summary } = props;
+    recommend, response, reviewer_name, summary } = data;
 
   return (
     <TileArea>

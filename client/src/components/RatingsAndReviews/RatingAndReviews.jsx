@@ -28,10 +28,9 @@ const StyledDiv = styled.div`
   gap: 5px 5px;
   place-items: center;
   font-size: 1.5em;
+  border:solid;
   text-align: center;
-  border: solid;
   background: papayawhip;
-  border-color: black;
 `;
 
 class RatingAndReviews extends React.Component {
@@ -47,8 +46,6 @@ class RatingAndReviews extends React.Component {
     const { placeholder } = this.state;
     return (
       <StyledDiv>
-        <div>hihi</div>
-        <div>kate</div>
         <Box>
           <p>{placeholder}</p>
           <p>hello</p>

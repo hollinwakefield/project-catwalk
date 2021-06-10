@@ -4,6 +4,9 @@ import Tile from './ReviewTile';
 
 const ReviewArea = styled.div`
   grid-area: ReviewList;
+  background: blue;
+  min-height: 100px;
+  min-width: 100px;
 
   `;
 
@@ -26,15 +29,9 @@ class ReviewList extends React.Component {
     const { reviews } = this.props;
     // const { hasError } = this.state;
     console.log(reviews.results);
-    if (!reviews) {
-      return (
-        <>
-          Still loading Review List...
-        </>
-      );
-    }
     return (
       <ReviewArea>
+        WHYYYYYYY
         {reviews.results.map(formatTile)}
       </ReviewArea>
     );

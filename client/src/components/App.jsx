@@ -47,7 +47,8 @@ class App extends React.Component {
       </>
     );
     }
-    return <div>Loading...</div>
+    return (<div>        <ProductOverview />
+    <RelatedItems /></div>);
   }
 }
 
