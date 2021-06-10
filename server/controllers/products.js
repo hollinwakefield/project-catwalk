@@ -15,6 +15,16 @@ router.get('/:productId', (req, res) => {
 });
 
 // get all styles - Kate
+router.get('/:productId', (req, res) => {
+  const { productId } = req.params;
+  productAPI.getAllStyles(productId, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
 
 // get related items - Chhuong
 
