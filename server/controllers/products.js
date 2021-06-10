@@ -22,7 +22,6 @@ router.get('/:productId/styles', (req, res) => {
       res.send(err);
     } else {
       res.status(200).send(data);
-      console.log(data);
     }
   });
 });
