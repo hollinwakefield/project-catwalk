@@ -25,7 +25,7 @@ class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allStyles: [],
+      allStyles: null,
       index: 0,
     };
   }
@@ -41,29 +41,32 @@ class ProductOverview extends React.Component {
   }
 
   render() {
-    const { product, cart } = this.props;
     const { allStyles, index } = this.state;
-    const { style } = allStyles[index];
-    const avgRating = 3.5;
-    const category = product.category;
-    const productName = product.name;
-    const styleName = style.name;
-    const price = style.sale_price ? style.sale_price : style.original_price;
+    if (allStyles) {
+      const { product, cart } = this.props;
+      const style = allStyles[index];
+      const rating = 3.5;
+      const { category } = product;
+      const productName = product.name;
+      const styleName = style.name;
+      const price = style.sale_price ? style.sale_price : style.original_price;
 
-    return (
-      <Grid>
-        <ImageGallery />
-        <ProductInfo
-          avgRating={avgRating}
-          category={category}
-          productName={productName}
-          price={price}
-        />
-        <StyleSelector />
-        <AddToCart />
-        <Description />
-      </Grid>
-    );
+      return (
+        <Grid>
+          <ImageGallery />
+          <ProductInfo
+            rating={rating}
+            category={category}
+            productName={productName}
+            price={price}
+          />
+          <StyleSelector />
+          <AddToCart />
+          <Description />
+        </Grid>
+      );
+    }
+    return <div>Loading all styles...</div>;
   }
 }
 

@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import Stars from '../SharedComponents/Stars';
 
 const ProductInfoArea = styled.div`
   grid-area: ProductInfo;
   background: palevioletred;
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
 `;
 
 const ProductInfo = (props) => {
   const {
-    avgRating,
+    rating,
     category,
     productName,
     price
@@ -19,7 +20,7 @@ const ProductInfo = (props) => {
 
   return(
     <ProductInfoArea>
-      <div>{avgRating}</div>
+      <Stars stars={rating} />
       <div>{category}</div>
       <Title>{productName}</Title>
       <div>

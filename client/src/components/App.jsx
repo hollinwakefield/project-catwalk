@@ -10,7 +10,7 @@ class App extends React.Component {
     this.state = {
       product: null,
       reviews: null,
-      cart: [],
+      cart: null,
     };
     // initializer();
   }
@@ -45,7 +45,7 @@ class App extends React.Component {
 
   render() {
     const { product, reviews, cart } = this.state;
-    if (product && reviews) {
+    if (product && reviews && cart) {
       return (
         <>
           <ProductOverview product={product} cart={cart} />
