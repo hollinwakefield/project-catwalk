@@ -30,21 +30,22 @@ const Helpful = styled.div`
   grid-area: Helpful
 `;
 
-
 const Tile = (props) => {
-  const [productInfo, setProductInfo] = useState(props.);
+  // const [productInfo, setProductInfo] = useState(props.);
+  const { body, date, helpfulness, photos, rating,
+    recommend, response, reviewer_name, summary } = props;
 
   return (
     <TileArea>
-      <div>{props.STARS}</div>
-      <div>{props.USERNAME}</div>
-      <div>{props.DATE}</div>
-      <ReviewSummary>{props.SUMMARY}</ReviewSummary>
-      <ReviewBody>{props.BODY}</ReviewBody>
-      <ReviewResponse>{props.RESPONSE}</ReviewResponse>
-      <Helpful>{props.HELPFUL}</Helpful>
+      <div>{rating}</div>
+      <div>{reviewer_name}</div>
+      <div>{date}</div>
+      <ReviewSummary>{summary}</ReviewSummary>
+      <ReviewBody>{body}</ReviewBody>
+      <ReviewResponse>{response}</ReviewResponse>
+      <Helpful>{recommend}</Helpful>
     </TileArea>
   );
-}
+};
 
 export default Tile;

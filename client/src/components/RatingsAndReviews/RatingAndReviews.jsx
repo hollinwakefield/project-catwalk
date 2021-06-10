@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ReviewList from './ReviewList';
 
 const Box = styled.div`
   grid-area: ProductBreakdown;
@@ -42,6 +43,7 @@ class RatingAndReviews extends React.Component {
   }
 
   render() {
+    const { reviews } = this.props;
     const { placeholder } = this.state;
     return (
       <StyledDiv>
@@ -53,6 +55,9 @@ class RatingAndReviews extends React.Component {
           <p>more stuff inside place</p>
           <div>hi</div>
         </Box>
+        <ReviewList
+          reviews={reviews}
+        />
       </StyledDiv>
     );
   }
