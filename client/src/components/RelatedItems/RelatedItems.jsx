@@ -1,24 +1,25 @@
 import React from 'react';
 import axios from 'axios';
 // import styled, { css } from 'styled-components';
-import CardList from './RelatedItemsComponents/CardList';
+import CardList from './CardList';
+import helpers from '../../../../helpers/productsAPI';
 
 // Will need to have two sections, can use flex box
-// Top portion for Related Items
-// Bottom portion for outfits
 
 class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+
     };
   }
 
   render() {
+    const {related} = this.props;
+    console.log({related});
     return (
       <>
-        <CardList />
+        <CardList related={related} />
       </>
     );
   }

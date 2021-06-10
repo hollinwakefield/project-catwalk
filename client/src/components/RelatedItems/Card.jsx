@@ -45,14 +45,14 @@ const Line = styled.hr`
 `;
 
 const Card = ({
-  itemName, image, price, rating,
+  itemName, image, price, rating
 }) => (
   <Wrapper data-testid="card">
     <Image src={image} alt="Nothing" />
     <div><Line /></div>
     <Name>{itemName}</Name>
     <Description>
-      Price:
+      Price: $
       {price}
     </Description>
     <Stars stars={rating} />

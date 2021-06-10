@@ -30,14 +30,14 @@ const CardList = (props) => (
   <>
     <Title>Related Items!</Title>
     <Wrapper>
-      {data.items.map((item, index) => (
+      {props.related.map((item) => (
         <Card
-          key={index}
-          itemName={item.itemName}
-          category={item.category}
-          image={item.image}
-          price={item.price}
-          rating={item.rating}
+          key={item.id}
+          itemName={item.name}
+          // category={item.category}
+          // image={item.image}
+          price={item.default_price}
+          // rating={item.rating}
         />
       ))}
     </Wrapper>

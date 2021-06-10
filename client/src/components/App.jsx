@@ -2,14 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import ProductOverview from './productOverview/productOverview';
 import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
-import RelatedItems from './RelatedItems';
+import RelatedItems from './RelatedItems/RelatedItems';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: {},
-      reviews: {},
+      product: null,
+      reviews: null,
       cart: [],
       related: null,
     };
@@ -47,15 +47,19 @@ class App extends React.Component {
   }
 
   render() {
-    const { reviews } = this.state;
-    const { related } = this.state;
-    return (
-      <>
-        <ProductOverview />
-        <RelatedItems related={related} />
-        <RatingAndReviews reviews={reviews} />
-      </>
-    );
+    const { reviews, related, product } = this.state;
+    if (product && reviews && related) {
+      return (
+        <>
+          <ProductOverview />
+          <RelatedItems related={related} />
+          <RatingAndReviews reviews={reviews} />
+        </>
+      );
+    } else {
+      return <div>Loading...</div>
+    }
+
   }
 }
 
