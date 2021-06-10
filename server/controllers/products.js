@@ -15,13 +15,14 @@ router.get('/:productId', (req, res) => {
 });
 
 // get all styles - Kate
-router.get('/:productId', (req, res) => {
+router.get('/:productId/styles', (req, res) => {
   const { productId } = req.params;
   productAPI.getAllStyles(productId, (err, data) => {
     if (err) {
       res.send(err);
     } else {
       res.status(200).send(data);
+      console.log(data);
     }
   });
 });
