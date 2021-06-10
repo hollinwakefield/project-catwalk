@@ -3,7 +3,7 @@ const cartAPI = require('../../helpers/cartAPI.js');
 
 const router = express.Router();
 
-router.get('/cart', (req, res) => {
+router.get('/', (req, res) => {
   cartAPI.getCart((err, data) => {
     if (err) {
       res.send(err);
