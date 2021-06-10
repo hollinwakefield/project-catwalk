@@ -17,8 +17,7 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/products/25168')
       .then((res) => {
-        const product = res.data;
-        this.setState({ product: product });
+        this.setState({ product: res.data });
       })
       .catch((err) => {
         console.log(err);
@@ -31,8 +30,16 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
+
     // fetch cart from API - Kate
+    axios.get('/cart')
+      .then((res) => {
+        this.setState({ cart: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   render() {

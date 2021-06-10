@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const reviews = require('../../helpers/reviewsAPI.js');
+
+const router = express.Router();
 
 // potential middleware for handling reviews from api
 
