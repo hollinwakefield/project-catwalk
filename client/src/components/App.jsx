@@ -11,6 +11,7 @@ class App extends React.Component {
       product: {},
       reviews: {},
       cart: [],
+      related: [],
     };
   }
 
@@ -33,14 +34,24 @@ class App extends React.Component {
         console.log(err);
       })
     // fetch cart from API - Kate
+
+    // get related data from
+      axios.get('/products/25168/related')
+        .then((res) => {
+          this.setState({related: res.data})
+        })
+        .catch((err) => {
+          console.log("Error: ", err);
+        })
   }
 
   render() {
     const { reviews } = this.state;
+    const { related } = this.state;
     return (
       <>
         <ProductOverview />
-        <RelatedItems />
+        <RelatedItems related = {related}/>
         <RatingAndReviews reviews={reviews} />
       </>
     );
