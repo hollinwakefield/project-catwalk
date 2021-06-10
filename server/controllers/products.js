@@ -31,7 +31,9 @@ router.get('/:productId/related', (req, res) => {
           res.send(err2);
         } else {
           relatedItems.push(data2);
+          // if data length is the same as the relatedItems length
           if (data.length === relatedItems.length) {
+            // send that data over
             res.send(relatedItems);
           }
         }

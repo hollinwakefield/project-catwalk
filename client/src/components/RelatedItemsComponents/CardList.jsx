@@ -26,7 +26,7 @@ const Title = styled.h1`
 `;
 
 // Convert CardList into a carousel
-const CardList = () => (
+const CardList = (props) => (
   <>
     <Title>Related Items!</Title>
     <Wrapper>

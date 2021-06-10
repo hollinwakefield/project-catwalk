@@ -11,7 +11,7 @@ class App extends React.Component {
       product: {},
       reviews: {},
       cart: [],
-      related: [],
+      related: null,
     };
   }
 
@@ -32,17 +32,18 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log(err);
-      })
-    // fetch cart from API - Kate
+      });
+    // fetch cart from API - Kate+
 
     // get related data from
-      axios.get('/products/25168/related')
-        .then((res) => {
-          this.setState({related: res.data})
-        })
-        .catch((err) => {
-          console.log("Error: ", err);
-        })
+    axios.get('/products/25168/related')
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({ related: res.data });
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
   }
 
   render() {
@@ -51,7 +52,7 @@ class App extends React.Component {
     return (
       <>
         <ProductOverview />
-        <RelatedItems related = {related}/>
+        <RelatedItems related={related} />
         <RatingAndReviews reviews={reviews} />
       </>
     );
