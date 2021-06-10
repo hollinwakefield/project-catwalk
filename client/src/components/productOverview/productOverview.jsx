@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProductInfo from './ProductInfo';
+import axios from 'axios';
+import ProductInfo from './productInfo';
 import StyleSelector from './styleSelector';
 import AddToCart from './addToCart';
 import Description from './description';
 import ImageGallery from './imageGallery';
-import dummyData from './dummyData';
-
-const allStyles = dummyData.styles.results;
 
 const Grid = styled.div`
   display: grid;
@@ -27,15 +25,28 @@ class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      style: allStyles[0],
+      allStyles: [],
+      index: 0,
     };
   }
 
+  componentDidMount() {
+    axios.get('/products/25168/styles')
+      .then((res) => {
+        this.setState({ allStyles: res.data.results });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
-    const { style } = this.state;
+    const { product, cart } = this.props;
+    const { allStyles, index } = this.state;
+    const { style } = allStyles[index];
     const avgRating = 3.5;
-    const category = dummyData.product.category;
-    const productName = dummyData.product.name;
+    const category = product.category;
+    const productName = product.name;
     const styleName = style.name;
     const price = style.sale_price ? style.sale_price : style.original_price;
 

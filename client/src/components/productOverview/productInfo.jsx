@@ -6,6 +6,9 @@ const ProductInfoArea = styled.div`
   background: palevioletred;
 `;
 
+const Title = styled.h2`
+`;
+
 const ProductInfo = (props) => {
   const {
     avgRating,
@@ -18,8 +21,11 @@ const ProductInfo = (props) => {
     <ProductInfoArea>
       <div>{avgRating}</div>
       <div>{category}</div>
-      <div>{productName}</div>
-      <div>{price}</div>
+      <Title>{productName}</Title>
+      <div>
+        $
+        {price}
+      </div>
     </ProductInfoArea>
   );
 };

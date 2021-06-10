@@ -39,14 +39,14 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   render() {
-    const { reviews } = this.state;
+    const { product, reviews, cart } = this.state;
     return (
       <>
-        <ProductOverview />
+        <ProductOverview product={product} cart={cart} />
         <RelatedItems />
         <RatingAndReviews reviews={reviews} />
       </>
