@@ -15,22 +15,43 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // hasError: false,
+      reviewsRendered: 2,
     };
+    this.onShowMore = this.onShowMore.bind(this);
   }
 
   // static getDerivedStateFromError(err) {
   //   // Update state so the next render will show the fallback UI.
   //   return { hasError: true };
   // }
+  onShowMore() {
+    const { reviewsRendered } = this.state;
+    this.setState({ reviewsRendered: reviewsRendered + 2 });
+  }
 
   render() {
+    //
     const { reviews } = this.props;
+    const { results } = reviews;
+    const { reviewsRendered } = this.state;
+
+    let showMoreButton;
+    const viewedTile = results.slice(0, reviewsRendered);
+    if (results.length > 2) {
+      if (reviewsRendered < results.length) {
+        showMoreButton = (
+          <button type="button" onClick={this.onShowMore}>Show More</button>
+        );
+      } else {
+        showMoreButton = null;
+      }
+    }
     // const { hasError } = this.state;
-    console.log(reviews.results);
     return (
       <ReviewArea>
-        {reviews.results.map(formatTile)}
+        {viewedTile.map(formatTile)}
+        <br />
+        {showMoreButton}
       </ReviewArea>
     );
   }
