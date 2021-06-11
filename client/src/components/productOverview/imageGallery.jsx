@@ -10,14 +10,19 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0,
+      expanded: false,
+      index: 0,
     };
   }
 
   render() {
-    const { counter } = this.state;
+    const { expanded, index } = this.state;
+    const { styles, styleNo } = this.props;
+    const { results } = styles;
     return (
-      <ImageGalleryArea>Image Gallery</ImageGalleryArea>
+      <ImageGalleryArea>
+        <img src={results[styleNo].photos[index].thumbnail_url} alt="No image to load"/>
+      </ImageGalleryArea>
     );
   }
 }
