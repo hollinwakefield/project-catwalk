@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import ProductInfo from './productInfo';
 import StyleSelector from './styleSelector';
 import AddToCart from './addToCart';
@@ -25,51 +24,37 @@ class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allStyles: null,
       index: 0,
     };
   }
 
-  componentDidMount() {
-    axios.get('/products/25168/styles')
-      .then((res) => {
-        this.setState({ allStyles: res.data.results });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   render() {
-    const { allStyles, index } = this.state;
-    if (allStyles) {
-      const { product, cart } = this.props;
-      const style = allStyles[index];
-      const rating = 3.5;
-      const { category, slogan, description } = product;
-      const productName = product.name;
-      const styleName = style.name;
-      const price = style.sale_price ? style.sale_price : style.original_price;
+    const { index } = this.state;
+    const { product, styles, cart } = this.props;
+    const style = styles.results[index];
+    const rating = 3.5;
+    const { category, slogan, description } = product;
+    const productName = product.name;
+    const styleName = style.name;
+    const price = style.sale_price ? style.sale_price : style.original_price;
 
-      return (
-        <Grid>
-          <ImageGallery />
-          <ProductInfo
-            rating={rating}
-            category={category}
-            productName={productName}
-            price={price}
-          />
-          <StyleSelector />
-          <AddToCart />
-          <Description
-            slogan={slogan}
-            description={description}
-          />
-        </Grid>
-      );
-    }
-    return <div>Loading all styles...</div>;
+    return (
+      <Grid>
+        <ImageGallery styles={styles} styleNo={index} />
+        <ProductInfo
+          rating={rating}
+          category={category}
+          productName={productName}
+          price={price}
+        />
+        <StyleSelector />
+        <AddToCart />
+        <Description
+          slogan={slogan}
+          description={description}
+        />
+      </Grid>
+    );
   }
 }
 
