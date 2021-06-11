@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
 
@@ -42,23 +42,30 @@ const ReviewBody = styled.div`
   grid-area: ReviewBody;
   font-size: x-small;
   background: red;
-  &:hover {
-    opacity: 0.5;
-    cursor: pointer;
-  };
+  .green {
+    color: green;
+  }
 `;
 
 const Photos = styled.div`
 display: flex;
 flex-direction: row;
-justify-content: space-around;
+justify-content: center;
 align-items: center;
 .photo {
+  margin-left: 10px;
+  border-radius: 4px;
+  background: white;
   display: block;
   object-fit: contain;
   width: 5%;
   max-height: auto;
   min-height: 0;
+  &:hover {
+    border: 1px solid #C0C0C0;
+    background: grey;
+    cursor: pointer;
+  };
 }
 `;
 
@@ -71,7 +78,28 @@ const Helpful = styled.div`
   grid-area: Helpful;
 `;
 
-const showImages = (photo) => <img className="photo" key={photo.id} alt={photo.id} src={photo.url} />;
+const Modal = styled.div`
+  display: flex;
+  position: fixed;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.3);
+
+  .modal-content {
+    border-radius: 10%;
+    background-color: white;
+    margin: auto;
+    width: 80%;
+  }
+`;
+
+// let clickedImage;
 
 const Tile = (props) => {
   // const [productInfo, setProductInfo] = useState(props.); NOOOOooooooo
@@ -83,9 +111,19 @@ const Tile = (props) => {
   const [expand, setExpand] = useState(false);
   const [helpful, setHelpful] = useState(0);
   const [notHelpful, setNotHelpful] = useState(0);
+  const [clickedImage, setClickedImage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  // useEffect(() => {
+  //   setShowModal(true);
+  // }, [clickedImage]);
 
   let showButton;
   let sellerResponse;
+  let modalImage;
+  let recommended;
+
+  const showImages = (photo) => <img className="photo thumbnail" key={photo.id} alt={photo.id} src={photo.url} />;
 
   if (body.length > 250) {
     if (expand) {
@@ -106,6 +144,27 @@ const Tile = (props) => {
     );
   }
 
+  if (showModal) {
+    modalImage = (
+      <Modal onClick={() => { setShowModal(!showModal); }}>
+        <img alt="modal" className="modal-content" src={clickedImage} />
+      </Modal>
+    );
+  }
+
+  if (recommend) {
+    recommended = (
+      <div>
+        <span className="green">
+          &#10003;
+        </span>
+        I recommend this product
+      </div>
+    );
+  }
+
+  console.log(data);
+
   return (
     <TileArea>
       <RatingArea>
@@ -123,18 +182,20 @@ const Tile = (props) => {
         <br />
         {showButton}
         <br />
-        <Photos>
-        {photos.map(showImages)}
+        <Photos onClick={(e) => { setClickedImage(e.target.src); setShowModal(!showModal); }}>
+          {photos.map(showImages)}
+          {modalImage}
         </Photos>
+        {recommended}
       </ReviewBody>
       <ReviewResponse>
         {sellerResponse}
       </ReviewResponse>
       <Helpful>
         Was this review helpful?
-        <span onClick={()=> {setHelpful(helpful + 1)}}> Yes:{helpful}
+        <span onClick={() => { setHelpful(helpful + 1) }}> Yes:{helpful}
         </span>
-        <span onClick={()=> {setNotHelpful(notHelpful + 1)}}> No: {notHelpful}
+        <span onClick={() => { setNotHelpful(notHelpful + 1) }}> No: {notHelpful}
         </span>
       </Helpful>
     </TileArea>
