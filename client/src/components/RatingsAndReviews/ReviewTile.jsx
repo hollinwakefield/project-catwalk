@@ -135,13 +135,15 @@ const Tile = (props) => {
     showButton;
   }
 
-  if (response.length > 0) {
-    sellerResponse = (
-      <div className="response">
-        Response from Seller:
-        {response}
-      </div>
-    );
+  if (response) {
+    if (response.length > 0) {
+      sellerResponse = (
+        <div className="response">
+          Response from Seller:
+          {response}
+        </div>
+      );
+    }
   }
 
   if (showModal) {
