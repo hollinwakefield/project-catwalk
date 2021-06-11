@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import ProductOverview from './productOverview/productOverview';
+import ProductOverview from './ProductOverviewHooks/ProductOverview';
 import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
 import RelatedItems from './RelatedItems/RelatedItems';
 
