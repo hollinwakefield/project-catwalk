@@ -25,11 +25,20 @@ const Name = styled.p`
   color: white;
   font-size: 20px;
   font-weight: 200;
-  text-align: center;
+  text-align: left;
+  margin-top:-30px;
 `;
 
 const Description = styled.p`
   color: white;
+  margin-top:-30px;
+  font-size: 20px;
+`;
+
+const Category = styled.p`
+  color: #EAE8E4;
+  text-align: left;
+  margin-top:-30px;
 `;
 
 const Image = styled.img`
@@ -45,14 +54,15 @@ const Line = styled.hr`
 `;
 
 const Card = ({
-  itemName, image, price, rating,
+  itemName, image, price, rating, category
 }) => (
   <Wrapper data-testid="card">
-    <Image src={image} alt="Nothing" />
+    <Image src={image} alt="nothing to show" />
     <div><Line /></div>
     <Name>{itemName}</Name>
+    <Category>{category}</Category>
     <Description>
-      Price:
+      Price: $
       {price}
     </Description>
     <Stars stars={rating} />

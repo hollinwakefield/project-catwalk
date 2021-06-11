@@ -2,37 +2,30 @@ import React from 'react';
 import axios from 'axios';
 import ProductOverview from './productOverview/productOverview';
 import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
-import RelatedItems from './RelatedItems';
+import RelatedItems from './RelatedItems/RelatedItems';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       product: null,
-      reviews: null,
+      styles: null,
       cart: null,
+      related: null,
+      reviews: null,
     };
     // initializer();
   }
 
   componentDidMount() {
-    axios.get('/products/25168')
+    axios.get('/products/25170')
       .then((res) => {
         this.setState({ product: res.data });
       })
       .catch((err) => {
         console.log(err);
       });
-
-    // fetch reviews from API - Steven
-    axios.get('/reviews/25168')
-      .then((res) => {
-        this.setState({ reviews: res.data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
+    
     // fetch cart from API - Kate
     axios.get('/cart')
       .then((res) => {
@@ -40,16 +33,45 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log(err);
+      
+    // get all styles from API - Chhuong
+    axios.get('products/25170/styles')
+      .then((res) => {
+        this.setState({ styles: res.data });
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+      
+   // get related items from API - Chhuong
+    axios.get('/products/25170/related')
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({ related: res.data });
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+   
+   // fetch reviews from API - Steven
+    axios.get('/reviews/25170')
+      .then((res) => {
+        this.setState({ reviews: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
   render() {
-    const { product, reviews, cart } = this.state;
-    if (product && reviews && cart) {
+    const {
+      product, styles, cart reviews, related
+    } = this.state;
+    if (product && styles && cart && reviews && related) {
       return (
         <>
-          <ProductOverview product={product} cart={cart} />
-          <RelatedItems />
+          <ProductOverview product={product} styles={styles} cart={cart} />
+          <RelatedItems related={related} styles={styles} />
           <RatingAndReviews reviews={reviews} />
         </>
       );
