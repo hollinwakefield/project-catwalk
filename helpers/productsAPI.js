@@ -42,7 +42,7 @@ const getProductInfo = (productId, callback) => {
     });
 };
 
-const getAllStyles = (productId) => {
+const getAllStyles = (productId, callback) => {
   const options = {
     url: `${config.APIURL}products/${productId}/styles`,
     headers: {
@@ -53,7 +53,7 @@ const getAllStyles = (productId) => {
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console
-      console.log(res.data);
+      callback(null, res.data);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
@@ -61,7 +61,7 @@ const getAllStyles = (productId) => {
     });
 };
 
-const getRelatedItems = (productId) => {
+const getRelatedItems = (productId, callback) => {
   const options = {
     url: `${config.APIURL}products/${productId}/related`,
     headers: {
@@ -72,7 +72,7 @@ const getRelatedItems = (productId) => {
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console
-      console.log(res.data);
+      callback(null, res.data);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console

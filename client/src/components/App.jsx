@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ProductOverview from './productOverview/productOverview';
 import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
-import RelatedItems from './RelatedItems';
+import RelatedItems from './RelatedItems/RelatedItems';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,6 +11,8 @@ class App extends React.Component {
       product: null,
       reviews: null,
       cart: [],
+      related: null,
+      styles: null,
     };
     // initializer();
   }
@@ -25,29 +27,52 @@ class App extends React.Component {
         console.log(err);
       });
 
+    // get styles
+
     // fetch reviews from API - Steven
-    axios.get('/reviews/25168')
+    axios.get('/reviews/25170')
       .then((res) => {
         this.setState({ reviews: res.data });
       })
       .catch((err) => {
         console.log(err);
+      });
+    // fetch cart from API - Kate+
+
+    // get related data from
+    axios.get('/products/25170/related')
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({ related: res.data });
       })
-    // fetch cart from API - Kate
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+
+    axios.get('products/25170/styles')
+      .then((res) => {
+        this.setState({ styles: res.data });
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
   }
 
   render() {
-    const { product, reviews } = this.state;
-    if (product && reviews) {
-    return (
-      <>
-        <ProductOverview />
-        <RelatedItems />
-        <RatingAndReviews reviews={reviews} />
-      </>
-    );
+    const {
+      reviews, related, product, styles,
+    } = this.state;
+    if (product && reviews && related) {
+      return (
+        <>
+          <ProductOverview />
+          <RelatedItems related={related} styles={styles} />
+          <RatingAndReviews reviews={reviews} />
+        </>
+      );
     }
-    return <div>Loading...</div>
+    return (<div>Loading...</div>);
+
   }
 }
 
