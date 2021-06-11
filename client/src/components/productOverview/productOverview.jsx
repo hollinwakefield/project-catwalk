@@ -46,7 +46,7 @@ class ProductOverview extends React.Component {
       const { product, cart } = this.props;
       const style = allStyles[index];
       const rating = 3.5;
-      const { category } = product;
+      const { category, slogan, description } = product;
       const productName = product.name;
       const styleName = style.name;
       const price = style.sale_price ? style.sale_price : style.original_price;
@@ -62,7 +62,10 @@ class ProductOverview extends React.Component {
           />
           <StyleSelector />
           <AddToCart />
-          <Description />
+          <Description
+            slogan={slogan}
+            description={description}
+          />
         </Grid>
       );
     }

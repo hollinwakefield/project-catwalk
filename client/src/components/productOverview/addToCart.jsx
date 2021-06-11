@@ -25,7 +25,7 @@ const StyledOption = styled.option`
 
 const StyledButton = styled.input`
   max-width: 50%;
-  height: 100%;
+  height: 20%;
   display: flex;
   justify-content: center;
   border: solid 2px;
@@ -38,7 +38,6 @@ const Dropdown = (props) => (
     <StyledSelect id="size" name="size">
       {props.children}
     </StyledSelect>
-    <StyledButton type="submit" value={props.buttonText} />
   </DropdownWrapper>
 );
 
@@ -46,6 +45,10 @@ const Option = (props) => (
   <StyledOption notSelected={props.notSelected}>
     {props.value}
   </StyledOption>
+);
+
+const Button = (props) => (
+  <StyledButton type="submit" value={props.buttonText} />
 );
 
 const AddToCart = () => {
@@ -58,7 +61,6 @@ const AddToCart = () => {
   return (
     <AddToCartArea>
       <Dropdown
-        buttonText="ADD TO BAG"
         onChange={handleSelect}
         action="/"
       >
@@ -70,7 +72,6 @@ const AddToCart = () => {
         <Option value="XL" />
       </Dropdown>
       <Dropdown
-        buttonText="ADD TO BAG"
         onChange={handleSelect}
         action="/"
       >
@@ -80,6 +81,7 @@ const AddToCart = () => {
         <Option value="4" />
         <Option value="5" />
       </Dropdown>
+      <Button buttonText="ADD TO BAG" />
     </AddToCartArea>
   );
 };
