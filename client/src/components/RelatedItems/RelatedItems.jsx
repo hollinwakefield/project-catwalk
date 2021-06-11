@@ -23,7 +23,7 @@ class RelatedItems extends React.Component {
     const image = styles.results[0].photos[0].url;
     return (
       <>
-        <CardList related={related} image={image}/>
+        <CardList related={related} styles={styles}/>
       </>
     );
   }

@@ -35,25 +35,21 @@ const Slider = styled.div`
 // Convert CardList into a carousel
 const CardList = (props) => {
   const { related } = props;
-  const { image } = props;
+  const { styles } = props;
   return (
     <div class="slider">
       <Title>Related Items!</Title>
       <Wrapper>
-        {props.related.map((item) => (
+        {props.related.map((item, index) => (
           <Card
             key={item.id}
-            image={image}
+            image={styles.results[index].photos[0].url}
             rating={3.5}
             itemName={item.name}
             category={item.category}
             price={item.default_price}
           />
         ))}
-        {/* {props.image.map((item) => (
-          <Card
-            image={item.image} />
-        ))} */}
       </Wrapper>
     </div>
   );
