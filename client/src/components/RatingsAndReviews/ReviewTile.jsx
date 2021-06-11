@@ -55,8 +55,8 @@ justify-content: space-around;
 align-items: center;
 .photo {
   display: block;
-  object-fit: fill;
-  width: auto;
+  object-fit: contain;
+  width: 5%;
   max-height: auto;
   min-height: 0;
 }
