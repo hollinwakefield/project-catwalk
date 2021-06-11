@@ -25,7 +25,7 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-    
+
     // fetch cart from API - Kate
     axios.get('/cart')
       .then((res) => {
@@ -33,7 +33,7 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log(err);
-      
+      });
     // get all styles from API - Chhuong
     axios.get('products/25170/styles')
       .then((res) => {
@@ -42,8 +42,8 @@ class App extends React.Component {
       .catch((err) => {
         console.log('Error: ', err);
       });
-      
-   // get related items from API - Chhuong
+
+    // get related items from API - Chhuong
     axios.get('/products/25170/related')
       .then((res) => {
         // console.log(res.data);
@@ -52,8 +52,8 @@ class App extends React.Component {
       .catch((err) => {
         console.log('Error: ', err);
       });
-   
-   // fetch reviews from API - Steven
+
+    // fetch reviews from API - Steven
     axios.get('/reviews/25170')
       .then((res) => {
         this.setState({ reviews: res.data });
@@ -65,7 +65,7 @@ class App extends React.Component {
 
   render() {
     const {
-      product, styles, cart reviews, related
+      product, styles, cart, reviews, related,
     } = this.state;
     if (product && styles && cart && reviews && related) {
       return (
