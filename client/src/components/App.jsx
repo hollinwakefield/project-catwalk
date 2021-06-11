@@ -14,6 +14,7 @@ class App extends React.Component {
       related: null,
       styles: null,
     };
+    // initializer();
   }
 
   componentDidMount() {
@@ -71,7 +72,29 @@ class App extends React.Component {
       );
     }
     return (<div>Loading...</div>);
+
   }
 }
 
 export default App;
+
+// attempted to initialize the state via initializing inside the constructor, which runs before the component... but failed.
+// const initializer = () => {
+//   axios.get('/products/25168')
+//   .then((res) => {
+//     const product = res.data;
+//     this.setState({ product: product });
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+// // fetch reviews from API - Steven
+// axios.get('/reviews/25168')
+//   .then((res) => {
+//     this.setState({ reviews: res.data });
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
+// }

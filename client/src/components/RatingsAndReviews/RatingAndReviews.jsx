@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ReviewList from './ReviewList';
 
 const Box = styled.div`
   grid-area: ProductBreakdown;
@@ -21,16 +22,15 @@ const StyledDiv = styled.div`
                        "RatingBreakdown ReviewList"
                        "ProductBreakdown ReviewList"
                        "CreateReview ReviewList";
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: auto auto 1fr auto;
-  min-height: 50vh;
+  grid-template-columns: minmax(0px, 1fr) minmax(0px, 3fr);
+  grid-template-rows: auto auto minmax(0px, 1fr) auto;
+  min-height: 100vh;
   gap: 5px 5px;
   place-items: center;
   font-size: 1.5em;
+  border:solid;
   text-align: center;
-  border: solid;
   background: papayawhip;
-  border-color: black;
 `;
 
 class RatingAndReviews extends React.Component {
@@ -42,18 +42,23 @@ class RatingAndReviews extends React.Component {
   }
 
   render() {
+    const { reviews } = this.props;
     const { placeholder } = this.state;
     return (
+      <>
+      <h1>Ratings and Reviews!</h1>
       <StyledDiv>
-        <div>hihi</div>
-        <div>kate</div>
-        <Box>
+        {/* <Box>
           <p>{placeholder}</p>
           <p>hello</p>
           <p>more stuff inside place</p>
           <div>hi</div>
-        </Box>
+        </Box> */}
+        <ReviewList
+          reviews={reviews}
+        />
       </StyledDiv>
+      </>
     );
   }
 }

@@ -29,7 +29,7 @@ S.FrontDiv = styled.div`
   top: 0;
   overflow: hidden;
   width: ${(props) => props.rating}%;
-  color: #0765d9;
+  color: rebeccapurple;
 `;
 
 function Stars(props) {
@@ -43,7 +43,7 @@ function Stars(props) {
   return (
     <>
       <S.WrapperDiv>
-        <S.RatingSpan>{stars || 'N/A'}</S.RatingSpan>
+        {/* <S.RatingSpan>{stars || 'N/A'}</S.RatingSpan> */}
         <S.BackStarsDiv>
           <IconStar />
           <IconStar />
