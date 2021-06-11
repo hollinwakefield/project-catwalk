@@ -1,6 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 // import styled, { css } from 'styled-components';
 import CardList from './CardList';
+import helpers from '../../../../helpers/productsAPI';
 
 // Will need to have two sections, can use flex box
 
@@ -8,13 +10,12 @@ class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      photoNum: 0,
-      currentPhoto: 0,
+
     };
   }
 
   render() {
-    const { related, styles } = this.props;
+    const {related, styles} = this.props;
     // need the array results, inside results are objects
     // now we need the array photos
     // inside of photos are objects
@@ -22,7 +23,7 @@ class RelatedItems extends React.Component {
     const image = styles.results[0].photos[0].url;
     return (
       <>
-        < CardList related={related} styles={styles} />
+        <CardList related={related} image={image}/>
       </>
     );
   }
