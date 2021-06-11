@@ -43,6 +43,8 @@ const CardList = (props) => {
         {props.related.map((item) => (
           <Card
             key={item.id}
+            image={image}
+            rating={3.5}
             itemName={item.name}
             category={item.category}
             price={item.default_price}
