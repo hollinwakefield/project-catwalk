@@ -22,9 +22,9 @@ const StyledDiv = styled.div`
                        "RatingBreakdown ReviewList"
                        "ProductBreakdown ReviewList"
                        "CreateReview ReviewList";
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: auto auto 1fr auto;
-  min-height: 50vh;
+  grid-template-columns: minmax(0px, 1fr) minmax(0px, 3fr);
+  grid-template-rows: auto auto minmax(0px, 1fr) auto;
+  min-height: 100vh;
   gap: 5px 5px;
   place-items: center;
   font-size: 1.5em;
@@ -45,17 +45,20 @@ class RatingAndReviews extends React.Component {
     const { reviews } = this.props;
     const { placeholder } = this.state;
     return (
+      <>
+      <h1>Ratings and Reviews!</h1>
       <StyledDiv>
-        <Box>
+        {/* <Box>
           <p>{placeholder}</p>
           <p>hello</p>
           <p>more stuff inside place</p>
           <div>hi</div>
-        </Box>
+        </Box> */}
         <ReviewList
           reviews={reviews}
         />
       </StyledDiv>
+      </>
     );
   }
 }
