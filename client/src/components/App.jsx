@@ -12,6 +12,7 @@ class App extends React.Component {
       reviews: null,
       cart: [],
       related: null,
+      styles: null,
     };
   }
 
@@ -25,8 +26,10 @@ class App extends React.Component {
         console.log(err);
       });
 
+    // get styles
+
     // fetch reviews from API - Steven
-    axios.get('/reviews/25168')
+    axios.get('/reviews/25170')
       .then((res) => {
         this.setState({ reviews: res.data });
       })
@@ -36,7 +39,7 @@ class App extends React.Component {
     // fetch cart from API - Kate+
 
     // get related data from
-    axios.get('/products/25168/related')
+    axios.get('/products/25170/related')
       .then((res) => {
         // console.log(res.data);
         this.setState({ related: res.data });
@@ -44,22 +47,30 @@ class App extends React.Component {
       .catch((err) => {
         console.log('Error: ', err);
       });
+
+    axios.get('products/25170/styles')
+      .then((res) => {
+        this.setState({ styles: res.data });
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
   }
 
   render() {
-    const { reviews, related, product } = this.state;
+    const {
+      reviews, related, product, styles,
+    } = this.state;
     if (product && reviews && related) {
       return (
         <>
           <ProductOverview />
-          <RelatedItems related={related} />
+          <RelatedItems related={related} styles={styles} />
           <RatingAndReviews reviews={reviews} />
         </>
       );
-    } else {
-      return <div>Loading...</div>
     }
-
+    return (<div>Loading...</div>);
   }
 }
 

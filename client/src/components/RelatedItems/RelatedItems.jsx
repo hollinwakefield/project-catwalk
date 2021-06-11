@@ -15,11 +15,15 @@ class RelatedItems extends React.Component {
   }
 
   render() {
-    const {related} = this.props;
-    console.log({related});
+    const {related, styles} = this.props;
+    // need the array results, inside results are objects
+    // now we need the array photos
+    // inside of photos are objects
+    // need the key thumbnail_url
+    const image = styles.results[0].photos[0].url;
     return (
       <>
-        <CardList related={related} />
+        <CardList related={related} image={image}/>
       </>
     );
   }

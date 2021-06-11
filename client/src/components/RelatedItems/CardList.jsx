@@ -25,23 +25,35 @@ const Title = styled.h1`
   font-family: Sans-serif;
 `;
 
-// Convert CardList into a carousel
-const CardList = (props) => (
-  <>
-    <Title>Related Items!</Title>
-    <Wrapper>
-      {props.related.map((item) => (
-        <Card
-          key={item.id}
-          itemName={item.name}
-          // category={item.category}
-          // image={item.image}
-          price={item.default_price}
-          // rating={item.rating}
-        />
-      ))}
-    </Wrapper>
-  </>
-);
+const Slider = styled.div`
+  width: 300px;
+  height: 300px;
+  display: flex;
+  overflow-x: auto;
+`;
 
+// Convert CardList into a carousel
+const CardList = (props) => {
+  const { related } = props;
+  const { image } = props;
+  return (
+    <div class="slider">
+      <Title>Related Items!</Title>
+      <Wrapper>
+        {props.related.map((item) => (
+          <Card
+            key={item.id}
+            itemName={item.name}
+            category={item.category}
+            price={item.default_price}
+          />
+        ))}
+        {/* {props.image.map((item) => (
+          <Card
+            image={item.image} />
+        ))} */}
+      </Wrapper>
+    </div>
+  );
+};
 export default CardList;
