@@ -39,6 +39,7 @@ const getProductInfo = (productId, callback) => {
     .catch((err) => {
       // eslint-disable-next-line no-console
       console.log('Error: ', err);
+      callback(err, null);
     });
 };
 
@@ -58,6 +59,7 @@ const getAllStyles = (productId, callback) => {
     .catch((err) => {
       // eslint-disable-next-line no-console
       console.log('Error: ', err);
+      callback(err, null);
     });
 };
 

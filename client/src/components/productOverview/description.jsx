@@ -6,6 +6,14 @@ const DescriptionArea = styled.div`
   background: palevioletred;
 `;
 
-const Description = () => <DescriptionArea>Description</DescriptionArea>;
+const Description = (props) => {
+  const { slogan, description } = props;
+  return (
+    <DescriptionArea>
+      <div>{slogan}</div>
+      <div>{description}</div>
+    </DescriptionArea>
+  );
+};
 
 export default Description;

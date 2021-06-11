@@ -1,7 +1,7 @@
 const axios = require('axios');
 const config = require('./config');
 
-const getCart = () => {
+const getCart = (callback) => {
   const options = {
     url: `${config.APIURL}cart`,
     headers: {
@@ -12,7 +12,7 @@ const getCart = () => {
   axios(options)
     .then((res) => {
       // eslint-disable-next-line no-console
-      console.log(res.data);
+      callback(null, res.data);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console

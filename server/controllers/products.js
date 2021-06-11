@@ -1,7 +1,6 @@
 const express = require('express');
-
+const productAPI = require('../../helpers/productsAPI.js');
 const router = express.Router();
-const productAPI = require('../../helpers/productsAPI');
 
 router.get('/:productId', (req, res) => {
   const { productId } = req.params;
