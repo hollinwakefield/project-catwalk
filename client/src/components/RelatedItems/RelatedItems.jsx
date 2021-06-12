@@ -4,7 +4,11 @@ import axios from 'axios';
 import CardList from './CardList';
 import helpers from '../../../../helpers/productsAPI';
 
-// Will need to have two sections, can use flex box
+// TO DO:
+  // App passed down related item
+  // Need to perform a get request in here to get the styles of each related item
+  // Then extract the url sources from each of the syles of each related item
+  // Store those urls into an array, then send it to the cardlist child
 
 class RelatedItems extends React.Component {
   constructor(props) {
@@ -14,13 +18,12 @@ class RelatedItems extends React.Component {
     };
   }
 
+  componentDidMount() {
+    
+  }
+
   render() {
     const {related, styles} = this.props;
-    // need the array results, inside results are objects
-    // now we need the array photos
-    // inside of photos are objects
-    // need the key thumbnail_url
-    const image = styles.results[0].photos[0].url;
     return (
       <>
         <CardList related={related} styles={styles}/>

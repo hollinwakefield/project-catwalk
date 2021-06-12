@@ -8,12 +8,11 @@ const Wrapper = styled.div`
   justify-content: space-between;
   min-width: 250px;
   max-width: 250px;
-  min-height: 250px;
-  background-color: #eb9534;
+  min-height: 500px;
   border-radius: 4px;
-
-  padding: 1rem;
-  margin: 1rem;
+  border: solid 2px #767676;
+  padding: 5px;
+  margin: 2rem;
 
   &:hover {
     opacity: 0.5;
@@ -22,34 +21,37 @@ const Wrapper = styled.div`
 `;
 
 const Name = styled.p`
-  color: white;
+  font-family: 'Montserrat'
+  color: gray;
   font-size: 20px;
   font-weight: 200;
   text-align: left;
-  margin-top:-30px;
+  flex-basis:0.1rem;
+  margin-top: -35px;
 `;
 
 const Description = styled.p`
-  color: white;
-  margin-top:-30px;
-  font-size: 20px;
+  color: gray;
+  text-align:left;
+  margin-top: -35px;
+
 `;
 
 const Category = styled.p`
-  color: #EAE8E4;
+  color: gray;
   text-align: left;
-  margin-top:-30px;
+  margin-top:-20px;
 `;
 
 const Image = styled.img`
-  max-height: 100px;
-  max-width: 100px;
-  margin-left: 75px;
   border-radius: 5px;
+  width: 250px;
+  height: 350px;
+  object-fit: cover;
 `;
 
 const Line = styled.hr`
-  color: white;
+  color: black;
   width: 100%;
 `;
 
@@ -59,11 +61,10 @@ const Card = ({
   <Wrapper data-testid="card">
     <Image src={image} alt="nothing to show" />
     <div><Line /></div>
-    <Name>{itemName}</Name>
     <Category>{category}</Category>
+    <Name>{itemName}</Name>
     <Description>
-      Price: $
-      {price}
+      ${price}
     </Description>
     <Stars stars={rating} />
   </Wrapper>

@@ -57,7 +57,7 @@ align-items: center;
   display: block;
   object-fit: contain;
   width: 5%;
-  max-height: auto;
+  max-height: 69px;
   min-height: 0;
 }
 `;
