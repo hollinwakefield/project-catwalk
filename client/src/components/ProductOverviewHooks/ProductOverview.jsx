@@ -14,9 +14,10 @@ const Grid = styled.div`
                        "Description Description";
   grid-template-columns: 5fr 2fr;
   grid-template-rows: auto auto auto auto;
-  grid-gap: 1em;
+  grid-gap: 2em;
   min-height: 70vh;
-  padding: 1em;
+  padding: 3em;
+  margin: 3em;
   background: papayawhip;
 `;
 
@@ -26,7 +27,7 @@ const ProductOverview = (props) => {
 
   return (
     <Grid>
-      {/* <ImageGallery style={style} /> */}
+      <ImageGallery style={style} />
 
       {/* REFACTOR RATING WITH REAL API DATA */}
       <ProductInfo product={product} style={style} rating={3.5} />
