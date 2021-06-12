@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
 
+// /////////////// ASSIGNED GRID AREA //////////////// //
 const ProductInfoArea = styled.div`
   grid-area: ProductInfo;
   background: palevioletred;
 `;
 
+// //////////////// STYLED COMPONENTS //////////////// //
 const ProductName = styled.h1`
 `;
 
@@ -15,6 +17,7 @@ const SalePrice = styled.span`
   text-decoration: line-through red;
 `;
 
+// //////////////// MAIN COMPONENT //////////////// //
 const ProductInfo = (props) => {
   const { product, style, rating } = props;
   const { name, category } = product;

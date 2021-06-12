@@ -26,7 +26,7 @@ const ProductOverview = (props) => {
 
   return (
     <Grid>
-      <ImageGallery style={style} />
+      {/* <ImageGallery style={style} /> */}
 
       {/* REFACTOR RATING WITH REAL API DATA */}
       <ProductInfo product={product} style={style} rating={3.5} />
