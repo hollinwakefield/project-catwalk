@@ -10,11 +10,10 @@ const TileArea = styled.div`
                        "Response Response Response"
                        "Helpful Helpful Helpful";
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 100px 100px 100px auto 100px;
+  grid-template-rows: auto auto auto auto auto;
   grid-gap: 5px;
-  background: turquoise;
   border: solid;
-  border-radius: 30px;
+  margin-bottom: 10px;
 `;
 
 const RatingArea = styled.div`
@@ -23,6 +22,7 @@ const RatingArea = styled.div`
 `;
 
 const ReviewerName = styled.div`
+  font-style: oblique;
   grid-area: ReviewerName;
   place-self: center;
 `;
@@ -35,13 +35,11 @@ const Date = styled.div`
 
 const ReviewSummary = styled.div`
   grid-area: Summary;
-  background: green;
  `;
 
 const ReviewBody = styled.div`
   grid-area: ReviewBody;
   font-size: x-small;
-  background: red;
   .green {
     color: green;
   }
@@ -71,7 +69,6 @@ align-items: center;
 
 const ReviewResponse = styled.div`
   grid-area: Response;
-  background: yellow;
 `;
 
 const Helpful = styled.div`
@@ -175,6 +172,7 @@ const Tile = (props) => {
       <ReviewerName>{reviewer_name}</ReviewerName>
       <Date>{prettyDate}</Date>
       <ReviewSummary>
+        <hr />
         <b>
           {summary}
         </b>

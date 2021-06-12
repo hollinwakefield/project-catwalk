@@ -5,7 +5,6 @@ import ReviewList from './ReviewList';
 const Box = styled.div`
   grid-area: ProductBreakdown;
   place-self: stretch;
-  background: red;
   margin: 0.5em;
   padding: 0.25em;
   text-align: center;
@@ -30,7 +29,6 @@ const StyledDiv = styled.div`
   font-size: 1.5em;
   border:solid;
   text-align: center;
-  background: papayawhip;
 `;
 
 class RatingAndReviews extends React.Component {
