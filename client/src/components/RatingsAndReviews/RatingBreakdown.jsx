@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import StarBreakdown from './StarBreakdown';
 
 //Contains a Rating Summary
 //Contains % of people who recommended product
 //Contains a Rating Star Breakdown
 
 const RatingBreakdownArea = styled.div`
+  grid-area: RatingBreakdown;
   display: flex;
   flex-direction: column;
 `;
-
-const StarBreakdown = styled.div`
-  margin: 0 auto;
-  background-color: yellow;
-  display: flex;
-  flex-direction: column;
-`;
-
 
 const RatingBreakdown = () => {
   const [filterOneStars, setFilterOneStars] = useState(false);
@@ -26,15 +21,17 @@ const RatingBreakdown = () => {
   const [recommended, setRecommended] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
 
-  useEffect() {
-    axios.get('/')
-  }
+  // useEffect() {
+  //   axios.get('/')
+  // }
   return (
     <RatingBreakdownArea>
-      <div className="summary"
+      <div className="summary">
+        Stuff inside this div
+      </div>
+      <StarBreakdown />
     </RatingBreakdownArea>
-  )
-
+  );
 };
 
 export default RatingBreakdown;

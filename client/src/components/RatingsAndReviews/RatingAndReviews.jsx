@@ -1,6 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import ReviewList from './ReviewList';
+import RatingBreakdown from './RatingBreakdown';
 
 const Box = styled.div`
   grid-area: ProductBreakdown;
@@ -35,27 +37,46 @@ class RatingAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      placeholder: 'Placeholder',
+      avg: 0,
+      totalReviews: 0,
+      recommended: '',
     };
+  }
+
+  componentDidMount() {
+    // axios.get(`/reviews/meta/${this.props.productId}`)
+    axios.get('/reviews/meta/25167')
+      .then((res) => {
+        const { data } = res;
+        this.setState({
+          avg: data.avg,
+          totalReviews: data.reviews,
+          recommended: data.recommended,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
     const { reviews } = this.props;
-    const { placeholder } = this.state;
+    const { avg, totalReviews, recommended } = this.state;
+
     return (
       <>
-      <h1>Ratings and Reviews!</h1>
-      <StyledDiv>
-        {/* <Box>
-          <p>{placeholder}</p>
-          <p>hello</p>
-          <p>more stuff inside place</p>
-          <div>hi</div>
-        </Box> */}
-        <ReviewList
-          reviews={reviews}
-        />
-      </StyledDiv>
+        <h1>Ratings and Reviews!</h1>
+        <StyledDiv>
+          <RatingBreakdown
+            avg={avg}
+            totalReviews={totalReviews}
+            recommended={recommended}
+          />
+          <ReviewList
+            reviews={reviews}
+            totalReviews={totalReviews}
+          />
+        </StyledDiv>
       </>
     );
   }
