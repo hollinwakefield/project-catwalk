@@ -53,6 +53,7 @@ const Image = styled.img`
 const Line = styled.hr`
   color: black;
   width: 100%;
+  margin-top: -10px;
 `;
 
 const Card = ({
