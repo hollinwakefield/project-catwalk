@@ -57,6 +57,46 @@ const getAverageRating = (id, callback) => {
     });
 };
 
+const getReviewMetaData = (id, callback) => {
+  const options = {
+    url: `${config.APIURL}reviews/meta/?product_id=${id}`,
+    headers: {
+      Authorization: config.APITOKEN,
+    },
+  };
+
+  axios(options)
+    .then((res) => {
+      // store the results array from the data that was recieved
+      // console.log(res.data);
+      const results = res.data.ratings;
+      console.log(results);
+      // Make an array of ratings
+      let totalRating = 0;
+      let reviews = 0;
+      let recommended = '';
+
+      const array = Object.keys(results);
+      array.forEach((rating) => {
+        totalRating += (Number(results[rating]) * Number(rating));
+        reviews += Number(results[rating]);
+      });
+
+      recommended = `${((Number(res.data.recommended.true) / reviews) * 100).toFixed(0)}%`;
+      const avg = Number((totalRating / reviews).toFixed(1));
+      const data = {
+        avg,
+        reviews,
+        recommended,
+      };
+      callback(null, data);
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      callback(err);
+    });
+};
+
 // product id for Slacker's Slacks
 // const id = 25170;
 
@@ -67,4 +107,5 @@ module.exports = {
   average,
   getAllReviews,
   getAverageRating,
+  getReviewMetaData,
 };
