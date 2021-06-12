@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import StarBreakdown from './StarBreakdown';
+import BreakdownSummary from './BreakdownSummary';
 
 //Contains a Rating Summary
 //Contains % of people who recommended product
@@ -12,7 +13,8 @@ const RatingBreakdownArea = styled.div`
   flex-direction: column;
 `;
 
-const RatingBreakdown = () => {
+const RatingBreakdown = (props) => {
+  const { avg } = props;
   const [filterOneStars, setFilterOneStars] = useState(false);
   const [filterTwoStars, setFilterTwoStars] = useState(false);
   const [filterThreeStars, setFilterThreeStars] = useState(false);
@@ -26,9 +28,7 @@ const RatingBreakdown = () => {
   // }
   return (
     <RatingBreakdownArea>
-      <div className="summary">
-        Stuff inside this div
-      </div>
+      <BreakdownSummary avg={avg} />
       <StarBreakdown />
     </RatingBreakdownArea>
   );
