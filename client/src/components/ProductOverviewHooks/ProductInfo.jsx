@@ -10,6 +10,7 @@ const ProductInfoArea = styled.div`
 
 // //////////////// STYLED COMPONENTS //////////////// //
 const ProductName = styled.h1`
+  font-size: xx-large;
 `;
 
 const SalePrice = styled.span`
