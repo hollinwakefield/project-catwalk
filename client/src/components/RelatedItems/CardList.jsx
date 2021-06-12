@@ -13,14 +13,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   text-align: center;
-  width: auto;
-  margin-left: 10vw;
-  margin-right: 10vw;
+  width: 100%;
 `;
 
 const Title = styled.h1`
   font-size: 30px;
-  margin-left: 5em;
   font-weight: bold;
 `;
 
@@ -39,19 +36,17 @@ const Arrow = styled.div`
   &.left {
 		left: 0;
 		transform: translate3d(0,-50%,0) rotate(-135deg);
-    margin-left: 20px;
 	}
   &.right {
 		right: 0;
 		transform: translate3d(0,-50%,0) rotate(45deg);
-    margin-right: 20px;
 	}
   &:hover {
 		border-color: coral;
 		box-shadow: 0.5vmin -0.5vmin 0 black;
     cursor: pointer;
 	}
-  &:before { // for better hit area
+  &:before {
 		content: '';
 		position: absolute;
 		top: 50%;
@@ -63,23 +58,23 @@ const Arrow = styled.div`
 `
 
 const CardList =({ related, styles }) => {
-  const [currentCards, setCards] = useState(0);
-  const [currentSet] = useState(related.slice(0,4));
+  const [Cards, setCards] = useState(related.slice(0,4));
   const length = related.length;
 
   const moveRight = () => {
-    setCards(currentCards === length -1 ? 0: currentCards + 1);
+    console.log(related);
+    setCards(related.slice(1,5));
   }
 
   const moveLeft = () => {
-    setCards(currentCards === 0 ? length - 1 : currentCards -1);
+    setCards(related.slice(0,4));
   }
   return (
-    <div className="slider">
+    <>
     <Title>Related Products!</Title>
     <Wrapper>
     <Arrow className ="left" onClick={moveLeft} />
-      {currentSet.map((item, index) => (
+      {Cards.map((item, index) => (
         <Card
           key={item.id}
           image={styles.results[index].photos[0].url}
@@ -91,7 +86,7 @@ const CardList =({ related, styles }) => {
       ))}
       <Arrow className="right" onClick={moveRight} />
     </Wrapper>
-  </div>
+  </>
   );
  }
 export default CardList;

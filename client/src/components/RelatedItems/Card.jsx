@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   border-radius: 4px;
   border: solid 2px #767676;
   padding: 5px;
-  margin: 2rem;
+  margin: 1rem;
 
   &:hover {
     opacity: 0.5;
