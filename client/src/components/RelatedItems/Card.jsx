@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
   border-radius: 4px;
   border: solid 2px #767676;
   padding: 5px;
-  margin: 2rem;
+  margin: 1rem;
 
   &:hover {
     opacity: 0.5;
@@ -53,13 +54,24 @@ const Image = styled.img`
 const Line = styled.hr`
   color: black;
   width: 100%;
+  margin-top: -10px;
 `;
 
 const Card = ({
-  itemName, image, price, rating, category
-}) => (
-  <Wrapper data-testid="card">
-    <Image src={image} alt="nothing to show" />
+  itemName, image, price, rating, category, id
+}) => {
+  const[url, setURL] = useState('');
+  axios.get(`products/${id}/styles`)
+    .then((res) => {
+      let url = res.data.results[0].photos[0].url;
+      setURL(url);
+    })
+    .catch((err)=> {
+      console.log('Error: ', err);
+    })
+  return (
+    <Wrapper data-testid="card">
+    <Image src={url} alt="empty" />
     <div><Line /></div>
     <Category>{category}</Category>
     <Name>{itemName}</Name>
@@ -68,6 +80,7 @@ const Card = ({
     </Description>
     <Stars stars={rating} />
   </Wrapper>
-);
+  )
+};
 
 export default Card;
