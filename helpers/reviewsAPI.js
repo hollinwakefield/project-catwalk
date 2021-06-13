@@ -70,7 +70,6 @@ const getReviewMetaData = (id, callback) => {
       // store the results array from the data that was recieved
       // console.log(res.data);
       const results = res.data.ratings;
-      console.log(results);
       // Make an array of ratings
       let totalRating = 0;
       let reviews = 0;

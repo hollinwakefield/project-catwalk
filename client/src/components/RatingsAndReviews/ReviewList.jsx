@@ -7,7 +7,6 @@ const ReviewArea = styled.div`
   min-height: auto;
   min-width: auto;
   padding: 30px;
-  background: papayawhip;
   `;
 
 const formatTile = (data) => <Tile key={data.review_id} data={data} />;

@@ -67,7 +67,6 @@ class App extends React.Component {
     const {
       product, styles, cart, reviews, related,
     } = this.state;
-    console.log(related);
     if (product && styles && cart && reviews && related) {
       return (
         <>
