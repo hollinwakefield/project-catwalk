@@ -14,16 +14,13 @@ class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      stylesURL: []
     };
-  }
-
-  componentDidMount() {
-    
   }
 
   render() {
     const {related, styles} = this.props;
+    console.log(related);
     return (
       <>
         <CardList related={related} styles={styles}/>

@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   text-align: center;
-  width: 100%;
+  width: 95%;
 `;
 
 const Title = styled.h1`
@@ -41,6 +41,10 @@ const Arrow = styled.div`
 		right: 0;
 		transform: translate3d(0,-50%,0) rotate(45deg);
 	}
+  &.empty {
+    right: 0;
+    opacity: 0;
+  }
   &:hover {
 		border-color: coral;
 		box-shadow: 0.5vmin -0.5vmin 0 black;
@@ -59,16 +63,64 @@ const Arrow = styled.div`
 
 const CardList =({ related, styles }) => {
   const [Cards, setCards] = useState(related.slice(0,4));
-  const length = related.length;
 
   const moveRight = () => {
-    console.log(related);
     setCards(related.slice(1,5));
   }
 
   const moveLeft = () => {
     setCards(related.slice(0,4));
   }
+  // If(card.(length) === related.(length))
+  if(Cards[Cards.length-1].id === related[related.length-1].id) {
+    // Render without right side arrow
+    return (
+      <>
+      <Title>Related Products!</Title>
+      <Wrapper>
+      <Arrow className ="left" onClick={moveLeft} />
+        {Cards.map((item, index) => (
+          <Card
+            key={item.id}
+            id={item.id}
+            image={styles.results[index].photos[0].url}
+            rating={3.5}
+            itemName={item.name}
+            category={item.category}
+            price={item.default_price}
+          />
+        ))}
+        <Arrow className="empty" />
+      </Wrapper>
+    </>
+    );
+   }
+   if(Cards[0].id === related[0].id) {
+    return (
+      <>
+      <Title>Related Products!</Title>
+      <Wrapper>
+      <Arrow className ="empty" />
+        {Cards.map((item, index) => (
+          <Card
+            key={item.id}
+            id={item.id}
+            image={styles.results[index].photos[0].url}
+            rating={3.5}
+            itemName={item.name}
+            category={item.category}
+            price={item.default_price}
+          />
+        ))}
+      <Arrow className="right" onClick={moveRight} />
+      </Wrapper>
+    </>
+    );
+   }
+  // else if (card.(0) === related.(0))
+    // Render without left side arrow
+  // else
+    // Render with both
   return (
     <>
     <Title>Related Products!</Title>
@@ -77,6 +129,7 @@ const CardList =({ related, styles }) => {
       {Cards.map((item, index) => (
         <Card
           key={item.id}
+          id={items.id}
           image={styles.results[index].photos[0].url}
           rating={3.5}
           itemName={item.name}
