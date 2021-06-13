@@ -25,8 +25,10 @@ const StyledThumbnail = styled.div`
 `;
 
 const Thumbnail = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
   cursor: pointer;
-  border-radius: 20px;
 `;
 
 // //////////////// HELPER FUNCTIONS //////////////// //
@@ -42,12 +44,15 @@ const StyleSelector = (props) => {
   const { styles, style, setStyle } = props;
   const { name } = style;
   const thumbnailUrls = getThumbnailUrls(styles);
+  const handleClick = (index) => {
+    setStyle(styles.results[index]);
+  };
 
   return (
     <StyleSelectorArea>
       <StyleName>STYLE > {name}</StyleName>
       <StyledThumbnail>
-        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} />))}
+        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} onClick={() => {handleClick(index)}} />))}
       </StyledThumbnail>
     </StyleSelectorArea>
   );
