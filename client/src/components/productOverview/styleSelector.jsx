@@ -33,7 +33,7 @@ const Thumbnail = styled.img`
 
 // //////////////// HELPER FUNCTIONS //////////////// //
 // input: styles <- an object with results array containing style objects
-// output: thumbnails <- an array of first thumbnail urls from each style object
+// output: an array of first thumbnail urls from each style object
 const getThumbnailUrls = (styles) => {
   const { results } = styles;
   return results.map((style) => style.photos[0].thumbnail_url);
@@ -50,9 +50,12 @@ const StyleSelector = (props) => {
 
   return (
     <StyleSelectorArea>
-      <StyleName>STYLE > {name}</StyleName>
+      <StyleName>
+        SELECTED STYLE:
+        {name}
+      </StyleName>
       <StyledThumbnail>
-        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} onClick={() => {handleClick(index)}} />))}
+        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} onClick={() => handleClick(index)} />))}
       </StyledThumbnail>
     </StyleSelectorArea>
   );

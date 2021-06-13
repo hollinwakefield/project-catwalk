@@ -10,43 +10,46 @@ const ImageGalleryArea = styled.div`
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
-const StyledMainImage = styled.img`
+const MainImage = styled.img`
   align-self: stretch;
   flex: 4;
   cursor: pointer;
 `;
 
-const StyledThumbnails = styled.div`
+const ThumbnailWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   flex: 1;
 `;
 
-const StyledThumbnail = styled.img`
-  cursor: pointer;
+const Thumbnail = styled.img`
   border: 1px solid #ddd;
   padding: 5px;
+  cursor: pointer;
 `;
 
-const MainImage = (props) => (
-  <StyledMainImage src={props.src} alt={props.alt} />
-);
-
-const Thumbnail = (props) => (
-  <StyledThumbnail src={props.src} alt={props.alt} />
-);
+// //////////////// HELPER FUNCTIONS //////////////// //
+// input: photos <- an array with objects containing thumbnail url
+// output: an array of all thumbnail urls
+const getThumbnailUrls = (photos) => photos.map((photo) => photo.thumbnail_url);
 
 // //////////////// MAIN COMPONENT //////////////// //
 const ImageGallery = (props) => {
   const { style } = props;
   const { photos } = style;
+  const thumbnailUrls = getThumbnailUrls(photos);
   const [expandedView, setExpandedView] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [mainImage, setMainImage] = useState(photos[0].url);
+  const handleClick = (index) => {
+    setMainImage(photos[index].url);
+  };
 
   return (
     <ImageGalleryArea>
-      {photos.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" />))}
-      <MainImage src={photos[index].url} alt="fitting" />
+      {photos.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" onClick={() => handleClick(index)} />))}
+      <MainImage src={mainImage} alt="fitting" />
     </ImageGalleryArea>
   );
 };
