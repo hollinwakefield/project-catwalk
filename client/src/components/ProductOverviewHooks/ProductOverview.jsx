@@ -14,9 +14,9 @@ const Grid = styled.div`
                        "Description Description";
   grid-template-columns: 5fr 2fr;
   grid-template-rows: auto auto auto auto;
-  grid-gap: 2em;
+  grid-gap: 3em;
   min-height: 70vh;
-  padding: 3em;
+  padding: 2em;
   margin: 3em;
   background: papayawhip;
 `;

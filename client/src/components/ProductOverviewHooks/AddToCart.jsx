@@ -33,6 +33,7 @@ const StyledButton = styled.input`
   border: solid 2px;
   padding: 0.5rem;
   border-radius: 1rem;
+  cursor: pointer;
 `;
 
 const Dropdown = (props) => (
@@ -98,7 +99,7 @@ const AddToCart = (props) => {
         action="/"
       >
         <Option notSelected value="SELECT SIZE" />
-        {sizes.map((size) => (<Option value={size} />))}
+        {sizes.map((size, index) => (<Option key={index} value={size} />))}
       </Dropdown>
       {(size === 'SELECT SIZE') ? (
         <Dropdown
