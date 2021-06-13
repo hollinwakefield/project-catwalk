@@ -2,30 +2,45 @@ import React from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
 
+// /////////////// ASSIGNED GRID AREA //////////////// //
 const ProductInfoArea = styled.div`
   grid-area: ProductInfo;
   background: palevioletred;
 `;
 
-const Title = styled.h1`
+// //////////////// STYLED COMPONENTS //////////////// //
+const ProductName = styled.h1`
+  font-size: xx-large;
 `;
 
-const ProductInfo = (props) => {
-  const {
-    rating,
-    category,
-    productName,
-    price
-  } = props;
+const SalePrice = styled.span`
+  color: red;
+  text-decoration: line-through red;
+`;
 
-  return(
+// //////////////// MAIN COMPONENT //////////////// //
+const ProductInfo = (props) => {
+  const { product, style, rating } = props;
+  const { name, category } = product;
+  const defaultPrice = product.default_price;
+  const salePrice = style.sale_price;
+
+  return (
     <ProductInfoArea>
       <Stars stars={rating} />
       <div>{category}</div>
-      <Title>{productName}</Title>
+      <ProductName>{name}</ProductName>
       <div>
-        $
-        {price}
+        <span>
+          $
+          {defaultPrice}
+        </span>
+        {salePrice ? (
+          <SalePrice>
+            $
+            {salePrice}
+          </SalePrice>
+        ) : null}
       </div>
     </ProductInfoArea>
   );
