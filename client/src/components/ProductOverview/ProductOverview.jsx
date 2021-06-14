@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ProductInfo from './ProductInfoo';
-import StyleSelector from './StyleSelectorr';
-import AddToCart from './AddToCartt';
-import Description from './Descriptionn';
-import ImageGallery from './ImageGalleryy';
+import ProductInfo from './ProductInfo';
+import StyleSelector from './StyleSelector';
+import AddToCart from './AddToCart';
+import Description from './Description';
+import ImageGallery from './ImageGallery';
 
 const Grid = styled.div`
   display: grid;
