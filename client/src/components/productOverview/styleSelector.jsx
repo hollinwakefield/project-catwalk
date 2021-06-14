@@ -4,31 +4,31 @@ import styled from 'styled-components';
 // //////////////// ASSIGNED GRID AREA //////////////// //
 const StyleSelectorArea = styled.div`
   grid-area: StyleSelector;
-  background: palevioletred;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
 const StyleName = styled.div`
-  font-weight: bold;
+  font-size: 15px;
 `;
 
-// const ThumbnailsWrapper = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-// `;
-
-const StyledThumbnail = styled.div`
+const ThumbnailWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, auto);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
 `;
 
 const Thumbnail = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ddd;
   border-radius: 50%;
+  padding: 3px;
+  margin-top: 5px;
   cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 // //////////////// HELPER FUNCTIONS //////////////// //
@@ -51,12 +51,12 @@ const StyleSelector = (props) => {
   return (
     <StyleSelectorArea>
       <StyleName>
-        SELECTED STYLE:
+        Selected Style >
         {name}
       </StyleName>
-      <StyledThumbnail>
+      <ThumbnailWrapper>
         {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} onClick={() => handleClick(index)} />))}
-      </StyledThumbnail>
+      </ThumbnailWrapper>
     </StyleSelectorArea>
   );
 };

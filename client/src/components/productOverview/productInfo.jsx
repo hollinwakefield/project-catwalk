@@ -5,15 +5,28 @@ import Stars from '../SharedComponents/Stars';
 // /////////////// ASSIGNED GRID AREA //////////////// //
 const ProductInfoArea = styled.div`
   grid-area: ProductInfo;
-  background: palevioletred;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
 const ProductName = styled.h1`
-  font-size: xx-large;
+  font-size: 50px;
+  font-weight: bold;
+`;
+
+const Category = styled.div`
+  font-size: 25px;
+  color: darkgrey;
+  font-style: italic;
+  text-decoration: underline;
+  margin-top: 20px;
+`;
+
+const DefaultPrice = styled.span`
+  font-size: 20px;
 `;
 
 const SalePrice = styled.span`
+  font-size: 15px;
   color: red;
   text-decoration: line-through red;
 `;
@@ -28,13 +41,13 @@ const ProductInfo = (props) => {
   return (
     <ProductInfoArea>
       <Stars stars={rating} />
-      <div>{category}</div>
+      <Category>{category}</Category>
       <ProductName>{name}</ProductName>
       <div>
-        <span>
+        <DefaultPrice>
           $
           {defaultPrice}
-        </span>
+        </DefaultPrice>
         {salePrice ? (
           <SalePrice>
             $

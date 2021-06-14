@@ -18,7 +18,6 @@ const Grid = styled.div`
   min-height: 70vh;
   padding: 2em;
   margin: 3em;
-  background: papayawhip;
 `;
 
 const ProductOverview = (props) => {

@@ -6,29 +6,52 @@ const ImageGalleryArea = styled.div`
   grid-area: ImageGallery;
   display: flex;
   align-items: flex-start;
-  background: palevioletred;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
 const MainImage = styled.img`
-  align-self: stretch;
-  flex: 4;
+  max-width: 90%;
+  max-height: 90%;
+  align-self: center;
+  margin-left: 5px;
   cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const ThumbnailWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  flex: 1;
+  padding: 2px;
+  margin-top: 30px;
 `;
 
 const Thumbnail = styled.img`
-  border: 1px solid #ddd;
-  padding: 5px;
+  width: 80px;
+  height: 80px;
+  border: 2px solid #ddd;
+  border-radius: 7%;
+  padding: 3px;
+  margin: 2px;
   cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
+
+// const SelectedThumbnail = styled.img`
+//   width: 80px;
+//   height: 80px;
+//   border: 5px solid #ddd;
+//   border-radius: 5%;
+//   padding: 5px;
+//   margin: 2px;
+//   cursor: pointer;
+//   &:hover {
+//     opacity: 0.5;
+//   }
+// `;
 
 // //////////////// HELPER FUNCTIONS //////////////// //
 // input: photos <- an array with objects containing thumbnail url
@@ -48,7 +71,9 @@ const ImageGallery = (props) => {
 
   return (
     <ImageGalleryArea>
-      {photos.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" onClick={() => handleClick(index)} />))}
+      <ThumbnailWrapper>
+        {photos.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" onClick={() => handleClick(index)} />))}
+      </ThumbnailWrapper>
       <MainImage src={mainImage} alt="fitting" />
     </ImageGalleryArea>
   );

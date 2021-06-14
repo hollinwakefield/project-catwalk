@@ -4,7 +4,6 @@ import styled from 'styled-components';
 // //////////////// ASSIGNED GRID AREA //////////////// //
 const AddToCartArea = styled.div`
   grid-area: AddToCart;
-  background: palevioletred;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
@@ -16,9 +15,10 @@ const DropdownWrapper = styled.form`
 
 const StyledSelect = styled.select`
   max-width: 50%;
-  height: 100%;
   padding: 0.5rem;
+  border-radius: 0.5em;
   margin-bottom: 1rem;
+  cursor: pointer;
 `;
 
 const StyledOption = styled.option`
@@ -26,13 +26,13 @@ const StyledOption = styled.option`
 `;
 
 const StyledButton = styled.input`
-  max-width: 50%;
-  height: 20%;
+  max-width: 100%;
+  height: 25%;
   display: flex;
   justify-content: center;
   border: solid 2px;
   padding: 0.5rem;
-  border-radius: 1rem;
+  border-radius: 0.5em;
   cursor: pointer;
 `;
 
