@@ -10,13 +10,14 @@ const ImageGalleryArea = styled.div`
 
 // //////////////// STYLED COMPONENTS //////////////// //
 const MainImage = styled.img`
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 85%;
+  max-height: 85%;
   align-self: center;
-  margin-left: 5px;
+  margin-left: 15px;
   cursor: pointer;
   &:hover {
     opacity: 0.8;
+    cursor: zoom-in;
   }
 `;
 
@@ -28,30 +29,17 @@ const ThumbnailWrapper = styled.div`
 `;
 
 const Thumbnail = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 65px;
   border: 2px solid #ddd;
   border-radius: 7%;
   padding: 3px;
   margin: 2px;
   cursor: pointer;
   &:hover {
-    opacity: 0.7;
+    border-color: #FF5A5F;
   }
 `;
-
-// const SelectedThumbnail = styled.img`
-//   width: 80px;
-//   height: 80px;
-//   border: 5px solid #ddd;
-//   border-radius: 5%;
-//   padding: 5px;
-//   margin: 2px;
-//   cursor: pointer;
-//   &:hover {
-//     opacity: 0.5;
-//   }
-// `;
 
 // //////////////// HELPER FUNCTIONS //////////////// //
 // input: photos <- an array with objects containing thumbnail url

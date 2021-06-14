@@ -45,13 +45,11 @@ const ProductInfo = (props) => {
       <ProductName>{name}</ProductName>
       <div>
         <DefaultPrice>
-          $
-          {defaultPrice}
+          {`$${defaultPrice}`}
         </DefaultPrice>
         {salePrice ? (
           <SalePrice>
-            $
-            {salePrice}
+            {`$${salePrice}`}
           </SalePrice>
         ) : null}
       </div>

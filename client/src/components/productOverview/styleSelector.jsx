@@ -27,7 +27,7 @@ const Thumbnail = styled.img`
   margin-top: 5px;
   cursor: pointer;
   &:hover {
-    opacity: 0.7;
+    border-color: #FF5A5F;
   }
 `;
 
@@ -51,8 +51,7 @@ const StyleSelector = (props) => {
   return (
     <StyleSelectorArea>
       <StyleName>
-        Selected Style >
-        {name}
+        {'Selected Style > ' + name}
       </StyleName>
       <ThumbnailWrapper>
         {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} onClick={() => handleClick(index)} />))}

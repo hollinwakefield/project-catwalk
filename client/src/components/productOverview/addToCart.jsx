@@ -7,14 +7,14 @@ const AddToCartArea = styled.div`
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
-const DropdownWrapper = styled.form`
+const DropdownWrapper = styled.div`
   display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: nowrap;
 `;
 
 const StyledSelect = styled.select`
-  max-width: 50%;
+  max-width: 100%;
   padding: 0.5rem;
   border-radius: 0.5em;
   margin-bottom: 1rem;
@@ -30,18 +30,25 @@ const StyledButton = styled.input`
   height: 25%;
   display: flex;
   justify-content: center;
-  border: solid 2px;
   padding: 0.5rem;
-  border-radius: 0.5em;
+  border: 2px solid;
+  border-radius: 7px;
+  border-color: #FF5A5F;
+  background-color: white;
+  transition-duration: 0.3s;
   cursor: pointer;
+  &:hover {
+    background-color: #FF5A5F;
+    color: white;
+  }
 `;
 
 const Dropdown = (props) => (
-  <DropdownWrapper action={props.action}>
+  <form>
     <StyledSelect onChange={props.onChange} disabled={props.disabled}>
       {props.children}
     </StyledSelect>
-  </DropdownWrapper>
+  </form>
 );
 
 const Option = (props) => (
@@ -93,32 +100,34 @@ const AddToCart = (props) => {
 
   return (
     <AddToCartArea>
-      <Dropdown
-        id="size-selector"
-        onChange={handleSizeSelect}
-        action="/"
-      >
-        <Option notSelected value="SELECT SIZE" />
-        {sizes.map((size, index) => (<Option key={index} value={size} />))}
-      </Dropdown>
-      {(size === 'SELECT SIZE') ? (
+      <DropdownWrapper>
         <Dropdown
-          id="qty-selector"
-          onChange={handleQuantitySelect}
-          action="/"
-          disabled
-        >
-          <Option value="1" />
-        </Dropdown>
-      ) : (
-        <Dropdown
-          id="qty-selector"
-          onChange={handleQuantitySelect}
+          id="size-selector"
+          onChange={handleSizeSelect}
           action="/"
         >
-          {getArrayOneToN(getMaxQuantity(skus, size)).map((quantity) => (<Option value={quantity} />))}
+          <Option notSelected value="SELECT SIZE" />
+          {sizes.map((size, index) => (<Option key={index} value={size} />))}
         </Dropdown>
-      )}
+        {(size === 'SELECT SIZE') ? (
+          <Dropdown
+            id="qty-selector"
+            onChange={handleQuantitySelect}
+            action="/"
+            disabled
+          >
+            <Option value="1" />
+          </Dropdown>
+        ) : (
+          <Dropdown
+            id="qty-selector"
+            onChange={handleQuantitySelect}
+            action="/"
+          >
+            {getArrayOneToN(getMaxQuantity(skus, size)).map((quantity) => (<Option value={quantity} />))}
+          </Dropdown>
+        )}
+      </DropdownWrapper>
       <Button buttonText="ADD TO BAG" />
     </AddToCartArea>
   );
