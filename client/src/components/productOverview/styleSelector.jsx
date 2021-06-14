@@ -4,36 +4,36 @@ import styled from 'styled-components';
 // //////////////// ASSIGNED GRID AREA //////////////// //
 const StyleSelectorArea = styled.div`
   grid-area: StyleSelector;
-  background: palevioletred;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
 const StyleName = styled.div`
-  font-weight: bold;
+  font-size: 15px;
 `;
 
-// const ThumbnailsWrapper = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-// `;
-
-const StyledThumbnail = styled.div`
+const ThumbnailWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, auto);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
 `;
 
 const Thumbnail = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ddd;
   border-radius: 50%;
+  padding: 3px;
+  margin-top: 5px;
   cursor: pointer;
+  &:hover {
+    border-color: #FF5A5F;
+  }
 `;
 
 // //////////////// HELPER FUNCTIONS //////////////// //
 // input: styles <- an object with results array containing style objects
-// output: thumbnails <- an array of first thumbnail urls from each style object
+// output: an array of first thumbnail urls from each style object
 const getThumbnailUrls = (styles) => {
   const { results } = styles;
   return results.map((style) => style.photos[0].thumbnail_url);
@@ -50,10 +50,12 @@ const StyleSelector = (props) => {
 
   return (
     <StyleSelectorArea>
-      <StyleName>STYLE > {name}</StyleName>
-      <StyledThumbnail>
-        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} onClick={() => {handleClick(index)}} />))}
-      </StyledThumbnail>
+      <StyleName>
+        {'Selected Style > ' + name}
+      </StyleName>
+      <ThumbnailWrapper>
+        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} onClick={() => handleClick(index)} />))}
+      </ThumbnailWrapper>
     </StyleSelectorArea>
   );
 };

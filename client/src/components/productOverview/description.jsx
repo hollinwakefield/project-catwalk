@@ -4,14 +4,20 @@ import styled from 'styled-components';
 // //////////////// ASSIGNED GRID AREA //////////////// //
 const DescriptionArea = styled.div`
   grid-area: Description;
-  background: palevioletred;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
 const Slogan = styled.div`
   font-style: italic;
   font-weight: bold;
-  font-size: x-large;
+  font-size: 25px;
+  margin-bottom: 15px;
+  margin-left: 30px;
+`;
+
+const ProductDescription = styled.div`
+  font-size: 15px;
+  margin-left: 30px;
 `;
 
 // //////////////// MAIN COMPONENT //////////////// //
@@ -22,7 +28,7 @@ const Description = (props) => {
   return (
     <DescriptionArea>
       <Slogan>{slogan}</Slogan>
-      <div>{description}</div>
+      <ProductDescription>{description}</ProductDescription>
     </DescriptionArea>
   );
 };

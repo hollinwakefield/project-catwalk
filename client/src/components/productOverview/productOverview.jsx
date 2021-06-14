@@ -10,15 +10,13 @@ const Grid = styled.div`
   display: grid;
   grid-template-areas: "ImageGallery ProductInfo"
                        "ImageGallery StyleSelector"
-                       "ImageGallery AddToCart"
-                       "Description Description";
+                       "Description AddToCart";
   grid-template-columns: 5fr 2fr;
   grid-template-rows: auto auto auto auto;
   grid-gap: 3em;
   min-height: 70vh;
   padding: 2em;
   margin: 3em;
-  background: papayawhip;
 `;
 
 const ProductOverview = (props) => {

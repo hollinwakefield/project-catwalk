@@ -6,47 +6,63 @@ const ImageGalleryArea = styled.div`
   grid-area: ImageGallery;
   display: flex;
   align-items: flex-start;
-  background: palevioletred;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
-const StyledMainImage = styled.img`
-  align-self: stretch;
-  flex: 4;
+const MainImage = styled.img`
+  max-width: 85%;
+  max-height: 85%;
+  align-self: center;
+  margin-left: 15px;
   cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+    cursor: zoom-in;
+  }
 `;
 
-const StyledThumbnails = styled.div`
+const ThumbnailWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  padding: 2px;
+  margin-top: 30px;
 `;
 
-const StyledThumbnail = styled.img`
+const Thumbnail = styled.img`
+  width: 50px;
+  height: 65px;
+  border: 2px solid #ddd;
+  border-radius: 7%;
+  padding: 3px;
+  margin: 2px;
   cursor: pointer;
-  border: 1px solid #ddd;
-  padding: 5px;
+  &:hover {
+    border-color: #FF5A5F;
+  }
 `;
 
-const MainImage = (props) => (
-  <StyledMainImage src={props.src} alt={props.alt} />
-);
-
-const Thumbnail = (props) => (
-  <StyledThumbnail src={props.src} alt={props.alt} />
-);
+// //////////////// HELPER FUNCTIONS //////////////// //
+// input: photos <- an array with objects containing thumbnail url
+// output: an array of all thumbnail urls
+const getThumbnailUrls = (photos) => photos.map((photo) => photo.thumbnail_url);
 
 // //////////////// MAIN COMPONENT //////////////// //
 const ImageGallery = (props) => {
   const { style } = props;
   const { photos } = style;
+  const thumbnailUrls = getThumbnailUrls(photos);
   const [expandedView, setExpandedView] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [mainImage, setMainImage] = useState(photos[0].url);
+  const handleClick = (index) => {
+    setMainImage(photos[index].url);
+  };
 
   return (
     <ImageGalleryArea>
-      {photos.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" />))}
-      <MainImage src={photos[index].url} alt="fitting" />
+      <ThumbnailWrapper>
+        {photos.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" onClick={() => handleClick(index)} />))}
+      </ThumbnailWrapper>
+      <MainImage src={mainImage} alt="fitting" />
     </ImageGalleryArea>
   );
 };
