@@ -14,23 +14,27 @@ const average = (arr) => {
 
 // ================== API Helpers ============================= //
 
-const getAllReviews = (id, callback) => {
+const getAllReviews = (id, numOfReviews, sortMethod) => {
+  let count;
+  let sort;
+  if (!numOfReviews) {
+    count = 2;
+  } else {
+    count = numOfReviews;
+  }
+  if (!sortMethod) {
+    sort = '';
+  } else {
+    sort = sortMethod;
+  }
   const options = {
-    url: `${config.APIURL}reviews/?product_id=${id}`,
+    url: `${config.APIURL}reviews/?product_id=${id}&count=${count}&sort=${sort}`,
     headers: {
       Authorization: config.APITOKEN,
     },
   };
-
-  axios(options)
-    .then((res) => {
-      // eslint-disable-next-line no-console
-      callback(null, res.data);
-    })
-    .catch((err) => {
-      // eslint-disable-next-line no-console
-      callback(err);
-    });
+  return (axios(options)
+    .then((res) => res.data.results));
 };
 
 const getAverageRating = (id, callback) => {
@@ -64,10 +68,9 @@ const getReviewMetaData = (id, callback) => {
       Authorization: config.APITOKEN,
     },
   };
-
   axios(options)
     .then((res) => {
-      // store the results array from the data that was recieved
+      // store the results array from the data that was received
       // console.log(res.data);
       const results = res.data.ratings;
       // Make an array of ratings

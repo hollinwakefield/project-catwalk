@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ReviewList from './ReviewList';
 import RatingBreakdown from './RatingBreakdown';
+import LoadingSpinner from '../SharedComponents/ElizabethDonatedSpinner';
 
 const Box = styled.div`
   grid-area: ProductBreakdown;
@@ -26,10 +27,11 @@ const StyledDiv = styled.div`
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 3fr);
   grid-template-rows: auto auto minmax(0px, 1fr) auto;
   min-height: 100vh;
-  gap: 5px 5px;
+  gap: 3em;
+  margin: 3rem;
+  padding: 2rem;
   place-items: center;
   font-size: 1.5em;
-  border:solid;
   text-align: center;
 `;
 
@@ -37,9 +39,12 @@ class RatingAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loaded: false,
       avg: 0,
-      totalReviews: 0,
+      totalReviews: 2,
       recommended: '',
+      productId: 25167,
+      sort: '',
     };
   }
 
@@ -49,6 +54,7 @@ class RatingAndReviews extends React.Component {
       .then((res) => {
         const { data } = res;
         this.setState({
+          loaded: true,
           avg: data.avg,
           totalReviews: data.reviews,
           recommended: data.recommended,
@@ -60,22 +66,35 @@ class RatingAndReviews extends React.Component {
   }
 
   render() {
-    const { reviews } = this.props;
-    const { avg, totalReviews, recommended } = this.state;
-
+    // const { reviews } = this.props;
+    let quickReviewList;
+    const {
+      loaded, avg, totalReviews, recommended, productId, sort,
+    } = this.state;
+    if (!loaded) {
+      quickReviewList = (
+        <LoadingSpinner />
+      );
+    } else {
+      quickReviewList = (
+        <ReviewList
+          totalReviews={totalReviews}
+          productId={productId}
+          sort={sort}
+          loaded={loaded}
+        />
+      );
+    }
     return (
       <>
-        <h1>Ratings and Reviews!</h1>
+        <h4>Ratings and Reviews!</h4>
         <StyledDiv>
           <RatingBreakdown
             avg={avg}
             totalReviews={totalReviews}
             recommended={recommended}
           />
-          <ReviewList
-            reviews={reviews}
-            totalReviews={totalReviews}
-          />
+          {quickReviewList}
         </StyledDiv>
       </>
     );

@@ -12,8 +12,7 @@ const TileArea = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   grid-gap: 5px;
-  border: solid;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 const RatingArea = styled.div`
@@ -25,24 +24,44 @@ const ReviewerName = styled.div`
   font-style: oblique;
   grid-area: ReviewerName;
   place-self: center;
+  font-size: 15px;
 `;
 
 const Date = styled.div`
   grid-area: Date;
   place-self: center end;
   padding-right: 10px;
+  font-size: 15px;
 `;
 
 const ReviewSummary = styled.div`
+  margin-top: 20px;
   grid-area: Summary;
+  place-self: center start;
+  font-size: 20px;
  `;
 
 const ReviewBody = styled.div`
   grid-area: ReviewBody;
-  font-size: x-small;
+  place-self: start;
+  display: block;
+  max-width: 100%;
+  font-size: 15px;
+  text-align: left;
+
   .green {
     color: green;
   }
+  button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: 0;
+    font-size: 12px;
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+  };
 `;
 
 const Photos = styled.div`
@@ -52,6 +71,7 @@ justify-content: center;
 align-items: center;
 .photo {
   margin-left: 10px;
+  border: none;
   border-radius: 4px;
   background: white;
   display: block;
@@ -59,9 +79,9 @@ align-items: center;
   width: 5%;
   max-height: 69px;
   min-height: 0;
+  transition-duration: 0.3s;
   &:hover {
-    border: 1px solid #C0C0C0;
-    background: grey;
+    border: 1px solid black;
     cursor: pointer;
   };
 }
@@ -69,32 +89,47 @@ align-items: center;
 
 const ReviewResponse = styled.div`
   grid-area: Response;
+  place-self: center start;
 `;
 
-const Helpful = styled.div`
+const Helpful = styled.span`
   grid-area: Helpful;
+  place-self: start;
+  text-align: right;
+  font-size: 12px;
+  padding-bottom: 30px;
+  border-bottom: solid 1px black;
+  min-width: 100%;
+  .leftSide {
+    text-align: left;
+  }
+  .green {
+    color: green;
+  }
 `;
 
 const Modal = styled.div`
   display: flex;
   position: fixed;
-  padding-top: 10%;
-  padding-bottom: 10%;
   z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.4);
 
   .modal-content {
-
+    position: relative;
     border-radius: 10%;
     background-color: white;
     margin: auto;
     width: 80%;
   }
+`;
+
+const Container = styled.div`
+  word-wrap: break-word;
 `;
 
 // let clickedImage;
@@ -155,12 +190,12 @@ const Tile = (props) => {
 
   if (recommend) {
     recommended = (
-      <div>
+      <span className="leftSide">
         <span className="green">
           &#10003;
         </span>
-        I recommend this product
-      </div>
+        {' I recommend this product'}
+      </span>
     );
   }
 
@@ -174,31 +209,32 @@ const Tile = (props) => {
       <ReviewerName>{reviewer_name}</ReviewerName>
       <Date>{prettyDate}</Date>
       <ReviewSummary>
-        <hr />
         <b>
           {summary}
         </b>
       </ReviewSummary>
       <ReviewBody>
-        {expand ? body : body.slice(0, 250)}
-        <br />
+        <Container>
+          {expand ? body : (`${body.slice(0, 250)}`)}
+        </Container>
         {showButton}
         <br />
         <Photos onClick={(e) => { setClickedImage(e.target.src); setShowModal(!showModal); }}>
           {photos.map(showImages)}
           {modalImage}
         </Photos>
-        {recommended}
       </ReviewBody>
       <ReviewResponse>
         {sellerResponse}
       </ReviewResponse>
       <Helpful>
+        {recommended}
+        <br />
         Was this review helpful?
         <span onClick={() => { if (!rated) {
           setHelpful(helpful + 1);
           setRated(true); }
-        }}> Yes:{helpful}
+        }}> Yes: {helpful}
         </span>
         <span onClick={() => {
           if (!rated) { setNotHelpful(notHelpful + 1); setRated(true); }}}> No: {notHelpful}
