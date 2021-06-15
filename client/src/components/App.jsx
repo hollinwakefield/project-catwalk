@@ -71,7 +71,7 @@ class App extends React.Component {
       return (
         <>
           <ProductOverview product={product} styles={styles} cart={cart} />
-          <RelatedItems related={related} styles = {styles} product={product}/>
+          <RelatedItems related={related} styles={styles} product={product} />
           <RatingAndReviews reviews={reviews} />
         </>
       );

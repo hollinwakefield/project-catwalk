@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
+/* eslint-disable no-tabs */
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from './Card';
 
-
 // Just sample data, will be removed once data from API/Database is set up
 // import data from './exampleData.json';
-
-
 
 // This is the container
 const Wrapper = styled.div`
@@ -59,48 +57,74 @@ const Arrow = styled.div`
 		width: 200%;
 		height: 200%;
 	}
-`
+`;
 
-const CardList =({ related, styles }) => {
-  const [Cards, setCards] = useState(related.slice(0,4));
+const CardList = ({ related, styles }) => {
+  console.log(styles);
+  const [Cards, setCards] = useState(related.slice(0, 4));
 
   const moveRight = () => {
-    setCards(related.slice(1,5));
-  }
+    setCards(related.slice(1, related.length));
+  };
 
   const moveLeft = () => {
-    setCards(related.slice(0,4));
-  }
+    setCards(related.slice(0, related.length-1));
+  };
   // If(card.(length) === related.(length))
-  if(Cards[Cards.length-1].id === related[related.length-1].id) {
+  if (Cards[Cards.length - 1].id === related[related.length - 1].id) {
     // Render without right side arrow
     return (
       <>
-      <Title>Related Products!</Title>
-      <Wrapper>
-      <Arrow className ="left" onClick={moveLeft} />
-        {Cards.map((item, index) => (
-          <Card
-            key={item.id}
-            id={item.id}
-            image={styles.results[index].photos[0].url}
-            rating={3.5}
-            itemName={item.name}
-            category={item.category}
-            price={item.default_price}
-          />
-        ))}
-        <Arrow className="empty" />
-      </Wrapper>
-    </>
+        <Title>Related Products!</Title>
+        <Wrapper>
+          <Arrow className="left" onClick={moveLeft} />
+          {Cards.map((item, index) => (
+            <Card
+              key={item.id}
+              id={item.id}
+              image={styles.results[index].photos[0].url}
+              rating={3.5}
+              itemName={item.name}
+              category={item.category}
+              price={item.default_price}
+            />
+          ))}
+          <Arrow className="empty" />
+        </Wrapper>
+      </>
     );
-   }
-   if(Cards[0].id === related[0].id) {
+  }
+  if (Cards[0].id === related[0].id) {
     return (
       <>
+        <Title>Related Products!</Title>
+        <Wrapper>
+          <Arrow className="empty" />
+          {Cards.map((item, index) => (
+            <Card
+              key={item.id}
+              id={item.id}
+              image={styles.results[index].photos[0].url}
+              rating={3.5}
+              itemName={item.name}
+              category={item.category}
+              price={item.default_price}
+            />
+          ))}
+          <Arrow data-testid="rightArrow" className="right" onClick={moveRight} />
+        </Wrapper>
+      </>
+    );
+  }
+  // else if (card.(0) === related.(0))
+  // Render without left side arrow
+  // else
+  // Render with both
+  return (
+    <>
       <Title>Related Products!</Title>
       <Wrapper>
-      <Arrow className ="empty" />
+        <Arrow className="left" onClick={moveLeft} />
         {Cards.map((item, index) => (
           <Card
             key={item.id}
@@ -112,34 +136,9 @@ const CardList =({ related, styles }) => {
             price={item.default_price}
           />
         ))}
-      <Arrow className="right" onClick={moveRight} />
+        <Arrow data-testid="rightArrow" className="right" onClick={moveRight} />
       </Wrapper>
     </>
-    );
-   }
-  // else if (card.(0) === related.(0))
-    // Render without left side arrow
-  // else
-    // Render with both
-  return (
-    <>
-    <Title>Related Products!</Title>
-    <Wrapper>
-    <Arrow className ="left" onClick={moveLeft} />
-      {Cards.map((item, index) => (
-        <Card
-          key={item.id}
-          id={items.id}
-          image={styles.results[index].photos[0].url}
-          rating={3.5}
-          itemName={item.name}
-          category={item.category}
-          price={item.default_price}
-        />
-      ))}
-      <Arrow className="right" onClick={moveRight} />
-    </Wrapper>
-  </>
   );
- }
+};
 export default CardList;

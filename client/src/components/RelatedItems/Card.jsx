@@ -1,7 +1,36 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
-import axios from 'axios';
+import Heart from './IconHeart';
+
+const H = {};
+
+H.Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  position: absolute;
+  margin-left: 210px;
+  margin-top: 20px;
+`;
+
+H.BackHeartDiv = styled.button`
+  display: flex;
+  position: absolute;
+  color: grey;
+  border: none;
+  background: none;
+
+  &:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+
+  &:focus {
+    color: #FF5A5F;
+  }
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,9 +43,9 @@ const Wrapper = styled.div`
   border: solid 2px #767676;
   padding: 5px;
   margin: 1rem;
+  position: relative;
 
   &:hover {
-    opacity: 0.5;
     cursor: pointer;
   }
 `;
@@ -35,7 +64,6 @@ const Description = styled.p`
   color: gray;
   text-align:left;
   margin-top: -35px;
-
 `;
 
 const Category = styled.p`
@@ -58,29 +86,36 @@ const Line = styled.hr`
 `;
 
 const Card = ({
-  itemName, image, price, rating, category, id
+  itemName, price, rating, category, id
 }) => {
-  const[url, setURL] = useState('');
+  const [url, setURL] = useState('');
   axios.get(`products/${id}/styles`)
     .then((res) => {
       let url = res.data.results[0].photos[0].url;
       setURL(url);
     })
-    .catch((err)=> {
+    .catch((err) => {
       console.log('Error: ', err);
-    })
+    });
+
   return (
     <Wrapper data-testid="card">
-    <Image src={url} alt="empty" />
-    <div><Line /></div>
-    <Category>{category}</Category>
-    <Name>{itemName}</Name>
-    <Description>
-      ${price}
-    </Description>
-    <Stars stars={rating} />
-  </Wrapper>
-  )
+      <H.Wrapper>
+        <H.BackHeartDiv className="outfit">
+          <Heart />
+        </H.BackHeartDiv>
+      </H.Wrapper>
+      <Image src={url} alt="empty" />
+      <div><Line /></div>
+      <Category>{category}</Category>
+      <Name>{itemName}</Name>
+      <Description>
+        $
+        {price}
+      </Description>
+      <Stars stars={rating} />
+    </Wrapper>
+  );
 };
 
 export default Card;
