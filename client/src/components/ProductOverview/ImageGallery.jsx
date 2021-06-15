@@ -6,6 +6,7 @@ const ImageGalleryArea = styled.div`
   grid-area: ImageGallery;
   display: flex;
   align-items: flex-start;
+  max-height: 70vh;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
