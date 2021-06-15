@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 // import App from '../../components/App';
 import ProductOverview from '../../components/ProductOverview/ProductOverview';
 import ImageGallery from '../../components/ProductOverview/ImageGallery';
@@ -11,14 +11,13 @@ import Description from '../../components/ProductOverview/Description';
 import dummyData from './dummyData';
 
 const { product, styles, cart } = dummyData;
-const style = styles.results[0];
-// const [style, setStyle] = useState(styles.results[0]);
+// const style = styles.results[0];
+const [style, setStyle] = useState(styles.results[0]);
 
 // 0. App
 // describe('App', () => {
 //   test('renders App component', () => {
 //     render(<App />);
-//     screen.debug();
 //   });
 // });
 
@@ -26,7 +25,6 @@ const style = styles.results[0];
 describe('ProductOverview', () => {
   test('renders ProductOverview component', () => {
     render(<ProductOverview product={product} styles={styles} cart={cart} />);
-    screen.debug();
   });
 });
 
@@ -34,7 +32,6 @@ describe('ProductOverview', () => {
 describe('ImageGallery', () => {
   test('renders ImageGallery component', () => {
     render(<ImageGallery style={style} />);
-    screen.debug();
   });
 });
 
@@ -42,23 +39,20 @@ describe('ImageGallery', () => {
 describe('ProductInfo', () => {
   test('renders ProductInfo component', () => {
     render(<ProductInfo product={product} style={style} rating={3.5} />);
-    screen.debug();
   });
 });
 
 // 4. StyleSelector
-// describe('StyleSelector', () => {
-//   test('renders StyleSelector component', () => {
-//     render(<StyleSelector styles={styles} style={style} setStyle={setStyle} />);
-//     screen.debug();
-//   });
-// });
+describe('StyleSelector', () => {
+  test('renders StyleSelector component', () => {
+    render(<StyleSelector styles={styles} style={style} setStyle={setStyle} />);
+  });
+});
 
 // 5. AddToCart
 describe('AddToCart', () => {
   test('renders AddToCart component', () => {
     render(<AddToCart style={style} />);
-    screen.debug();
   });
 });
 
@@ -66,6 +60,5 @@ describe('AddToCart', () => {
 describe('Description', () => {
   test('renders Description component', () => {
     render(<Description product={product} />);
-    screen.debug();
   });
 });
