@@ -11,8 +11,10 @@ import Description from '../../components/ProductOverview/Description';
 import dummyData from './dummyData';
 
 const { product, styles, cart } = dummyData;
-// const style = styles.results[0];
-const [style, setStyle] = useState(styles.results[0]);
+let style = styles.results[0];
+const setStyle = (newStyle) => {
+  style = newStyle;
+};
 
 // 0. App
 // describe('App', () => {
