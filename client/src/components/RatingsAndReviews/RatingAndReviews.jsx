@@ -65,7 +65,7 @@ class RatingAndReviews extends React.Component {
 
     return (
       <>
-        <h1>Ratings and Reviews!</h1>
+        <h4>Ratings and Reviews!</h4>
         <StyledDiv>
           <RatingBreakdown
             avg={avg}

@@ -52,6 +52,7 @@ justify-content: center;
 align-items: center;
 .photo {
   margin-left: 10px;
+  border: none;
   border-radius: 4px;
   background: white;
   display: block;
@@ -59,9 +60,9 @@ align-items: center;
   width: 5%;
   max-height: 69px;
   min-height: 0;
+  transition-duration: 0.3s;
   &:hover {
-    border: 1px solid #C0C0C0;
-    background: grey;
+    border: 1px solid black;
     cursor: pointer;
   };
 }
@@ -78,18 +79,16 @@ const Helpful = styled.div`
 const Modal = styled.div`
   display: flex;
   position: fixed;
-  padding-top: 10%;
-  padding-bottom: 10%;
   z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.4);
 
   .modal-content {
-
+    position: relative;
     border-radius: 10%;
     background-color: white;
     margin: auto;

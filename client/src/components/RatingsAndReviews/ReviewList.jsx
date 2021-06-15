@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Tile from './ReviewTile';
+import DownArrow from '../sharedComponents/downArrows';
 
 const ReviewArea = styled.div`
   grid-area: ReviewList;
@@ -8,6 +9,39 @@ const ReviewArea = styled.div`
   min-width: auto;
   padding: 30px;
   `;
+
+const VerticalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: auto;
+  min-width: auto;
+`;
+
+const CoralStyledButton = styled.button`
+  :before {
+    content: "Show More"
+  };
+  transition: opacity 3s ease-in-out
+  position: relative;
+  background-color: white;
+  border-radius: 22px;
+  border: 2px solid #FF5A5F;
+  color: black;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+    &:hover {
+      background-color: #FF5A5F;
+      color: white;
+      border: 2 px solid #FF5A5F;
+      border-radius: 22px;
+    }
+`;
 
 const formatTile = (data) => <Tile key={data.review_id} data={data} />;
 
@@ -40,7 +74,10 @@ class ReviewList extends React.Component {
     if (results.length > 2) {
       if (reviewsRendered < results.length) {
         showMoreButton = (
-          <button type="button" onClick={this.onShowMore}>Show More</button>
+          <VerticalContainer>
+            <CoralStyledButton type="button" onClick={this.onShowMore} />
+            <DownArrow />
+          </VerticalContainer>
         );
       } else {
         showMoreButton = null;
