@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React from 'react';
 import { render } from '@testing-library/react';
 // import App from '../../components/App';
 import ProductOverview from '../../components/ProductOverview/ProductOverview';
