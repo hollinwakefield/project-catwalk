@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 
 describe('Rating and Reviews module', () => {
   afterEach(cleanup);
-
+  // Hi Steven
   test('renders', () => {
     render(<RatingAndReviews reviews={ {results: "fake data"}} />);
 
