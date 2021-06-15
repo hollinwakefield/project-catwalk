@@ -3,6 +3,7 @@ import axios from 'axios';
 import ProductOverview from './ProductOverview/ProductOverview';
 import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
 import RelatedItems from './RelatedItems/RelatedItems';
+import LoadingSpinner from './SharedComponents/ElizabethDonatedSpinner';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class App extends React.Component {
       styles: null,
       cart: null,
       related: null,
-      reviews: null,
+      // reviews: null,
     };
     // initializer();
   }
@@ -54,29 +55,29 @@ class App extends React.Component {
       });
 
     // fetch reviews from API - Steven
-    axios.get('/reviews/25170')
-      .then((res) => {
-        this.setState({ reviews: res.data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios.get('/reviews/getReviews/25170')
+    //   .then((res) => {
+    //     this.setState({ reviews: res.data });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   render() {
     const {
-      product, styles, cart, reviews, related,
+      product, styles, cart, related,
     } = this.state;
-    if (product && styles && cart && reviews && related) {
+    if (product && styles && cart && related) {
       return (
         <>
           <ProductOverview product={product} styles={styles} cart={cart} />
-          <RelatedItems related={related} styles={styles} product={product}/>
-          <RatingAndReviews reviews={reviews} />
+          <RelatedItems related={related} styles={styles} product={product} />
+          <RatingAndReviews />
         </>
       );
     }
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 }
 

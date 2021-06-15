@@ -12,8 +12,7 @@ const TileArea = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   grid-gap: 5px;
-  border: solid;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 const RatingArea = styled.div`
@@ -25,24 +24,44 @@ const ReviewerName = styled.div`
   font-style: oblique;
   grid-area: ReviewerName;
   place-self: center;
+  font-size: 15px;
 `;
 
 const Date = styled.div`
   grid-area: Date;
   place-self: center end;
   padding-right: 10px;
+  font-size: 15px;
 `;
 
 const ReviewSummary = styled.div`
+  margin-top: 20px;
   grid-area: Summary;
+  place-self: center start;
+  font-size: 20px;
  `;
 
 const ReviewBody = styled.div`
   grid-area: ReviewBody;
-  font-size: x-small;
+  place-self: start;
+  display: block;
+  max-width: 100%;
+  font-size: 15px;
+  text-align: left;
+
   .green {
     color: green;
   }
+  button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: 0;
+    font-size: 12px;
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+  };
 `;
 
 const Photos = styled.div`
@@ -70,10 +89,23 @@ align-items: center;
 
 const ReviewResponse = styled.div`
   grid-area: Response;
+  place-self: center start;
 `;
 
-const Helpful = styled.div`
+const Helpful = styled.span`
   grid-area: Helpful;
+  place-self: start;
+  text-align: right;
+  font-size: 12px;
+  padding-bottom: 30px;
+  border-bottom: solid 1px black;
+  min-width: 100%;
+  .leftSide {
+    text-align: left;
+  }
+  .green {
+    color: green;
+  }
 `;
 
 const Modal = styled.div`
@@ -94,6 +126,10 @@ const Modal = styled.div`
     margin: auto;
     width: 80%;
   }
+`;
+
+const Container = styled.div`
+  word-wrap: break-word;
 `;
 
 // let clickedImage;
@@ -154,12 +190,12 @@ const Tile = (props) => {
 
   if (recommend) {
     recommended = (
-      <div>
+      <span className="leftSide">
         <span className="green">
           &#10003;
         </span>
-        I recommend this product
-      </div>
+        {' I recommend this product'}
+      </span>
     );
   }
 
@@ -173,31 +209,32 @@ const Tile = (props) => {
       <ReviewerName>{reviewer_name}</ReviewerName>
       <Date>{prettyDate}</Date>
       <ReviewSummary>
-        <hr />
         <b>
           {summary}
         </b>
       </ReviewSummary>
       <ReviewBody>
-        {expand ? body : body.slice(0, 250)}
-        <br />
+        <Container>
+          {expand ? body : (`${body.slice(0, 250)}`)}
+        </Container>
         {showButton}
         <br />
         <Photos onClick={(e) => { setClickedImage(e.target.src); setShowModal(!showModal); }}>
           {photos.map(showImages)}
           {modalImage}
         </Photos>
-        {recommended}
       </ReviewBody>
       <ReviewResponse>
         {sellerResponse}
       </ReviewResponse>
       <Helpful>
+        {recommended}
+        <br />
         Was this review helpful?
         <span onClick={() => { if (!rated) {
           setHelpful(helpful + 1);
           setRated(true); }
-        }}> Yes:{helpful}
+        }}> Yes: {helpful}
         </span>
         <span onClick={() => {
           if (!rated) { setNotHelpful(notHelpful + 1); setRated(true); }}}> No: {notHelpful}

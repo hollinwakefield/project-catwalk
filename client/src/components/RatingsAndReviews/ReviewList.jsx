@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Tile from './ReviewTile';
 import DownArrow from '../sharedComponents/downArrows';
 
@@ -8,6 +9,8 @@ const ReviewArea = styled.div`
   min-height: auto;
   min-width: auto;
   padding: 30px;
+  overflow: auto;
+  max-height: 80vh;
   `;
 
 const VerticalContainer = styled.div`
@@ -49,9 +52,17 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      reviews: [],
       reviewsRendered: 2,
     };
     this.onShowMore = this.onShowMore.bind(this);
+  }
+
+  componentDidMount() {
+    const { productId, totalReviews, sort } = this.props;
+    axios.get(`/reviews/getReviews/${productId}/${totalReviews}/${sort}`)
+      .then((data) => this.setState({ reviews: data.data }))
+      .catch((err) => console.log('error: ', err));
   }
 
   // static getDerivedStateFromError(err) {
@@ -65,14 +76,13 @@ class ReviewList extends React.Component {
 
   render() {
     //
-    const { reviews } = this.props;
-    const { results } = reviews;
+    const { reviews } = this.state;
     const { reviewsRendered } = this.state;
 
     let showMoreButton;
-    const viewedTile = results.slice(0, reviewsRendered);
-    if (results.length > 2) {
-      if (reviewsRendered < results.length) {
+    const viewedTile = reviews.slice(0, reviewsRendered);
+    if (reviews.length > 2) {
+      if (reviewsRendered < reviews.length) {
         showMoreButton = (
           <VerticalContainer>
             <CoralStyledButton type="button" onClick={this.onShowMore} />

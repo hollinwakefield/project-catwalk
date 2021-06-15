@@ -6,15 +6,12 @@ const router = express.Router();
 // potential middleware for handling reviews from api
 
 // need to potentially handle other parameters? could also specify in req body
-router.get('/:productId', (req, res) => {
-  const { productId } = req.params;
-  reviews.getAllReviews(productId, (err, data) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.status(200).send(data);
-    }
-  });
+router.get('/getReviews/:productId/:totalReviews?/:sort?', (req, res) => {
+  const { productId, totalReviews, sort } = req.params;
+
+  reviews.getAllReviews(productId, totalReviews, sort)
+    .then((data) => res.status(200).send(data))
+    .catch((err) => res.status(500).send(err));
 });
 
 router.get('/averageRating/:productId', (req, res) => {
