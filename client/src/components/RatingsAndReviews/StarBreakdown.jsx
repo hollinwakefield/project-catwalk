@@ -17,6 +17,7 @@ const Bar = styled.div`
     padding: 0;
     border: 0;
     background: 0;
+    font-size: 12px;
     color: black;
     text-decoration: underline;
     cursor: pointer;
@@ -30,7 +31,7 @@ const Bar = styled.div`
   };
 
   .filled {
-    background-color: #404040;
+    background-color: #FF5A5F;
     min-height: 10px;
   };
 

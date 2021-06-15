@@ -1,15 +1,14 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
-import RatingAndReviews from '../components/RatingsAndReviews/RatingAndReviews.jsx';
+import RatingAndReviews from '../../components/RatingsAndReviews/RatingAndReviews.jsx';
 import '@testing-library/jest-dom';
 
 describe('Rating and Reviews module', () => {
-  test.afterEach(cleanup)
-
+  afterEach(cleanup);
+  // Hi Steven
   test('renders', () => {
-    render(<RatingAndReviews />);
-  });
+    render(<RatingAndReviews reviews={ {results: "fake data"}} />);
 
-  test('has two ')
-  );
+    screen.debug();
+  });
 });
