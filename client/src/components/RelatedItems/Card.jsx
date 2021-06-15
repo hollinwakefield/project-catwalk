@@ -11,8 +11,8 @@ H.Wrapper = styled.div`
   align-items: center;
   z-index: 1;
   position: absolute;
-  margin-left: 210px;
-  margin-top: 20px;
+  margin-left: 205px;
+  margin-top: 25px;
 `;
 
 H.BackHeartDiv = styled.button`
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 250px;
+  min-width: 230px;
   max-width: 250px;
   min-height: 500px;
   border-radius: 4px;
@@ -74,7 +74,8 @@ const Category = styled.p`
 
 const Image = styled.img`
   border-radius: 5px;
-  width: 250px;
+  min-width: 230px;
+  max-width: 250px;
   height: 350px;
   object-fit: cover;
 `;
