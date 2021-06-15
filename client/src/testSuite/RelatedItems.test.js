@@ -31,10 +31,10 @@ describe('CardList testing suite', () => {
     expect(screen.queryAllByTestId('card')).toHaveLength(4);
   });
 
-  test('Clicking the carousel right arrow', () => {
-    render(<CardList related={exampleProductInfo.items} styles={exampleImageInfo.styles} />);
+  // test('Clicking the carousel right arrow', () => {
+  //   render(<CardList related={exampleProductInfo.items} styles={exampleImageInfo.styles} />);
 
-    const button = screen.getByTestId('rightArrow');
-    fireEvent.click(button);
-  });
+  //   const button = screen.getByTestId('rightArrow');
+  //   fireEvent.click(button);
+  // });
 });

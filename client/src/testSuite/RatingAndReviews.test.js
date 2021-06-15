@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 
 describe('Rating and Reviews module', () => {
   test.afterEach(cleanup)
-  
+
   test('renders', () => {
     render(<RatingAndReviews />);
   });
