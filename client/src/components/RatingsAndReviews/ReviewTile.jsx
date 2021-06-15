@@ -89,6 +89,7 @@ const Modal = styled.div`
   background-color: rgba(0,0,0,0.3);
 
   .modal-content {
+
     border-radius: 10%;
     background-color: white;
     margin: auto;
@@ -110,6 +111,7 @@ const Tile = (props) => {
   const [notHelpful, setNotHelpful] = useState(0);
   const [clickedImage, setClickedImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [rated, setRated] = useState(false);
 
   // useEffect(() => {
   //   setShowModal(true);
@@ -162,7 +164,7 @@ const Tile = (props) => {
     );
   }
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <TileArea>
@@ -193,9 +195,13 @@ const Tile = (props) => {
       </ReviewResponse>
       <Helpful>
         Was this review helpful?
-        <span onClick={() => { setHelpful(helpful + 1) }}> Yes:{helpful}
+        <span onClick={() => { if (!rated) {
+          setHelpful(helpful + 1);
+          setRated(true); }
+        }}> Yes:{helpful}
         </span>
-        <span onClick={() => { setNotHelpful(notHelpful + 1) }}> No: {notHelpful}
+        <span onClick={() => {
+          if (!rated) { setNotHelpful(notHelpful + 1); setRated(true); }}}> No: {notHelpful}
         </span>
       </Helpful>
     </TileArea>

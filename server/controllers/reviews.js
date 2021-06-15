@@ -28,4 +28,15 @@ router.get('/averageRating/:productId', (req, res) => {
   });
 });
 
+router.get('/meta/:productId', (req, res) => {
+  const { productId } = req.params;
+  reviews.getReviewMetaData(productId, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
 module.exports = router;

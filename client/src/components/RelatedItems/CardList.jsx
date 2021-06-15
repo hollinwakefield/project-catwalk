@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   justify-content: space-around;
   text-align: center;
   width: 95%;
+  z-index: 0;
 `;
 
 const Title = styled.h1`
@@ -30,6 +31,7 @@ const Arrow = styled.div`
   box-shadow: 0 0 0 lightgray;
   transition: all 200ms ease;
   margin-top: 250px;
+  z-index: 1;
 
   &.left {
 		left: 0;
