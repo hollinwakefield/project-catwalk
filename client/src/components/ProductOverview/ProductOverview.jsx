@@ -15,8 +15,8 @@ const Grid = styled.div`
   grid-template-rows: auto auto auto auto;
   grid-gap: 3em;
   min-height: 70vh;
-  padding: 2em;
-  margin: 3em;
+  padding: 2rem;
+  margin: 3rem;
 `;
 
 const ProductOverview = (props) => {

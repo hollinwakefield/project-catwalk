@@ -6,6 +6,7 @@ const ImageGalleryArea = styled.div`
   grid-area: ImageGallery;
   display: flex;
   align-items: flex-start;
+  max-height: 70vh;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
@@ -13,7 +14,7 @@ const MainImage = styled.img`
   max-width: 85%;
   max-height: 85%;
   align-self: center;
-  margin-left: 15px;
+  margin-left: 30px;
   cursor: pointer;
   &:hover {
     opacity: 0.8;
