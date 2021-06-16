@@ -23,12 +23,13 @@ const Category = styled.div`
 
 const DefaultPrice = styled.span`
   font-size: 20px;
+  text-decoration: ${(props) => (props.strikethrough ? 'line-through' : 'none')};
 `;
 
 const SalePrice = styled.span`
-  font-size: 15px;
+  font-size: 20px;
   color: red;
-  text-decoration: line-through red;
+  margin-left: 10px;
 `;
 
 // //////////////// MAIN COMPONENT //////////////// //
@@ -43,16 +44,22 @@ const ProductInfo = (props) => {
       <Stars stars={rating} />
       <Category>{category}</Category>
       <ProductName>{name}</ProductName>
-      <div>
-        <DefaultPrice>
-          {`$${defaultPrice}`}
-        </DefaultPrice>
-        {salePrice ? (
+      {salePrice ? (
+        <div>
+          <DefaultPrice strikethrough>
+            {`$${defaultPrice}`}
+          </DefaultPrice>
           <SalePrice>
             {`$${salePrice}`}
           </SalePrice>
-        ) : null}
-      </div>
+        </div>
+      ) : (
+        <div>
+          <DefaultPrice>
+            {`$${defaultPrice}`}
+          </DefaultPrice>
+        </div>
+      )}
     </ProductInfoArea>
   );
 };

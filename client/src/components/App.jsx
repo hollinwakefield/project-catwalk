@@ -9,6 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      productId: 25167,
       product: null,
       styles: null,
       cart: null,
@@ -19,49 +20,21 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/products/25170')
-      .then((res) => {
-        this.setState({ product: res.data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const { productId } = this.state;
+    const getProduct = () => (axios.get(`/products/${productId}`));
+    const getCart = () => (axios.get('/cart'));
+    const getStyles = () => (axios.get(`products/${productId}/styles`));
+    const getRelated = () => (axios.get(`/products/${productId}/related`));
 
-    // fetch cart from API - Kate
-    axios.get('/cart')
-      .then((res) => {
-        this.setState({ cart: res.data });
-      })
-      .catch((err) => {
-        console.log(err);
+    Promise.all([getProduct(), getCart(), getStyles(), getRelated()])
+      .then((results) => {
+        this.setState({
+          product: results[0].data,
+          cart: results[1].data,
+          styles: results[2].data,
+          related: results[3].data,
+        });
       });
-    // get all styles from API - Chhuong
-    axios.get('products/25170/styles')
-      .then((res) => {
-        this.setState({ styles: res.data });
-      })
-      .catch((err) => {
-        console.log('Error: ', err);
-      });
-
-    // get related items from API - Chhuong
-    axios.get('/products/25170/related')
-      .then((res) => {
-        // console.log(res.data);
-        this.setState({ related: res.data });
-      })
-      .catch((err) => {
-        console.log('Error: ', err);
-      });
-
-    // fetch reviews from API - Steven
-    // axios.get('/reviews/getReviews/25170')
-    //   .then((res) => {
-    //     this.setState({ reviews: res.data });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   }
 
   render() {
