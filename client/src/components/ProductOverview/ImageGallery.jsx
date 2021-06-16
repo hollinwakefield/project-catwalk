@@ -65,9 +65,9 @@ const ImageGallery = (props) => {
   return (
     <ImageGalleryArea>
       <ThumbnailWrapper>
-        {thumbnailUrls.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" onClick={() => handleClick(index)} />))}
+        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} alt="fitting" onClick={() => handleClick(index)} />))}
       </ThumbnailWrapper>
-      <MainImage src={mainImage} alt="fitting" />
+      <MainImage src={mainImage} alt="thumbnail" />
     </ImageGalleryArea>
   );
 };
