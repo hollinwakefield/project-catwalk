@@ -28,12 +28,16 @@ class App extends React.Component {
 
     Promise.all([getProduct(), getCart(), getStyles(), getRelated()])
       .then((results) => {
+        console.log(results);
         this.setState({
           product: results[0].data,
           cart: results[1].data,
           styles: results[2].data,
           related: results[3].data,
         });
+      })
+      .catch((err) => {
+        console.log('Error: error getting API data');
       });
   }
 

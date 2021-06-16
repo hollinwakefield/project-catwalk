@@ -12,7 +12,7 @@ const ImageGalleryArea = styled.div`
 // //////////////// STYLED COMPONENTS //////////////// //
 const MainImage = styled.img`
   max-width: 85%;
-  max-height: 85%;
+  max-height: 80%;
   align-self: center;
   margin-left: 30px;
   cursor: pointer;
