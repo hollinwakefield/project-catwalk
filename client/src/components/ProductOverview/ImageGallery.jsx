@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // /////////////// ASSIGNED GRID AREA //////////////// //
@@ -58,10 +58,14 @@ const ImageGallery = (props) => {
     setMainImage(photos[index].url);
   };
 
+  useEffect(() => {
+    setMainImage(photos[0].url);
+  }, [style]);
+
   return (
     <ImageGalleryArea>
       <ThumbnailWrapper>
-        {photos.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" onClick={() => handleClick(index)} />))}
+        {thumbnailUrls.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" onClick={() => handleClick(index)} />))}
       </ThumbnailWrapper>
       <MainImage src={mainImage} alt="fitting" />
     </ImageGalleryArea>
