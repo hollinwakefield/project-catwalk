@@ -11,10 +11,11 @@ const ImageGalleryArea = styled.div`
 
 // //////////////// STYLED COMPONENTS //////////////// //
 const MainImage = styled.img`
-  max-width: 85%;
-  max-height: 80%;
+  max-width: 90%;
+  max-height: 90%;
   align-self: center;
   margin-left: 30px;
+  margin-right: 50px;
   cursor: pointer;
   &:hover {
     opacity: 0.8;

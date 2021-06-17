@@ -13,4 +13,15 @@ router.get('/', (req, res) => {
   });
 });
 
+router.post('/', (req, res) => {
+  const { skuId, qty } = req.body;
+  cartAPI.addToCart(skuId, qty)
+    .then((cartRes) => {
+      res.status(201).send(cartRes.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
 module.exports = router;

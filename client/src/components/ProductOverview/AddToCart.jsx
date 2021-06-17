@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 // //////////////// ASSIGNED GRID AREA //////////////// //
 const AddToCartArea = styled.div`
@@ -25,21 +26,19 @@ const StyledOption = styled.option`
   color: ${(props) => (props.notSelected ? 'lightgrey' : 'black')};
 `;
 
-const StyledButton = styled.input`
+const Button = styled.button`
   max-width: 100%;
   height: 25%;
   display: flex;
   justify-content: center;
   padding: 0.5rem;
-  border: 2px solid;
+  color: white;
+  background-color: #FF5A5F;
+  border: 2px solid #FF5A5F;
   border-radius: 7px;
-  border-color: #FF5A5F;
-  background-color: white;
-  transition-duration: 0.3s;
   cursor: pointer;
   &:hover {
-    background-color: #FF5A5F;
-    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 `;
 
@@ -57,9 +56,11 @@ const Option = (props) => (
   </StyledOption>
 );
 
-const Button = (props) => (
-  <StyledButton type="submit" value={props.buttonText} />
-);
+// const Button = (props) => (
+//   <form action={props.action}>
+//     <StyledButton type="submit" value={props.buttonText} />
+//   </form>
+// );
 
 // //////////////// HELPER FUNCTIONS //////////////// //
 // input: skus <- an object with sku id as it's key and a nested object containing size and quantity
@@ -79,7 +80,11 @@ const getMaxQuantity = (skus, size) => {
 
 // input: N <- maximum number
 // output: an array containing 1, 2, ..., N
-const getArrayOneToN = (n) => ([...Array(n).keys()].map((num) => num + 1));
+const getArrayOneToN = (n) => [...Array(n).keys()].map((num) => num + 1);
+
+// input: style, size
+// output: sku id
+const getSkuId = (skus, size) => Object.keys(skus).find((key) => skus[key].size === size);
 
 // //////////////// MAIN COMPONENT //////////////// //
 const AddToCart = (props) => {
@@ -89,13 +94,24 @@ const AddToCart = (props) => {
   const [quantity, setQuantity] = useState(1);
   const sizes = getAvailableSizes(skus);
   const handleSizeSelect = (event) => {
-    console.log('size before: ', size);
     setSize(event.target.value);
-    console.log('event.target.value: ', event.target.value);
-    console.log('size after: ', size);
   };
   const handleQuantitySelect = (event) => {
     setQuantity(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('BUTTON CLICKED');
+    // axios.post('/cart', {
+    //   sku_id: getSkuId(skus, size),
+    //   count: quantity,
+    // })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -128,7 +144,7 @@ const AddToCart = (props) => {
           </Dropdown>
         )}
       </DropdownWrapper>
-      <Button buttonText="ADD TO BAG" />
+      <Button onClick={handleSubmit}>ADD TO BAG</Button>
     </AddToCartArea>
   );
 };
