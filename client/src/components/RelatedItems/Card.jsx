@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
 import Heart from './IconHeart';
@@ -11,8 +10,8 @@ H.Wrapper = styled.div`
   align-items: center;
   z-index: 1;
   position: absolute;
-  margin-left: 210px;
-  margin-top: 20px;
+  margin-left: 205px;
+  margin-top: 25px;
 `;
 
 H.BackHeartDiv = styled.button`
@@ -36,7 +35,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 250px;
+  min-width: 230px;
   max-width: 250px;
   min-height: 500px;
   border-radius: 4px;
@@ -74,7 +73,8 @@ const Category = styled.p`
 
 const Image = styled.img`
   border-radius: 5px;
-  width: 250px;
+  min-width: 230px;
+  max-width: 250px;
   height: 350px;
   object-fit: cover;
 `;
@@ -85,19 +85,13 @@ const Line = styled.hr`
   margin-top: -10px;
 `;
 
+// The related product id is passed down from cardList
+// Perform a get request in the child function to display the
+// Correct photo that corresponds with the data
 const Card = ({
-  itemName, price, rating, category, id
-}) => {
-  const [url, setURL] = useState('');
-  axios.get(`products/${id}/styles`)
-    .then((res) => {
-      let url = res.data.results[0].photos[0].url;
-      setURL(url);
-    })
-    .catch((err) => {
-      console.log('Error: ', err);
-    });
-
+  itemName, price, image, ratings, category, id
+}) =>
+{
   return (
     <Wrapper data-testid="card">
       <H.Wrapper>
@@ -105,7 +99,7 @@ const Card = ({
           <Heart />
         </H.BackHeartDiv>
       </H.Wrapper>
-      <Image src={url} alt="empty" />
+      <Image src={image} alt="empty" />
       <div><Line /></div>
       <Category>{category}</Category>
       <Name>{itemName}</Name>
@@ -113,7 +107,7 @@ const Card = ({
         $
         {price}
       </Description>
-      <Stars stars={rating} />
+      <Stars stars={ratings} />
     </Wrapper>
   );
 };

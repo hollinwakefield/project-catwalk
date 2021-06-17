@@ -1,5 +1,6 @@
 /* eslint-disable no-tabs */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import Card from './Card';
 
@@ -61,31 +62,62 @@ const Arrow = styled.div`
 	}
 `;
 
-const CardList = ({ related, styles }) => {
-  console.log(styles);
-  const [Cards, setCards] = useState(related.slice(0, 4));
+let start = 0;
+let end = 4;
+
+const CardList = ({ related }) => {
+  const [cards, setCards] = useState(related.slice(0, 4));
+  const [styledImage, setStyledImage] = useState([]);
+  const [avgRatings, setAvgRatings] = useState([]);
+  let imageArray = [];
+  let ratingsArray = [];
+
+  useEffect(() => {
+    const idArr = related.map((object) => object.id);
+    const getRelatedInfo = idArr.map((element) => axios.get(`products/${element}/styles`));
+    const getAverageRatings = idArr.map((element) => axios.get(`reviews/meta/${element}`));
+    // Resolve here and store into a variable
+
+    Promise.all(getRelatedInfo)
+      .then((results) => {
+        imageArray = (results.map((element) => element.data.results[0].photos[0].thumbnail_url));
+        setStyledImage(imageArray);
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+
+    Promise.all(getAverageRatings)
+      .then((results) => {
+        ratingsArray = (results.map((element) => element.data.avg));
+        setAvgRatings(ratingsArray);
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+  }, []);
 
   const moveRight = () => {
-    setCards(related.slice(1, related.length));
+    setCards(related.slice(start += 1, end += 1));
   };
 
   const moveLeft = () => {
-    setCards(related.slice(0, related.length-1));
+    setCards(related.slice(start -= 1, end -= 1));
   };
   // If(card.(length) === related.(length))
-  if (Cards[Cards.length - 1].id === related[related.length - 1].id) {
+  if (cards[cards.length - 1].id === related[related.length - 1].id) {
     // Render without right side arrow
     return (
       <>
         <Title>Related Products!</Title>
         <Wrapper>
-          <Arrow className="left" onClick={moveLeft} />
-          {Cards.map((item, index) => (
+          <Arrow aria-label="leftArrow" className="left" onClick={moveLeft} />
+          {cards.map((item, index) => (
             <Card
               key={item.id}
               id={item.id}
-              image={styles.results[index].photos[0].url}
-              rating={3.5}
+              ratings={avgRatings[index]}
+              image={styledImage[index]}
               itemName={item.name}
               category={item.category}
               price={item.default_price}
@@ -96,24 +128,24 @@ const CardList = ({ related, styles }) => {
       </>
     );
   }
-  if (Cards[0].id === related[0].id) {
+  if (cards[0].id === related[0].id) {
     return (
       <>
         <Title>Related Products!</Title>
         <Wrapper>
           <Arrow className="empty" />
-          {Cards.map((item, index) => (
+          {cards.map((item, index) => (
             <Card
               key={item.id}
               id={item.id}
-              image={styles.results[index].photos[0].url}
-              rating={3.5}
+              ratings={avgRatings[index+1]}
+              image={styledImage[index+1]}
               itemName={item.name}
               category={item.category}
               price={item.default_price}
             />
           ))}
-          <Arrow data-testid="rightArrow" className="right" onClick={moveRight} />
+          <Arrow className="right" onClick={moveRight} />
         </Wrapper>
       </>
     );
@@ -127,12 +159,12 @@ const CardList = ({ related, styles }) => {
       <Title>Related Products!</Title>
       <Wrapper>
         <Arrow className="left" onClick={moveLeft} />
-        {Cards.map((item, index) => (
+        {cards.map((item, index) => (
           <Card
             key={item.id}
             id={item.id}
-            image={styles.results[index].photos[0].url}
-            rating={3.5}
+            ratings={avgRatings[index]}
+            image={styledImage[index]}
             itemName={item.name}
             category={item.category}
             price={item.default_price}

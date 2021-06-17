@@ -9,7 +9,7 @@ import CardList from './CardList';
 // Then extract the url sources from each of the syles of each related item
 // Store those urls into an array, then send it to the cardlist child
 
-const Wrapper = styled.div `
+const Wrapper = styled.div`
   margin: 3em;
   padding:2em;
 `;
@@ -17,12 +17,16 @@ const Wrapper = styled.div `
 class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      reviews: null,
+    };
   }
+
   render() {
-    const { related, styles } = this.props;
+    const { related } = this.props;
     return (
       <Wrapper>
-        <CardList related={related} styles={styles} />
+        <CardList related={related} />
       </Wrapper>
     );
   }
