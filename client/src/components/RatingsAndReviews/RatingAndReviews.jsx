@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ReviewList from './ReviewList';
 import RatingBreakdown from './RatingBreakdown';
 import LoadingSpinner from '../SharedComponents/ElizabethDonatedSpinner';
+import WriteReview from './WriteReview';
 
 const Box = styled.div`
   grid-area: ProductBreakdown;
@@ -26,7 +27,7 @@ const StyledDiv = styled.div`
                        "CreateReview ReviewList";
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 3fr);
   grid-template-rows: auto auto minmax(0px, 1fr) auto;
-  min-height: 100vh;
+  min-height: 80vh;
   gap: 3em;
   margin: 3rem;
   padding: 2rem;
@@ -81,7 +82,6 @@ class RatingAndReviews extends React.Component {
           totalReviews={totalReviews}
           productId={productId}
           sort={sort}
-          loaded={loaded}
         />
       );
     }
@@ -95,6 +95,7 @@ class RatingAndReviews extends React.Component {
             recommended={recommended}
           />
           {quickReviewList}
+          <WriteReview />
         </StyledDiv>
       </>
     );

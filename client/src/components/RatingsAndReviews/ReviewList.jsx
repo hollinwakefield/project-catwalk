@@ -97,7 +97,6 @@ class ReviewList extends React.Component {
     return (
       <ReviewArea>
         {viewedTile.map(formatTile)}
-        <br />
         {showMoreButton}
       </ReviewArea>
     );
