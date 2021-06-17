@@ -14,14 +14,17 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { skuId, qty } = req.body;
-  cartAPI.addToCart(skuId, qty)
-    .then((cartRes) => {
-      res.status(201).send(cartRes.data);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+  // const { skuId, quantity } = req.body;
+  // console.log('sku id', skuId);
+  // console.log('', quantity);
+  console.log(req);
+  // cartAPI.addToCart(skuId, quantity)
+  //   .then((cartRes) => {
+  //     res.status(201).send(cartRes.data);
+  //   })
+  //   .catch((err) => {
+  //     res.send(err);
+  //   });
 });
 
 module.exports = router;

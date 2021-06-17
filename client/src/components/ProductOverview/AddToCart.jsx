@@ -102,6 +102,7 @@ const AddToCart = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('BUTTON CLICKED');
+    console.log(getSkuId(skus, size));
     // axios.post('/cart', {
     //   sku_id: getSkuId(skus, size),
     //   count: quantity,
