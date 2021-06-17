@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
 import Heart from './IconHeart';
@@ -86,19 +85,13 @@ const Line = styled.hr`
   margin-top: -10px;
 `;
 
+// The related product id is passed down from cardList
+// Perform a get request in the child function to display the
+// Correct photo that corresponds with the data
 const Card = ({
-  itemName, price, rating, category, id
-}) => {
-  const [url, setURL] = useState('');
-  axios.get(`products/${id}/styles`)
-    .then((res) => {
-      let url = res.data.results[0].photos[0].url;
-      setURL(url);
-    })
-    .catch((err) => {
-      console.log('Error: ', err);
-    });
-
+  itemName, price, image, ratings, category, id
+}) =>
+{
   return (
     <Wrapper data-testid="card">
       <H.Wrapper>
@@ -106,7 +99,7 @@ const Card = ({
           <Heart />
         </H.BackHeartDiv>
       </H.Wrapper>
-      <Image src={url} alt="empty" />
+      <Image src={image} alt="empty" />
       <div><Line /></div>
       <Category>{category}</Category>
       <Name>{itemName}</Name>
@@ -114,7 +107,7 @@ const Card = ({
         $
         {price}
       </Description>
-      <Stars stars={rating} />
+      <Stars stars={ratings} />
     </Wrapper>
   );
 };

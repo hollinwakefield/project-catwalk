@@ -56,3 +56,17 @@ const Line = styled.hr`
   width: 100%;
   margin-top: -10px;
 `;
+
+const OutfitCard = ({
+  itemName, price, image, ratings, category,
+}) => {
+  if (itemName && price && image && ratings && category) {
+    return (
+      <div>NO OUTFITS...</div>
+    );
+  } else {
+    <Wrapper>
+      <Image />
+    </Wrapper>
+  }
+}
