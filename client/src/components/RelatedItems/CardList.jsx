@@ -105,7 +105,7 @@ const CardList = ({ related }) => {
     setCards(related.slice(start -= 1, end -= 1));
   };
   // If(card.(length) === related.(length))
-  if (cards[cards.length - 1].id === related[related.length - 1].id) {
+  if (cards[cards.length - 1].id === related[related.length - 1].id && !cards[0].id === related[0].id) {
     // Render without right side arrow
     return (
       <>
@@ -128,7 +128,7 @@ const CardList = ({ related }) => {
       </>
     );
   }
-  if (cards[0].id === related[0].id) {
+  if (cards[0].id === related[0].id && !cards[cards.length - 1].id === related[related.length - 1].id) {
     return (
       <>
         <Title>Related Products!</Title>
@@ -146,6 +146,28 @@ const CardList = ({ related }) => {
             />
           ))}
           <Arrow className="right" onClick={moveRight} />
+        </Wrapper>
+      </>
+    );
+  }
+  if (cards[cards.length - 1].id === related[related.length - 1].id && cards[0].id === related[0].id) {
+    return (
+      <>
+        <Title>Related Products!</Title>
+        <Wrapper>
+          <Arrow className="empty" />
+          {cards.map((item, index) => (
+            <Card
+              key={item.id}
+              id={item.id}
+              ratings={avgRatings[index+1]}
+              image={styledImage[index+1]}
+              itemName={item.name}
+              category={item.category}
+              price={item.default_price}
+            />
+          ))}
+          <Arrow className="empty" />
         </Wrapper>
       </>
     );
