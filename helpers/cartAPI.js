@@ -20,23 +20,20 @@ const getCart = (callback) => {
     });
 };
 
-const addToCart = (skuId) => {
+const addToCart = (skuId, quantity) => {
   const options = {
     url: `${config.APIURL}cart`,
+    method: 'POST',
     headers: {
       Authorization: config.APITOKEN,
     },
+    data: {
+      sku_id: skuId,
+      count: quantity,
+    },
   };
 
-  // axios(options)
-  //   .then((res) => {
-  //     // eslint-disable-next-line no-console
-  //     console.log(res.data);
-  //   })
-  //   .catch((err) => {
-  //     // eslint-disable-next-line no-console
-  //     console.log('ERROR: ', err);
-  //   });
+  return axios(options);
 };
 
 module.exports = {

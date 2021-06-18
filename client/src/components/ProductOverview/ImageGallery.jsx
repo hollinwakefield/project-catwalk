@@ -11,10 +11,11 @@ const ImageGalleryArea = styled.div`
 
 // //////////////// STYLED COMPONENTS //////////////// //
 const MainImage = styled.img`
-  max-width: 85%;
-  max-height: 80%;
+  max-width: 90%;
+  max-height: 90%;
   align-self: center;
   margin-left: 30px;
+  margin-right: 50px;
   cursor: pointer;
   &:hover {
     opacity: 0.8;
@@ -65,9 +66,9 @@ const ImageGallery = (props) => {
   return (
     <ImageGalleryArea>
       <ThumbnailWrapper>
-        {thumbnailUrls.map((photo, index) => (<Thumbnail key={index} src={photo.thumbnail_url} alt="fitting" onClick={() => handleClick(index)} />))}
+        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} alt="fitting" onClick={() => handleClick(index)} />))}
       </ThumbnailWrapper>
-      <MainImage src={mainImage} alt="fitting" />
+      <MainImage src={mainImage} alt="thumbnail" />
     </ImageGalleryArea>
   );
 };

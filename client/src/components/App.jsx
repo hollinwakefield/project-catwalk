@@ -28,7 +28,6 @@ class App extends React.Component {
 
     Promise.all([getProduct(), getCart(), getStyles(), getRelated()])
       .then((results) => {
-        console.log(results);
         this.setState({
           product: results[0].data,
           cart: results[1].data,
