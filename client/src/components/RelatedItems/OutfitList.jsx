@@ -9,10 +9,10 @@ const Wrapper = styled.div`
   width: 95%;
 `;
 
-const OutfitList = () => {
+const OutfitList = ({itemName, price, image, ratings, category}) => {
   return (
     <Wrapper>
-      <OutfitCard />
+      <OutfitCard itemName={itemName} price={price} image={image} ratings={ratings} category={category}/>
     </Wrapper>
   );
 };

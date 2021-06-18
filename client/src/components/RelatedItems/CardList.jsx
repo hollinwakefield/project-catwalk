@@ -97,12 +97,21 @@ const CardList = ({ related }) => {
       });
   }, []);
 
+  let currentImages = [];
+  let currentRatings = [];
+  currentImages = styledImage.slice(start, end);
+  currentRatings = avgRatings.slice(start, end);
+
   const moveRight = () => {
     setCards(related.slice(start += 1, end += 1));
+    currentImages = styledImage.slice(start, end);
+    currentRatings = avgRatings.slice(start, end);
   };
 
   const moveLeft = () => {
     setCards(related.slice(start -= 1, end -= 1));
+    currentImages = styledImage.slice(start, end);
+    currentRatings = avgRatings.slice(start, end);
   };
 
   let leftArrow = (<Arrow className="left" onClick={moveLeft} />);
@@ -116,11 +125,11 @@ const CardList = ({ related }) => {
     rightArrow = (<Arrow className="empty" />);
   }
 
-  let cardCompnents = cards.map((item, index) => (
+  let cardComponents = cards.map((item, index) => (
     <Card
       key={item.id}
-      ratings={avgRatings[index]}
-      image={styledImage[index]}
+      ratings={currentRatings[index]}
+      image={currentImages[index]}
       itemName={item.name}
       category={item.category}
       price={item.default_price}
@@ -131,7 +140,7 @@ const CardList = ({ related }) => {
       <Title>Related Products!</Title>
       <Wrapper>
         {leftArrow}
-        {cardCompnents}
+        {cardComponents}
         {rightArrow}
       </Wrapper>
     </>
