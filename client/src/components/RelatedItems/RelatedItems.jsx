@@ -24,10 +24,10 @@ class RelatedItems extends React.Component {
   }
 
   render() {
-    const { related } = this.props;
+    const { related, product } = this.props;
     return (
       <Wrapper>
-        <CardList related={related} />
+        <CardList related={related} product={product} />
         <OutfitList />
       </Wrapper>
     );

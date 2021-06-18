@@ -82,19 +82,33 @@ const Line = styled.hr`
   margin-top: -10px;
 `;
 
+const ComparisonModal = styled.table`
+display: flex;
+position: fixed;
+z-index: 1;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4);
 
+.modal-content {
+  position: relative;
+  border-radius: 10%;
+  background-color: white;
+  margin: auto;
+  width: 80%;
+}
+`;
 
 // The related product id is passed down from cardList
 // Perform a get request in the child function to display the
 // Correct photo that corresponds with the data
 const Card = ({
   // eslint-disable-next-line react/prop-types
-  itemName, price, image, ratings, category,
+  itemName, price, image, ratings, category, product,
 }) => {
-  let outfitList;
-
   const addOutfit = () => {
-    console.log("This clicked");
+    console.log('this clicked');
     <H.BackHeartDiv selected>
       <Heart />
     </H.BackHeartDiv>;
@@ -102,9 +116,13 @@ const Card = ({
     console.log(price);
   };
 
+  const compare = () => {
+    console.log('Compare this');
+  }
+
   // pass data that was selected to outfitList
   return (
-    <Wrapper data-testid="card">
+    <Wrapper data-testid="card" onClick={compare}>
       <H.Wrapper>
         <H.BackHeartDiv className="outfit" onClick={addOutfit}>
           <Heart />

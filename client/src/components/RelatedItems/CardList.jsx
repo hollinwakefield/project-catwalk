@@ -65,7 +65,7 @@ const Arrow = styled.div`
 let start = 0;
 let end = 4;
 
-const CardList = ({ related }) => {
+const CardList = ({ related, product }) => {
   const [cards, setCards] = useState(related.slice(0, 4));
   const [styledImage, setStyledImage] = useState([]);
   const [avgRatings, setAvgRatings] = useState([]);
@@ -125,7 +125,7 @@ const CardList = ({ related }) => {
     rightArrow = (<Arrow className="empty" />);
   }
 
-  let cardComponents = cards.map((item, index) => (
+  const cardComponents = cards.map((item, index) => (
     <Card
       key={item.id}
       ratings={currentRatings[index]}
@@ -133,8 +133,10 @@ const CardList = ({ related }) => {
       itemName={item.name}
       category={item.category}
       price={item.default_price}
+      product={product}
     />
   ));
+
   return (
     <>
       <Title>Related Products!</Title>
