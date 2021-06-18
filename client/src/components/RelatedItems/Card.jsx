@@ -82,11 +82,7 @@ const Line = styled.hr`
   margin-top: -10px;
 `;
 
-const addOutfit = () => {
-  <H.BackHeartDiv selected>
-    <Heart />
-  </H.BackHeartDiv>;
-};
+
 
 // The related product id is passed down from cardList
 // Perform a get request in the child function to display the
@@ -95,6 +91,17 @@ const Card = ({
   // eslint-disable-next-line react/prop-types
   itemName, price, image, ratings, category,
 }) => {
+  let outfitList;
+
+  const addOutfit = () => {
+    console.log("This clicked");
+    <H.BackHeartDiv selected>
+      <Heart />
+    </H.BackHeartDiv>;
+    console.log(itemName);
+    console.log(price);
+  };
+
   // pass data that was selected to outfitList
   return (
     <Wrapper data-testid="card">
