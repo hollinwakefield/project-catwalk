@@ -101,18 +101,13 @@ const AddToCart = (props) => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('BUTTON CLICKED');
-    console.log(getSkuId(skus, size));
-    // axios.post('/cart', {
-    //   sku_id: getSkuId(skus, size),
-    //   count: quantity,
-    // })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios.post('/cart', {
+      skuId: getSkuId(skus, size),
+      quantity,
+    })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -141,7 +136,7 @@ const AddToCart = (props) => {
             onChange={handleQuantitySelect}
             action="/"
           >
-            {getArrayOneToN(getMaxQuantity(skus, size)).map((quantity) => (<Option value={quantity} />))}
+            {getArrayOneToN(getMaxQuantity(skus, size)).map((quantity, index) => (<Option key={index} value={quantity} />))}
           </Dropdown>
         )}
       </DropdownWrapper>
