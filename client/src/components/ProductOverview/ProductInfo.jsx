@@ -14,12 +14,29 @@ const ProductName = styled.h1`
 `;
 
 const Category = styled.div`
-  font-size: 25px;
+  font-size: 27px;
   color: darkgrey;
   font-style: italic;
-  text-decoration: underline;
   margin-top: 20px;
 `;
+
+const RatingsWrapper = styled.div`
+  display: flex;
+`;
+
+const ReviewRedirect = styled.a`
+  color: darkgrey;
+  margin-left: 10px;
+`;
+
+const Ratings = (props) => (
+  <RatingsWrapper>
+    <Stars stars={props.rating} />
+    <ReviewRedirect href="#ratings-and-reviews">
+      {`Read all ${props.total} reviews`}
+    </ReviewRedirect>
+  </RatingsWrapper>
+);
 
 const DefaultPrice = styled.span`
   font-size: 20px;
@@ -41,7 +58,7 @@ const ProductInfo = (props) => {
 
   return (
     <ProductInfoArea>
-      <Stars stars={rating} />
+      <Ratings rating={rating} total={5} />
       <Category>{category}</Category>
       <ProductName>{name}</ProductName>
       {salePrice ? (
