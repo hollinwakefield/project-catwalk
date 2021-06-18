@@ -1,6 +1,7 @@
 # manual ignore
 bundle.js
 config.js
+*.json
 
 # Logs
 logs

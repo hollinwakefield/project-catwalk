@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { sku_id, count } = req.body;
-  cartAPI.addToCart(sku_id, count)
+  const { skuId, quantity } = req.body;
+  cartAPI.addToCart(skuId, quantity)
     .then((cartRes) => {
       res.status(201).send(cartRes.data);
     })
