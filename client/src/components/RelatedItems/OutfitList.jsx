@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Card from './Card';
+import OutfitCard from './OutfitCard';
 
 const Wrapper = styled.div`
   display: flex;
@@ -8,3 +8,13 @@ const Wrapper = styled.div`
   text-align: center;
   width: 95%;
 `;
+
+const OutfitList = () => {
+  return (
+    <Wrapper>
+      <OutfitCard />
+    </Wrapper>
+  );
+};
+
+export default OutfitList;

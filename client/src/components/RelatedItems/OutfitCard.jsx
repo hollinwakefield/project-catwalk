@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import Stars from '../SharedComponents/Stars';
 
 const Wrapper = styled.div`
@@ -16,7 +15,6 @@ const Wrapper = styled.div`
   margin: 1rem;
 
   &:hover {
-    opacity: 0.5;
     cursor: pointer;
   }
 `;
@@ -47,8 +45,8 @@ const Category = styled.p`
 const Image = styled.img`
   border-radius: 5px;
   width: 250px;
-  height: 350px;
-  object-fit: cover;
+  height: 250px;
+  opacity: 0.2
 `;
 
 const Line = styled.hr`
@@ -64,9 +62,25 @@ const OutfitCard = ({
     return (
       <div>NO OUTFITS...</div>
     );
-  } else {
-    <Wrapper>
-      <Image />
-    </Wrapper>
   }
-}
+  console.log(image);
+  let images;
+
+
+  if (image === undefined) {
+    images = <Image src='https://cdn1.iconfinder.com/data/icons/general-9/500/add-512.png' />
+  }
+
+  return (
+    <Wrapper>
+      {images}
+      <div><Line /></div>
+      <Category></Category>
+      <Name></Name>
+      <Description></Description>
+      <Stars />
+    </Wrapper>
+  )
+};
+
+export default OutfitCard;
