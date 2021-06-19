@@ -33,6 +33,8 @@ const Thumbnail = styled.img`
 `;
 
 const MainImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
   object-fit: scale-down;
   align-self: center;
   cursor: pointer;
@@ -40,7 +42,6 @@ const MainImage = styled.img`
   &:hover {
     opacity: 0.8;
     cursor: zoom-in;
-    // transform: scale(2);
   }
 `;
 

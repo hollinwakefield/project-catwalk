@@ -10,12 +10,12 @@ const AddToCartArea = styled.div`
 // //////////////// STYLED COMPONENTS //////////////// //
 const DropdownWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: nowrap;
 `;
 
 const StyledSelect = styled.select`
-  max-width: 100%;
+  width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
   cursor: pointer;
@@ -26,15 +26,17 @@ const StyledOption = styled.option`
 `;
 
 const Button = styled.button`
-  max-width: 100%;
-  height: 25%;
+  width: 100%;
+  height: 35%;
   display: flex;
   justify-content: center;
   padding: 0.5rem;
+  font-size: 15px;
+  align-items: center;
   color: white;
   background-color: #FF5A5F;
   border: 2px solid #FF5A5F;
-  border-radius: 1em;
+  border-radius: 1.5em;
   cursor: pointer;
   transition-duration: 0.3s;
   &:hover {
