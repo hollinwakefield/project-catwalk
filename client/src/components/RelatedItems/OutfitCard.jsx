@@ -20,16 +20,17 @@ const Wrapper = styled.div`
 `;
 
 const NotWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 250px;
-  max-width: 250px;
-  min-height: 300px;
-  border-radius: 4px;
-  border: solid 2px #767676;
-  padding: 5px;
-  margin: 1rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-content: center;
+min-width: 250px;
+max-width: 250px;
+min-height: 450px;
+border-radius: 4px;
+border: solid 2px #767676;
+padding: 5px;
+margin: 1rem;
 
   &:hover {
     cursor: pointer;
@@ -63,12 +64,13 @@ const Image = styled.img`
   border-radius: 5px;
   width: 250px;
   height: 250px;
-  opacity: 0.2
+  opacity: 0.1;
 
 `;
 
 const NoImage = styled.img`
   border-radius: 5px;
+  opacity: 0.3;
 `;
 
 const Line = styled.hr`
@@ -86,8 +88,7 @@ const OutfitCard = ({
   if (image === undefined) {
     return (
       <NotWrapper>
-        <NoImage src="https://image.flaticon.com/icons/png/512/1894/1894671.png" />
-        <Description>No Outfits in list</Description>
+        <NoImage src="https://freepikpsd.com/media/2019/10/add-icon-white-png-5-Free-PNG-Images-Transparent.png" />
       </NotWrapper>
     );
   }

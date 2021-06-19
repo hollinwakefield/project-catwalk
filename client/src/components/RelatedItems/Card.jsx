@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
 import Heart from './IconHeart';
@@ -82,22 +82,30 @@ const Line = styled.hr`
   margin-top: -10px;
 `;
 
-const ComparisonModal = styled.table`
-display: flex;
-position: fixed;
-z-index: 1;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgba(0,0,0,0.4);
+const Modal = styled.div`
+  position: fixed;
+  z-index: 1;
+  inset: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  transition-duration: 4s;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+`;
 
-.modal-content {
+const StyledTable = styled.table`
+  margin-top: 10px;
   position: relative;
-  border-radius: 10%;
   background-color: white;
-  margin: auto;
-  width: 80%;
-}
+  opacity: 0.8;
+  max-width: 50%;
+  max-height: 50%;
+  .td, th{
+    padding: 5px 10px;
+    border: 2px solid;
+  }
 `;
 
 // The related product id is passed down from cardList
@@ -105,39 +113,56 @@ background-color: rgba(0,0,0,0.4);
 // Correct photo that corresponds with the data
 const Card = ({
   // eslint-disable-next-line react/prop-types
-  itemName, price, image, ratings, category, product,
+  itemName, price, image, ratings, category, product, features,
 }) => {
+  const [currentCompare, setCurrentCompare] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
   const addOutfit = () => {
-    console.log('this clicked');
     <H.BackHeartDiv selected>
       <Heart />
     </H.BackHeartDiv>;
-    console.log(itemName);
-    console.log(price);
   };
 
-  const compare = () => {
-    console.log('Compare this');
+  let modal;
+
+  if (showModal) {
+    modal = (
+      <Modal>
+        <StyledTable>
+          <tr>
+            {itemName}
+            {product.name}
+          </tr>
+        </StyledTable>
+      </Modal>
+    );
   }
+  const compare = () => {
+    setCurrentCompare(features);
+  };
 
   // pass data that was selected to outfitList
   return (
-    <Wrapper data-testid="card" onClick={compare}>
-      <H.Wrapper>
-        <H.BackHeartDiv className="outfit" onClick={addOutfit}>
-          <Heart />
-        </H.BackHeartDiv>
-      </H.Wrapper>
-      <Image src={image} alt="empty" />
-      <div><Line /></div>
-      <Category>{category}</Category>
-      <Name>{itemName}</Name>
-      <Description>
-        $
-        {price}
-      </Description>
-      <Stars stars={ratings} />
-    </Wrapper>
+    <>
+      {modal}
+      <Wrapper data-testid="card">
+        <H.Wrapper>
+          <H.BackHeartDiv className="outfit" onClick={addOutfit}>
+            <Heart />
+          </H.BackHeartDiv>
+        </H.Wrapper>
+        <Image src={image} alt="empty" onClick={() => { compare(); setShowModal(!showModal); }} />
+        <div><Line /></div>
+        <Category>{category}</Category>
+        <Name>{itemName}</Name>
+        <Description>
+          $
+          {price}
+        </Description>
+        <Stars stars={ratings} />
+      </Wrapper>
+    </>
   );
 };
 

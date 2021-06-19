@@ -24,8 +24,8 @@ const Title = styled.h1`
 const Arrow = styled.div`
   position: relative;
   top: 50%;
-  width: 2vmin;
-  height: 2vmin;
+  width: 1vmin;
+  height: 1vmin;
   background: transparent;
   border-top: 1vmin solid black;
   border-right: 1vmin solid black;
@@ -69,11 +69,14 @@ const CardList = ({ related, product }) => {
   const [cards, setCards] = useState(related.slice(0, 4));
   const [styledImage, setStyledImage] = useState([]);
   const [avgRatings, setAvgRatings] = useState([]);
+  const [features, setFeatures] = useState([]);
   let imageArray = [];
   let ratingsArray = [];
+  let featuresArray = [];
 
   useEffect(() => {
     const idArr = related.map((object) => object.id);
+    const getFeatures = idArr.map((element) => axios.get(`products/${element}`));
     const getRelatedInfo = idArr.map((element) => axios.get(`products/${element}/styles`));
     const getAverageRatings = idArr.map((element) => axios.get(`reviews/meta/${element}`));
     // Resolve here and store into a variable
@@ -95,12 +98,23 @@ const CardList = ({ related, product }) => {
       .catch((err) => {
         console.log('Error: ', err);
       });
+
+    Promise.all(getFeatures)
+      .then((results) => {
+        featuresArray = (results.map((element) => element.data.features));
+        setFeatures(featuresArray);
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
   }, []);
 
   let currentImages = [];
   let currentRatings = [];
+  let currentFeatures = [];
   currentImages = styledImage.slice(start, end);
   currentRatings = avgRatings.slice(start, end);
+  currentFeatures = features.slice(start, end);
 
   const moveRight = () => {
     setCards(related.slice(start += 1, end += 1));
@@ -134,12 +148,12 @@ const CardList = ({ related, product }) => {
       category={item.category}
       price={item.default_price}
       product={product}
+      features={currentFeatures[index]}
     />
   ));
 
   return (
     <>
-      <Title>Related Products!</Title>
       <Wrapper>
         {leftArrow}
         {cardComponents}
