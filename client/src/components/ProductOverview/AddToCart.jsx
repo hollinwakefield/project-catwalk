@@ -32,14 +32,14 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   padding: 0.5rem;
-  background-color: white;
+  color: white;
+  background-color: #FF5A5F;
   border: 2px solid #FF5A5F;
   border-radius: 7px;
   cursor: pointer;
   transition-duration: 0.3s;
   &:hover {
-    color: white;
-    background-color: #FF5A5F;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 `;
 

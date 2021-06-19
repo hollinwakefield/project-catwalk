@@ -82,6 +82,7 @@ const ImageGallery = (props) => {
 
   useEffect(() => {
     setMainImage(photos[0].url);
+    setThumbnailIndex(0);
   }, [style]);
 
   return (
