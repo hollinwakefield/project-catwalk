@@ -28,7 +28,7 @@ class RelatedItems extends React.Component {
     return (
       <Wrapper>
         <CardList related={related} product={product} />
-        <OutfitList />
+        {/* <OutfitList /> */}
       </Wrapper>
     );
   }

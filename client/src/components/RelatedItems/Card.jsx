@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
 import Heart from './IconHeart';
+import Comparison from './Comparison';
 // import OutfitList from './OutfitList';
 
 const H = {};
@@ -90,9 +91,9 @@ const Modal = styled.div`
   height: 100%;
   overflow: auto;
   transition-duration: 4s;
+  justify-content: center;
   background-color: rgba(0,0,0,0.4);
   display: flex;
-  justify-content: center;
 `;
 
 const StyledTable = styled.table`
@@ -107,13 +108,16 @@ const StyledTable = styled.table`
   transform: translate(-50%, -50%);
   display: flex;
   z-index: 2;
-  max-height: 80vh;
   overflow: auto;
   flex-direction: column;
-  justify-content: stretch;
   border-spacing: 15px;
   .th{
-     padding: 1px 10px;
+     padding: 5px 10px;
+     width: 100%;
+  }
+  .td{
+    text-align: center !important;
+    min-width: 100%;
   }
 `;
 
@@ -132,10 +136,55 @@ const Card = ({
       <Heart />
     </H.BackHeartDiv>;
   };
-  const overviewProduct = product.features;
-  const relatedProduct = features;
 
-  
+  const comparator = () => {
+    const results = [];
+    const overviewProduct = product.features;
+    const relatedProduct = features;
+    // const allFeatures = overviewProduct.concat(relatedProduct);
+    let big;
+    let small;
+    if (overviewProduct.length > relatedProduct.length) {
+      big = overviewProduct;
+      small = relatedProduct;
+    } else {
+      big = relatedProduct;
+      small = overviewProduct;
+    }
+
+    var skippedHash = {};
+
+    for (let i = 0; i < big.length; i += 1) {
+      for (let j = 0; j < small.length; j += 1) {
+        if (big[i].feature === small[j].feature) {
+          results.push({
+            feature: big[i].feature,
+            currentFeature: big[i].value,
+            comparedFeature: small[j].value,
+          });
+          skippedHash[big[i].feature] = 1;
+        } else if (big[i].feature !== small[j].feature) {
+          if (skippedHash[big[i].feature] !== 1) {
+            results.push({
+              feature: big[i].feature,
+              currentFeature: big[i].value,
+              comparedFeature: 'Not Applicable',
+            });
+            skippedHash[big[i].feature] = 1;
+          }
+          if (skippedHash[small[j].feature] !== 1) {
+            results.push({
+              feature: small[j].feature,
+              currentFeature: 'Not Applicable',
+              comparedFeature: small[j].value,
+            });
+            skippedHash[small[j].feature] = 1;
+          }
+        }
+      }
+    }
+    return results.map((element, index) => <Comparison feature={element} key={index} />);
+  };
 
   // Check mark
   // if (recommend) {
@@ -155,13 +204,14 @@ const Card = ({
     modal = (
       <Modal onClick={() => { setShowModal(!showModal); }}>
         <StyledTable>
-          <tr>
-            <th>{itemName}</th>
-            <th>Description</th>
+          <thead>
             <th>{product.name}</th>
-          </tr>
-          <tr>
-          </tr>
+            <th>Description</th>
+            <th>{itemName}</th>
+          </thead>
+          <tbody>
+            {comparator()}
+          </tbody>
         </StyledTable>
       </Modal>
     );
