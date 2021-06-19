@@ -21,7 +21,8 @@ const ThumbnailWrapper = styled.div`
 const Thumbnail = styled.img`
   width: 50px;
   height: 65px;
-  border: 2px solid #ddd;
+  border: 2px solid;
+  border-color: ${(props) => (props.selected ? '#FF5A5F' : '#ddd')};
   border-radius: 7%;
   padding: 3px;
   margin: 2px;
@@ -73,7 +74,9 @@ const ImageGallery = (props) => {
   const thumbnailUrls = getThumbnailUrls(photos);
   const [expandedView, setExpandedView] = useState(false);
   const [mainImage, setMainImage] = useState(photos[0].url);
+  const [thumbnailIndex, setThumbnailIndex] = useState(0);
   const handleClick = (index) => {
+    setThumbnailIndex(index);
     setMainImage(photos[index].url);
   };
 
@@ -84,7 +87,11 @@ const ImageGallery = (props) => {
   return (
     <ImageGalleryArea>
       <ThumbnailWrapper>
-        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} alt="thumbnail" onClick={() => handleClick(index)} />))}
+        {thumbnailUrls.map((thumbnailUrl, index) => (index === thumbnailIndex ? (
+          <Thumbnail key={index} selected src={thumbnailUrl} alt="thumbnail" onClick={() => handleClick(index)} />
+        ) : (
+          <Thumbnail key={index} src={thumbnailUrl} alt="thumbnail" onClick={() => handleClick(index)} />
+        )))}
       </ThumbnailWrapper>
       <MainImage src={mainImage} alt="main-image" />
       {/* <Modal>

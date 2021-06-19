@@ -44,8 +44,8 @@ const getThumbnailUrls = (styles) => {
 const StyleSelector = (props) => {
   const { styles, style, setStyle } = props;
   const { name } = style;
-  const [styleIndex, setStyleIndex] = useState(0);
   const thumbnailUrls = getThumbnailUrls(styles);
+  const [styleIndex, setStyleIndex] = useState(0);
   const handleClick = (index) => {
     setStyleIndex(index);
     setStyle(styles.results[index]);
