@@ -14,9 +14,12 @@ class App extends React.Component {
       styles: null,
       cart: null,
       related: null,
+      rating: 0,
+      totalReviews: 420,
       // reviews: null,
     };
     // initializer();
+    this.setRatingAndTotalRev = this.setRatingAndTotalRev.bind(this);
   }
 
   componentDidMount() {
@@ -40,16 +43,33 @@ class App extends React.Component {
       });
   }
 
+  setRatingAndTotalRev(rating, totalReviews) {
+    this.setState({ rating, totalReviews });
+  }
+
   render() {
     const {
-      productId, product, styles, cart, related,
+      productId, product, styles, cart, related, rating, totalReviews,
     } = this.state;
     if (product && styles && cart && related) {
       return (
         <>
-          <ProductOverview product={product} styles={styles} cart={cart} />
-          <RelatedItems related={related} styles={styles} product={product} />
-          <RatingAndReviews productId={productId} />
+          <ProductOverview
+            product={product}
+            styles={styles}
+            cart={cart}
+            rating={rating}
+            totalReviews={totalReviews}
+          />
+          <RelatedItems
+            related={related}
+            styles={styles}
+            product={product}
+          />
+          <RatingAndReviews
+            productId={productId}
+            passBackAvgAndTotalReviews={this.setRatingAndTotalRev}
+          />
         </>
       );
     }

@@ -37,7 +37,7 @@ class RatingAndReviews extends React.Component {
   }
 
   componentDidMount() {
-    const { productId } = this.props;
+    const { productId, passBackAvgAndTotalReviews } = this.props;
     axios.get(`/reviews/meta/${productId}`)
       .then((res) => {
         const { data } = res;
@@ -47,6 +47,9 @@ class RatingAndReviews extends React.Component {
           totalReviews: data.reviews,
           recommended: data.recommended,
           characteristics: data.characteristics,
+        }, () => {
+          const { avg, totalReviews } = this.state;
+          passBackAvgAndTotalReviews(avg, totalReviews);
         });
       })
       .catch((err) => {
