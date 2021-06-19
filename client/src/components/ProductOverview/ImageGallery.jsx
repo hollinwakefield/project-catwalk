@@ -44,23 +44,24 @@ const MainImage = styled.img`
   }
 `;
 
-// const Modal = styled.div`
-//   background: rgba(0, 0, 0, 0.6);
-//   position: fixed;
-//   z-index: 1;
-//   top: 0;
-//   left: 0;
-//   bottom: 0;
-//   right: 0;
-// `;
+const Modal = styled.div`
+  display: flex;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+`;
 
-// const FullImage = styled.img`
-//   position: fixed;
-//   height: 80%;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, 50%) scale(2);
-// `;
+const ModalImage = styled.img`
+  position: relative;
+  background-color: white;
+  margin: auto;
+  width: 85%;
+`;
 
 // //////////////// HELPER FUNCTIONS //////////////// //
 // input: photos <- an array with objects containing thumbnail url
@@ -75,9 +76,12 @@ const ImageGallery = (props) => {
   const [expandedView, setExpandedView] = useState(false);
   const [mainImage, setMainImage] = useState(photos[0].url);
   const [thumbnailIndex, setThumbnailIndex] = useState(0);
-  const handleClick = (index) => {
+  const handleThumbnailClick = (index) => {
     setThumbnailIndex(index);
     setMainImage(photos[index].url);
+  };
+  const handleImageClick = () => {
+    setExpandedView(!expandedView);
   };
 
   useEffect(() => {
@@ -89,15 +93,17 @@ const ImageGallery = (props) => {
     <ImageGalleryArea>
       <ThumbnailWrapper>
         {thumbnailUrls.map((thumbnailUrl, index) => (index === thumbnailIndex ? (
-          <Thumbnail key={index} selected src={thumbnailUrl} alt="thumbnail" onClick={() => handleClick(index)} />
+          <Thumbnail key={index} selected src={thumbnailUrl} alt="thumbnail" onClick={() => handleThumbnailClick(index)} />
         ) : (
-          <Thumbnail key={index} src={thumbnailUrl} alt="thumbnail" onClick={() => handleClick(index)} />
+          <Thumbnail key={index} src={thumbnailUrl} alt="thumbnail" onClick={() => handleThumbnailClick(index)} />
         )))}
       </ThumbnailWrapper>
-      <MainImage src={mainImage} alt="main-image" />
-      {/* <Modal>
-        <FullImage src={mainImage} alt="expanded-view" />
-      </Modal> */}
+      <MainImage src={mainImage} alt="main-image" onClick={handleImageClick} />
+      {expandedView ? (
+        <Modal onClick={handleImageClick}>
+          <ModalImage src={mainImage} alt="modal" />
+        </Modal>
+      ) : null}
     </ImageGalleryArea>
   );
 };

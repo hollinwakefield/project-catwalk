@@ -15,7 +15,7 @@ class App extends React.Component {
       cart: null,
       related: null,
       rating: 0,
-      totalReviews: 420,
+      totalReviews: 0,
       // reviews: null,
     };
     // initializer();

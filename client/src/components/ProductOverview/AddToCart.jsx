@@ -17,7 +17,6 @@ const DropdownWrapper = styled.div`
 const StyledSelect = styled.select`
   max-width: 100%;
   padding: 0.5rem;
-  border-radius: 0.5em;
   margin-bottom: 1rem;
   cursor: pointer;
 `;
@@ -35,7 +34,7 @@ const Button = styled.button`
   color: white;
   background-color: #FF5A5F;
   border: 2px solid #FF5A5F;
-  border-radius: 7px;
+  border-radius: 1em;
   cursor: pointer;
   transition-duration: 0.3s;
   &:hover {
