@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
 import Heart from './IconHeart';
+import OutfitList from './OutfitList';
 
 const H = {};
 
@@ -17,7 +18,7 @@ H.Wrapper = styled.div`
 H.BackHeartDiv = styled.button`
   display: flex;
   position: absolute;
-  color: grey;
+  color: ${(props) => (props.selected ? 'coral' : 'gray')};
   border: none;
   background: none;
 
@@ -25,17 +26,13 @@ H.BackHeartDiv = styled.button`
     opacity: 0.6;
     cursor: pointer;
   }
-
-  &:focus {
-    color: #FF5A5F;
-  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 230px;
+  min-width: 250px;
   max-width: 250px;
   min-height: 500px;
   border-radius: 4px;
@@ -85,17 +82,31 @@ const Line = styled.hr`
   margin-top: -10px;
 `;
 
+
+
 // The related product id is passed down from cardList
 // Perform a get request in the child function to display the
 // Correct photo that corresponds with the data
 const Card = ({
-  itemName, price, image, ratings, category, id
-}) =>
-{
+  // eslint-disable-next-line react/prop-types
+  itemName, price, image, ratings, category,
+}) => {
+  let outfitList;
+
+  const addOutfit = () => {
+    console.log("This clicked");
+    <H.BackHeartDiv selected>
+      <Heart />
+    </H.BackHeartDiv>;
+    console.log(itemName);
+    console.log(price);
+  };
+
+  // pass data that was selected to outfitList
   return (
     <Wrapper data-testid="card">
       <H.Wrapper>
-        <H.BackHeartDiv className="outfit">
+        <H.BackHeartDiv className="outfit" onClick={addOutfit}>
           <Heart />
         </H.BackHeartDiv>
       </H.Wrapper>

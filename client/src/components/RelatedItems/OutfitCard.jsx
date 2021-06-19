@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import Stars from '../SharedComponents/Stars';
 
 const Wrapper = styled.div`
@@ -16,7 +15,23 @@ const Wrapper = styled.div`
   margin: 1rem;
 
   &:hover {
-    opacity: 0.5;
+    cursor: pointer;
+  }
+`;
+
+const NotWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 300px;
+  border-radius: 4px;
+  border: solid 2px #767676;
+  padding: 5px;
+  margin: 1rem;
+
+  &:hover {
     cursor: pointer;
   }
 `;
@@ -34,7 +49,7 @@ const Name = styled.p`
 const Description = styled.p`
   color: gray;
   text-align:left;
-  margin-top: -35px;
+  margin-top: -100px;
 
 `;
 
@@ -47,8 +62,13 @@ const Category = styled.p`
 const Image = styled.img`
   border-radius: 5px;
   width: 250px;
-  height: 350px;
-  object-fit: cover;
+  height: 250px;
+  opacity: 0.2
+
+`;
+
+const NoImage = styled.img`
+  border-radius: 5px;
 `;
 
 const Line = styled.hr`
@@ -60,13 +80,27 @@ const Line = styled.hr`
 const OutfitCard = ({
   itemName, price, image, ratings, category,
 }) => {
-  if (itemName && price && image && ratings && category) {
+  let images;
+  let cat, name, stars, line;
+
+  if (image === undefined) {
     return (
-      <div>NO OUTFITS...</div>
+      <NotWrapper>
+        <NoImage src="https://image.flaticon.com/icons/png/512/1894/1894671.png" />
+        <Description>No Outfits in list</Description>
+      </NotWrapper>
     );
-  } else {
-    <Wrapper>
-      <Image />
-    </Wrapper>
   }
-}
+  return (
+    <Wrapper>
+      {images}
+      <div>{line}</div>
+      {category}
+      {name}
+      {cat}
+      {stars}
+    </Wrapper>
+  );
+};
+
+export default OutfitCard;

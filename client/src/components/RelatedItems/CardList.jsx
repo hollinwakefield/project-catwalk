@@ -97,102 +97,51 @@ const CardList = ({ related }) => {
       });
   }, []);
 
+  let currentImages = [];
+  let currentRatings = [];
+  currentImages = styledImage.slice(start, end);
+  currentRatings = avgRatings.slice(start, end);
+
   const moveRight = () => {
     setCards(related.slice(start += 1, end += 1));
+    currentImages = styledImage.slice(start, end);
+    currentRatings = avgRatings.slice(start, end);
   };
 
   const moveLeft = () => {
     setCards(related.slice(start -= 1, end -= 1));
+    currentImages = styledImage.slice(start, end);
+    currentRatings = avgRatings.slice(start, end);
   };
-  // If(card.(length) === related.(length))
-  if (cards[cards.length - 1].id === related[related.length - 1].id && !cards[0].id === related[0].id) {
-    // Render without right side arrow
-    return (
-      <>
-        <Title>Related Products!</Title>
-        <Wrapper>
-          <Arrow aria-label="leftArrow" className="left" onClick={moveLeft} />
-          {cards.map((item, index) => (
-            <Card
-              key={item.id}
-              id={item.id}
-              ratings={avgRatings[index]}
-              image={styledImage[index]}
-              itemName={item.name}
-              category={item.category}
-              price={item.default_price}
-            />
-          ))}
-          <Arrow className="empty" />
-        </Wrapper>
-      </>
-    );
+
+  let leftArrow = (<Arrow className="left" onClick={moveLeft} />);
+  let rightArrow = (<Arrow className="right" onClick={moveRight} />);
+
+  if (cards[0] === related[0]) {
+    leftArrow = (<Arrow className="empty" />);
   }
-  if (cards[0].id === related[0].id && !cards[cards.length - 1].id === related[related.length - 1].id) {
-    return (
-      <>
-        <Title>Related Products!</Title>
-        <Wrapper>
-          <Arrow className="empty" />
-          {cards.map((item, index) => (
-            <Card
-              key={item.id}
-              id={item.id}
-              ratings={avgRatings[index+1]}
-              image={styledImage[index+1]}
-              itemName={item.name}
-              category={item.category}
-              price={item.default_price}
-            />
-          ))}
-          <Arrow className="right" onClick={moveRight} />
-        </Wrapper>
-      </>
-    );
+
+  if (cards[cards.length - 1] === related[related.length - 1]) {
+    rightArrow = (<Arrow className="empty" />);
   }
-  if (cards[cards.length - 1].id === related[related.length - 1].id && cards[0].id === related[0].id) {
-    return (
-      <>
-        <Title>Related Products!</Title>
-        <Wrapper>
-          <Arrow className="empty" />
-          {cards.map((item, index) => (
-            <Card
-              key={item.id}
-              id={item.id}
-              ratings={avgRatings[index+1]}
-              image={styledImage[index+1]}
-              itemName={item.name}
-              category={item.category}
-              price={item.default_price}
-            />
-          ))}
-          <Arrow className="empty" />
-        </Wrapper>
-      </>
-    );
-  }
-  // else if (card.(0) === related.(0))
-  // Render without left side arrow
-  // else
-  // Render with both
+
+  let cardComponents = cards.map((item, index) => (
+    <Card
+      key={item.id}
+      ratings={currentRatings[index]}
+      image={currentImages[index]}
+      itemName={item.name}
+      category={item.category}
+      price={item.default_price}
+    />
+  ));
   return (
     <>
       <Title>Related Products!</Title>
       <Wrapper>
-        <Arrow className="left" onClick={moveLeft} />
-        {cards.map((item, index) => (
-          <Card
-            key={item.id}
-            id={item.id}
-            ratings={avgRatings[index]}
-            image={styledImage[index]}
-            itemName={item.name}
-            category={item.category}
-            price={item.default_price}
-          />
-        ))}
-        <Arrow data-testid="rightArrow" className="right" onClick={moveRight} />
+        {leftArrow}
+        {cardComponents}
+        {rightArrow}
       </Wrapper>
     </>
   );
