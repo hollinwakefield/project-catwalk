@@ -76,7 +76,6 @@ class RatingAndReviews extends React.Component {
     }
     return (
       <>
-        <h4>Ratings and Reviews!</h4>
         <StyledDiv id="ratings-and-reviews">
           <RatingBreakdown
             avg={avg}

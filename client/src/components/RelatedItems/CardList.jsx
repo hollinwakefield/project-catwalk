@@ -137,7 +137,6 @@ const CardList = ({ related }) => {
   ));
   return (
     <>
-      <Title>Related Products!</Title>
       <Wrapper>
         {leftArrow}
         {cardComponents}
