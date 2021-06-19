@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Tile from './ReviewTile';
-import DownArrow from '../sharedComponents/downArrows';
+import DownArrow from '../SharedComponents/downArrows';
 
 const ReviewArea = styled.div`
   grid-area: ReviewList;

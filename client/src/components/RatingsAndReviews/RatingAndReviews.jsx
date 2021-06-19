@@ -6,19 +6,6 @@ import RatingBreakdown from './RatingBreakdown';
 import LoadingSpinner from '../SharedComponents/ElizabethDonatedSpinner';
 import WriteReview from './WriteReview';
 
-const Box = styled.div`
-  grid-area: ProductBreakdown;
-  place-self: stretch;
-  margin: 0.5em;
-  padding: 0.25em;
-  text-align: center;
-  font-size: 1vw;
-      &:hover {
-        opacity: 0.5;
-        cursor: grab;
-      }
-  `;
-
 const StyledDiv = styled.div`
   display: grid;
   grid-template-areas: "RatingBreakdown Sorting"
@@ -46,6 +33,7 @@ class RatingAndReviews extends React.Component {
       recommended: '',
       productId: 25167,
       sort: '',
+      characteristics: {},
     };
   }
 
@@ -59,6 +47,7 @@ class RatingAndReviews extends React.Component {
           avg: data.avg,
           totalReviews: data.reviews,
           recommended: data.recommended,
+          characteristics: data.characteristics,
         });
       })
       .catch((err) => {
@@ -66,11 +55,13 @@ class RatingAndReviews extends React.Component {
       });
   }
 
+  
+
   render() {
     // const { reviews } = this.props;
     let quickReviewList;
     const {
-      loaded, avg, totalReviews, recommended, productId, sort,
+      loaded, avg, totalReviews, recommended, productId, sort, characteristics,
     } = this.state;
     if (!loaded) {
       quickReviewList = (
@@ -95,7 +86,7 @@ class RatingAndReviews extends React.Component {
             recommended={recommended}
           />
           {quickReviewList}
-          <WriteReview />
+          <WriteReview characteristics={characteristics} />
         </StyledDiv>
       </>
     );

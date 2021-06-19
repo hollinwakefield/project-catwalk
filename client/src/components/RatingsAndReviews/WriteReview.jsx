@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Stars from '../SharedComponents/Stars';
+import SelectableStar from './SelectableStar';
 
 const sheen = keyframes`
   100% {
@@ -78,6 +79,15 @@ const RowContainer = styled.div`
       transform: translateX(-50%);
       font-size: 20px;
     }
+
+    .eachRadioButton {
+      justify-content: space-evenly;
+    }
+
+    .centerItems {
+      align-items: flex-start;
+    }
+    padding-bottom: ${(props) => (props.input ? '10px' : '0px')}
 `;
 
 const VerticalContainer = styled.div`
@@ -85,6 +95,15 @@ const VerticalContainer = styled.div`
     align-items: flex-start;
     flex-direction: column;
     margin-top: 20px;
+
+    .nested {
+      margin-top: 0px;
+    }
+
+    .centered {
+      justify-content: center;
+      align-items: center;
+    }
 `;
 
 // Make sure that the Parent is position: relative!
@@ -129,6 +148,15 @@ const ReviewTextArea = styled.textarea`
     border-radius: 3px;
     font-family: 'Montserrat', sans-serif;
 
+`;
+
+const RadioButtonGrouped = styled.fieldset`
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    border: 0;
+    padding: 0;
+    min-width: 0;
 `;
 
 const CoralStyledButton = styled.button`
@@ -186,6 +214,21 @@ const MediaButton = styled.button`
 }
 `;
 
+const ClearFieldSet = styled.fieldset`
+    border: none;
+    padding: 0;
+    margin: 0;
+`;
+
+const LabelForm = styled.label`
+    font-size: 12px;
+    margin-left: 10px;
+`;
+
+const InputNoPadding = styled.input`
+    margin: 0;
+`;
+
 // not working clear border;
 // .xButton {
 //   display: inline-block;
@@ -206,8 +249,49 @@ const MediaButton = styled.button`
 //   };
 // };
 
-const WriteReview = () => {
+const displayCharacteristicOptions = (attribute) => (
+   <div></div>
+);
+
+const potentialValues = {
+  Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
+  Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+  Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+  Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+  Length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+  Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
+};
+
+const attributeValues = {
+  rating: '',
+  summary: '',
+  body: '',
+  recommend: '',
+  name: '',
+  email: '',
+  photos: [],
+  characteristics: {},
+};
+
+const WriteReview = (characteristics) => {
+  const productAttributes = Object.keys(characteristics);
+
+  for (let i = 0; i < productAttributes.length; i += 1) {
+    attributeValues.characteristics[productAttributes[i]] = '';
+  }
+
+  console.log('this is attributes', attributeValues);
+  const [values, setValues] = useState(attributeValues);
   const [showModal, setShowModal] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
   let modal;
 
   if (showModal) {
@@ -228,7 +312,7 @@ const WriteReview = () => {
             <Title>
               Overall Rating
             </Title>
-            <Stars />
+            <SelectableStar />
           </VerticalContainer>
           <VerticalContainer className="username">
             <RowContainer>
@@ -236,30 +320,67 @@ const WriteReview = () => {
                 Your Username
               </Title>
             </RowContainer>
-            <StyledInput type="text" placeholder="  Your username" />
+            <StyledInput
+              type="text"
+              label="name"
+              name="name"
+              value={attributeValues.name}
+              placeholder="  Your username"
+              onChange={handleInputChange}
+            />
           </VerticalContainer>
           <VerticalContainer className="email">
             <Title>
               Your Email
             </Title>
-            <StyledInput type="text" placeholder="  Your email" />
+            <StyledInput
+              type="text"
+              label="email"
+              name="email"
+              value={attributeValues.email}
+              placeholder="  Your email"
+              onChange={handleInputChange}
+            />
           </VerticalContainer>
           <VerticalContainer className="recommended">
             <Title>
               Would you recommend this product?
             </Title>
+            <ClearFieldSet>
+              <RowContainer className="centerItems" input>
+                <InputNoPadding type="radio" name="format" id="txt" value="txt" checked/>
+                <LabelForm htmlFor="txt">Yes</LabelForm>
+              </RowContainer>
+              <RowContainer className="centerItems">
+                <InputNoPadding type="radio" name="format" id="csv" value="csv" />
+                <LabelForm htmlFor="csv">No</LabelForm>
+              </RowContainer>
+            </ClearFieldSet>
           </VerticalContainer>
           <VerticalContainer className="reviewSummary">
             <Title>
               Add a headline
             </Title>
-            <StyledInput type="text" placeholder="  What's most important to know?" />
+            <StyledInput
+              type="text"
+              label="summary"
+              name="summary"
+              value={attributeValues.summary}
+              placeholder="  What's most important to know?"
+              onChange={handleInputChange}
+            />
           </VerticalContainer>
           <VerticalContainer className="reviewBody">
             <Title>
               Add a written review
             </Title>
-            <ReviewTextArea placeholder="  What did you like or dislike?" />
+            <ReviewTextArea
+              label="body"
+              name="body"
+              value={attributeValues.body}
+              placeholder="  What did you like or dislike?"
+              onChange={handleInputChange}
+            />
           </VerticalContainer>
           <VerticalContainer className="addPhotoVideo">
             <Title>
@@ -277,7 +398,7 @@ const WriteReview = () => {
               Rate features
             </Title>
           </VerticalContainer>
-          <CoralStyledButton type="submit" value="submit">
+          <CoralStyledButton aria-label="submit-review" type="submit" value="submit">
             Submit
           </CoralStyledButton>
         </form>

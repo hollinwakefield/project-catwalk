@@ -36,4 +36,12 @@ router.get('/meta/:productId', (req, res) => {
   });
 });
 
+router.post('/createReview', (req, res) => {
+  const postBody = req.body;
+
+  reviews.createReview(postBody)
+    .then((data) => res.status(201).send(data.data))
+    .catch((err) => res.status(500).send(err));
+});
+
 module.exports = router;

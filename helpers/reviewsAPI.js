@@ -73,6 +73,7 @@ const getReviewMetaData = (id, callback) => {
       // store the results array from the data that was received
       // console.log(res.data);
       const results = res.data.ratings;
+      const { characteristics } = res.data;
       // Make an array of ratings
       let totalRating = 0;
       let reviews = 0;
@@ -90,6 +91,7 @@ const getReviewMetaData = (id, callback) => {
         avg,
         reviews,
         recommended,
+        characteristics,
       };
       callback(null, data);
     })
@@ -99,6 +101,18 @@ const getReviewMetaData = (id, callback) => {
     });
 };
 
+const createReview = (postBody) => {
+  const options = {
+    url: `${config.APIURL}reviews/meta/`,
+    method: 'POST',
+    data: postBody,
+    headers: {
+      Authorization: config.APITOKEN,
+    },
+  };
+
+  return axios(options);
+};
 // product id for Slacker's Slacks
 // const id = 25170;
 
@@ -110,4 +124,5 @@ module.exports = {
   getAllReviews,
   getAverageRating,
   getReviewMetaData,
+  createReview,
 };
