@@ -33,7 +33,7 @@ const Ratings = (props) => (
   <RatingsWrapper>
     <Stars stars={props.rating} />
     <ReviewRedirect href="#ratings-and-reviews">
-      {`Read all ${props.total} reviews`}
+      {`Read all ${props.totalReviews} reviews`}
     </ReviewRedirect>
   </RatingsWrapper>
 );
@@ -58,7 +58,7 @@ const ProductInfo = (props) => {
 
   return (
     <ProductInfoArea>
-      <Ratings rating={rating} total={5} />
+      <Ratings rating={rating} totalReviews={5} />
       <Category>{category}</Category>
       <ProductName>{name}</ProductName>
       {salePrice ? (

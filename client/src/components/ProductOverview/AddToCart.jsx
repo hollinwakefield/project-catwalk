@@ -22,8 +22,8 @@ const StyledSelect = styled.select`
   cursor: pointer;
 `;
 
+// STYLE OPTION CSS
 const StyledOption = styled.option`
-  color: ${(props) => (props.notSelected ? 'lightgrey' : 'black')};
 `;
 
 const Button = styled.button`
@@ -32,13 +32,14 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   padding: 0.5rem;
-  color: white;
-  background-color: #FF5A5F;
+  background-color: white;
   border: 2px solid #FF5A5F;
   border-radius: 7px;
   cursor: pointer;
+  transition-duration: 0.3s;
   &:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: white;
+    background-color: #FF5A5F;
   }
 `;
 
@@ -51,16 +52,8 @@ const Dropdown = (props) => (
 );
 
 const Option = (props) => (
-  <StyledOption notSelected={props.notSelected}>
-    {props.value}
-  </StyledOption>
+  <StyledOption>{props.value}</StyledOption>
 );
-
-// const Button = (props) => (
-//   <form action={props.action}>
-//     <StyledButton type="submit" value={props.buttonText} />
-//   </form>
-// );
 
 // //////////////// HELPER FUNCTIONS //////////////// //
 // input: skus <- an object with sku id as it's key and a nested object containing size and quantity
@@ -118,7 +111,7 @@ const AddToCart = (props) => {
           onChange={handleSizeSelect}
           action="/"
         >
-          <Option notSelected value="SELECT SIZE" />
+          <Option value="SELECT SIZE" />
           {sizes.map((size, index) => (<Option key={index} value={size} />))}
         </Dropdown>
         {(size === 'SELECT SIZE') ? (
