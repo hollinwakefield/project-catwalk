@@ -31,15 +31,14 @@ class RatingAndReviews extends React.Component {
       avg: 0,
       totalReviews: 2,
       recommended: '',
-      productId: 25167,
       sort: '',
       characteristics: {},
     };
   }
 
   componentDidMount() {
-    // axios.get(`/reviews/meta/${this.props.productId}`)
-    axios.get('/reviews/meta/25167')
+    const { productId } = this.props;
+    axios.get(`/reviews/meta/${productId}`)
       .then((res) => {
         const { data } = res;
         this.setState({
@@ -59,8 +58,9 @@ class RatingAndReviews extends React.Component {
     // const { reviews } = this.props;
     let quickReviewList;
     const {
-      loaded, avg, totalReviews, recommended, productId, sort, characteristics,
+      loaded, avg, totalReviews, recommended, sort, characteristics,
     } = this.state;
+    const { productId } = this.props;
     if (!loaded) {
       quickReviewList = (
         <LoadingSpinner />

@@ -42,14 +42,14 @@ class App extends React.Component {
 
   render() {
     const {
-      product, styles, cart, related,
+      productId, product, styles, cart, related,
     } = this.state;
     if (product && styles && cart && related) {
       return (
         <>
           <ProductOverview product={product} styles={styles} cart={cart} />
           <RelatedItems related={related} styles={styles} product={product} />
-          <RatingAndReviews />
+          <RatingAndReviews productId={productId} />
         </>
       );
     }
