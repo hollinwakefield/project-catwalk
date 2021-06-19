@@ -4,19 +4,7 @@ import styled from 'styled-components';
 import ReviewList from './ReviewList';
 import RatingBreakdown from './RatingBreakdown';
 import LoadingSpinner from '../SharedComponents/ElizabethDonatedSpinner';
-
-const Box = styled.div`
-  grid-area: ProductBreakdown;
-  place-self: stretch;
-  margin: 0.5em;
-  padding: 0.25em;
-  text-align: center;
-  font-size: 1vw;
-      &:hover {
-        opacity: 0.5;
-        cursor: grab;
-      }
-  `;
+import WriteReview from './WriteReview';
 
 const StyledDiv = styled.div`
   display: grid;
@@ -26,7 +14,7 @@ const StyledDiv = styled.div`
                        "CreateReview ReviewList";
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 3fr);
   grid-template-rows: auto auto minmax(0px, 1fr) auto;
-  min-height: 100vh;
+  min-height: 80vh;
   gap: 3em;
   margin: 3rem;
   padding: 2rem;
@@ -43,14 +31,14 @@ class RatingAndReviews extends React.Component {
       avg: 0,
       totalReviews: 2,
       recommended: '',
-      productId: 25167,
       sort: '',
+      characteristics: {},
     };
   }
 
   componentDidMount() {
-    // axios.get(`/reviews/meta/${this.props.productId}`)
-    axios.get('/reviews/meta/25167')
+    const { productId, passBackAvgAndTotalReviews } = this.props;
+    axios.get(`/reviews/meta/${productId}`)
       .then((res) => {
         const { data } = res;
         this.setState({
@@ -58,6 +46,10 @@ class RatingAndReviews extends React.Component {
           avg: data.avg,
           totalReviews: data.reviews,
           recommended: data.recommended,
+          characteristics: data.characteristics,
+        }, () => {
+          const { avg, totalReviews } = this.state;
+          passBackAvgAndTotalReviews(avg, totalReviews);
         });
       })
       .catch((err) => {
@@ -69,8 +61,9 @@ class RatingAndReviews extends React.Component {
     // const { reviews } = this.props;
     let quickReviewList;
     const {
-      loaded, avg, totalReviews, recommended, productId, sort,
+      loaded, avg, totalReviews, recommended, sort, characteristics,
     } = this.state;
+    const { productId } = this.props;
     if (!loaded) {
       quickReviewList = (
         <LoadingSpinner />
@@ -81,13 +74,11 @@ class RatingAndReviews extends React.Component {
           totalReviews={totalReviews}
           productId={productId}
           sort={sort}
-          loaded={loaded}
         />
       );
     }
     return (
       <>
-        <h4>Ratings and Reviews!</h4>
         <StyledDiv id="ratings-and-reviews">
           <RatingBreakdown
             avg={avg}
@@ -95,6 +86,7 @@ class RatingAndReviews extends React.Component {
             recommended={recommended}
           />
           {quickReviewList}
+          <WriteReview characteristics={characteristics} />
         </StyledDiv>
       </>
     );

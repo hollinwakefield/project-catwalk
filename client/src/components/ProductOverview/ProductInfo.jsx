@@ -51,14 +51,14 @@ const SalePrice = styled.span`
 
 // //////////////// MAIN COMPONENT //////////////// //
 const ProductInfo = (props) => {
-  const { product, style, rating } = props;
+  const { product, style, rating, totalReviews } = props;
   const { name, category } = product;
   const defaultPrice = product.default_price;
   const salePrice = style.sale_price;
 
   return (
     <ProductInfoArea>
-      <Ratings rating={rating} totalReviews={5} />
+      <Ratings rating={rating} totalReviews={totalReviews} />
       <Category>{category}</Category>
       <ProductName>{name}</ProductName>
       {salePrice ? (

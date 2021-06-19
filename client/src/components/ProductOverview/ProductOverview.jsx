@@ -21,16 +21,13 @@ const Grid = styled.div`
 `;
 
 const ProductOverview = (props) => {
-  const { product, styles, cart } = props;
+  const { product, styles, cart, rating, totalReviews } = props;
   const [style, setStyle] = useState(styles.results[0]);
 
   return (
     <Grid>
       <ImageGallery style={style} />
-
-      {/* REFACTOR RATING WITH REAL API DATA */}
-      <ProductInfo product={product} style={style} rating={3.5} />
-
+      <ProductInfo product={product} style={style} rating={rating} totalReviews={totalReviews} />
       <StyleSelector styles={styles} style={style} setStyle={setStyle} />
       <AddToCart style={style} />
       <Description product={product} />
