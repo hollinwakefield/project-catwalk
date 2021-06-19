@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const products = require('./controllers/products');
 const reviews = require('./controllers/reviews');
 const cart = require('./controllers/cart');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000;
