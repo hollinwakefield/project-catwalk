@@ -84,7 +84,7 @@ const Line = styled.hr`
 
 const Modal = styled.div`
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   inset: 0px;
   width: 100%;
   height: 100%;
@@ -96,15 +96,24 @@ const Modal = styled.div`
 `;
 
 const StyledTable = styled.table`
-  margin-top: 10px;
-  position: relative;
-  background-color: white;
-  opacity: 0.8;
-  max-width: 50%;
-  max-height: 50%;
-  .td, th{
-    padding: 5px 10px;
-    border: 2px solid;
+  border-radius: 22px;
+  position: fixed;
+  background: white;
+  min-width: 30%;
+  min-height: 30%;
+  padding: 2%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  z-index: 2;
+  max-height: 80vh;
+  overflow: auto;
+  flex-direction: column;
+  justify-content: stretch;
+  border-spacing: 15px;
+  .th{
+     padding: 1px 10px;
   }
 `;
 
@@ -124,15 +133,30 @@ const Card = ({
     </H.BackHeartDiv>;
   };
 
+  // Check mark
+  // if (recommend) {
+  //   recommended = (
+  //     <span className="leftSide">
+  //       <span className="green">
+  //         &#10003;
+  //       </span>
+  //       {' I recommend this product'}
+  //     </span>
+  //   );
+  // }
+
   let modal;
 
   if (showModal) {
     modal = (
-      <Modal>
+      <Modal onClick={() => { setShowModal(!showModal); }}>
         <StyledTable>
           <tr>
-            {itemName}
-            {product.name}
+            <th>{itemName}</th>
+            <th>Description</th>
+            <th>{product.name}</th>
+          </tr>
+          <tr>
           </tr>
         </StyledTable>
       </Modal>
