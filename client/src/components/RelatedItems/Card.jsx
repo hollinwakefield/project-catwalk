@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Stars from '../SharedComponents/Stars';
 import Heart from './IconHeart';
-import OutfitList from './OutfitList';
+// import OutfitList from './OutfitList';
 
 const H = {};
 
@@ -132,6 +132,10 @@ const Card = ({
       <Heart />
     </H.BackHeartDiv>;
   };
+  const overviewProduct = product.features;
+  const relatedProduct = features;
+
+  
 
   // Check mark
   // if (recommend) {
