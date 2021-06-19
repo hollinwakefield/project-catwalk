@@ -55,8 +55,6 @@ class RatingAndReviews extends React.Component {
       });
   }
 
-  
-
   render() {
     // const { reviews } = this.props;
     let quickReviewList;
