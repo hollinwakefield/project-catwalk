@@ -21,10 +21,6 @@ const StyledSelect = styled.select`
   cursor: pointer;
 `;
 
-// STYLE OPTION CSS
-const StyledOption = styled.option`
-`;
-
 const Button = styled.button`
   width: 100%;
   height: 35%;
@@ -50,10 +46,6 @@ const Dropdown = (props) => (
       {props.children}
     </StyledSelect>
   </form>
-);
-
-const Option = (props) => (
-  <StyledOption>{props.value}</StyledOption>
 );
 
 // //////////////// HELPER FUNCTIONS //////////////// //
@@ -112,8 +104,8 @@ const AddToCart = (props) => {
           onChange={handleSizeSelect}
           action="/"
         >
-          <Option value="SELECT SIZE" />
-          {sizes.map((size, index) => (<Option key={index} value={size} />))}
+          <option>SELECT SIZE</option>
+          {sizes.map((size, index) => (<option key={index}>{size}</option>))}
         </Dropdown>
         {(size === 'SELECT SIZE') ? (
           <Dropdown
@@ -122,7 +114,7 @@ const AddToCart = (props) => {
             action="/"
             disabled
           >
-            <Option value="1" />
+            <option>1</option>
           </Dropdown>
         ) : (
           <Dropdown
@@ -130,7 +122,7 @@ const AddToCart = (props) => {
             onChange={handleQuantitySelect}
             action="/"
           >
-            {getArrayOneToN(getMaxQuantity(skus, size)).map((quantity, index) => (<Option key={index} value={quantity} />))}
+            {getArrayOneToN(getMaxQuantity(skus, size)).map((quantity, index) => (<option key={index}>{quantity}</option>))}
           </Dropdown>
         )}
       </DropdownWrapper>
