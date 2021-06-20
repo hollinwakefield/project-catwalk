@@ -80,11 +80,12 @@ class ReviewList extends React.Component {
     //
     const { reviews } = this.state;
     const { reviewsRendered } = this.state;
+    const { totalReviews } = this.props;
 
     let showMoreButton;
     const viewedTile = reviews.slice(0, reviewsRendered);
-    if (reviews.length > 2) {
-      if (reviewsRendered < reviews.length) {
+    if (totalReviews > 2) {
+      if (reviewsRendered < totalReviews) {
         showMoreButton = (
           <VerticalContainer>
             <CoralStyledButton type="button" onClick={this.onShowMore} />

@@ -11,8 +11,9 @@ import OutfitList from './OutfitList';
 // Store those urls into an array, then send it to the cardlist child
 
 const Wrapper = styled.div`
-  margin: 3em;
-  padding:2em;
+  margin: auto;
+  padding: 2rem;
+  min-width: 80vw;
 `;
 
 class RelatedItems extends React.Component {

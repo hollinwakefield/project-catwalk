@@ -10,15 +10,10 @@ import Card from './Card';
 // This is the container
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   text-align: center;
-  width: 95%;
+  width: 100%;
   z-index: 0;
-`;
-
-const Title = styled.h1`
-  font-size: 30px;
-  font-weight: bold;
 `;
 
 const Arrow = styled.div`
