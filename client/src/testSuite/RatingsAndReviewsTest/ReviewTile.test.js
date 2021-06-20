@@ -38,12 +38,12 @@ describe('ReviewTile tests', () => {
   test('renders successfully', () => {
     render(<Tile data={dummyData} />);
 
-    screen.debug();
+    expect(screen.queryByRole('button')).toBeNull();
   });
 
-  test('handles body size over 250 characters', () => {
+  test('renders with body size over 250 characters', () => {
     render(<Tile data={longData} />);
 
-    screen.debug();
+    expect(screen.getByRole('button', { name: 'Show More' })).toBeInTheDocument();
   });
 });
