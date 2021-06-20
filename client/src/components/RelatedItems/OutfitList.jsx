@@ -10,7 +10,6 @@ const Wrapper = styled.div`
 `;
 
 const OutfitList = ({itemName}) => {
-  console.log(itemName);
   return (
     <Wrapper>
       <OutfitCard itemName={itemName} />
