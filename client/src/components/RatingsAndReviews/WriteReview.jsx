@@ -218,6 +218,12 @@ const ClearFieldSet = styled.fieldset`
     border: none;
     padding: 0;
     margin: 0;
+    ${(props) => {
+    if (props.row) {
+      return 'display: flex';
+    }
+    return 'display';
+  }}
 `;
 
 const LabelForm = styled.label`
@@ -250,23 +256,14 @@ const InputNoPadding = styled.input`
 // };
 
 const displayCharacteristicOptions = (attribute) => (
-   <div></div>
+  <div></div>
 );
-
-const potentialValues = {
-  Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
-  Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-  Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-  Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-  Length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-  Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
-};
 
 const attributeValues = {
   rating: '',
   summary: '',
   body: '',
-  recommend: '',
+  recommend: false,
   name: '',
   email: '',
   photos: [],
@@ -280,12 +277,31 @@ const WriteReview = (characteristics) => {
     attributeValues.characteristics[productAttributes[i]] = '';
   }
 
-  console.log('this is attributes', attributeValues);
   const [values, setValues] = useState(attributeValues);
   const [showModal, setShowModal] = useState(false);
+  const [files, setFiles] = useState([]);
+
+  const handleFileUpload = (e) => {
+    setFiles([...files, URL.createObjectURL(e.target.files[0])]);
+  };
+
+  const removeFile = (e) => {
+    const updatedFiles = files.filter((item, index) => index !== e);
+    setFiles(updatedFiles);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleRadioChange = (e) => {
+    const { name } = e.target;
+    let { value } = e.target;
+    value = JSON.parse(value);
     setValues({
       ...values,
       [name]: value,
@@ -324,7 +340,7 @@ const WriteReview = (characteristics) => {
               type="text"
               label="name"
               name="name"
-              value={attributeValues.name}
+              value={values.name}
               placeholder="  Your username"
               onChange={handleInputChange}
             />
@@ -337,7 +353,7 @@ const WriteReview = (characteristics) => {
               type="text"
               label="email"
               name="email"
-              value={attributeValues.email}
+              value={values.email}
               placeholder="  Your email"
               onChange={handleInputChange}
             />
@@ -348,12 +364,12 @@ const WriteReview = (characteristics) => {
             </Title>
             <ClearFieldSet>
               <RowContainer className="centerItems" input>
-                <InputNoPadding type="radio" name="format" id="txt" value="txt" checked/>
+                <InputNoPadding type="radio" name="recommend" id="recoYes" value="true" onClick={handleRadioChange} />
                 <LabelForm htmlFor="txt">Yes</LabelForm>
               </RowContainer>
               <RowContainer className="centerItems">
-                <InputNoPadding type="radio" name="format" id="csv" value="csv" />
-                <LabelForm htmlFor="csv">No</LabelForm>
+                <InputNoPadding type="radio" name="recommend" id="recoNo" value="false" onClick={handleRadioChange} />
+                <LabelForm htmlFor="recoNo">No</LabelForm>
               </RowContainer>
             </ClearFieldSet>
           </VerticalContainer>
@@ -365,7 +381,7 @@ const WriteReview = (characteristics) => {
               type="text"
               label="summary"
               name="summary"
-              value={attributeValues.summary}
+              value={values.summary}
               placeholder="  What's most important to know?"
               onChange={handleInputChange}
             />
@@ -377,7 +393,7 @@ const WriteReview = (characteristics) => {
             <ReviewTextArea
               label="body"
               name="body"
-              value={attributeValues.body}
+              value={values.body}
               placeholder="  What did you like or dislike?"
               onChange={handleInputChange}
             />
@@ -390,8 +406,24 @@ const WriteReview = (characteristics) => {
               <CenteredToParent>
                 +
               </CenteredToParent>
-              <input className="mediaInput" type="file" accept="image/*,.pdf" />
+              <input className="mediaInput" name="photos" type="file" accept="image/*,.pdf" />
             </MediaButton>
+            <RowContainer>
+
+              <div className="form-group preview">
+                {values.photos.length > 0 &&
+                  values.photos.map((item, index) => {
+                    return (
+                      <div key={item}>
+                        <img src={item} alt="" />
+                        <button type="button" onClick={() => deleteFile(index)}>
+                          delete
+                        </button>
+                      </div>
+                    );
+                  })}
+              </div>
+            </RowContainer>
           </VerticalContainer>
           <VerticalContainer className="featureRating">
             <Title>
