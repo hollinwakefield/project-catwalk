@@ -6,8 +6,10 @@ import DownArrow from '../SharedComponents/downArrows';
 
 const ReviewArea = styled.div`
   grid-area: ReviewList;
-  min-height: auto;
-  min-width: auto;
+  position: relative;
+  min-height: 100%;
+  min-width: 100%;
+  margin-top: 30px;
   padding: 30px;
   overflow: auto;
   max-height: 80vh;

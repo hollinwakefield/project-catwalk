@@ -5,6 +5,7 @@ import ReviewList from './ReviewList';
 import RatingBreakdown from './RatingBreakdown';
 import LoadingSpinner from '../SharedComponents/ElizabethDonatedSpinner';
 import WriteReview from './WriteReview';
+import Sorting from './Sorting';
 
 const StyledDiv = styled.div`
   display: grid;
@@ -15,7 +16,7 @@ const StyledDiv = styled.div`
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 3fr);
   grid-template-rows: auto auto minmax(0px, 1fr) auto;
   min-height: 80vh;
-  gap: 3em;
+  gap: 1em;
   margin: 3rem;
   padding: 2rem;
   place-items: center;
@@ -85,6 +86,7 @@ class RatingAndReviews extends React.Component {
             totalReviews={totalReviews}
             recommended={recommended}
           />
+          <Sorting totalReviews={totalReviews} />
           {quickReviewList}
           <WriteReview characteristics={characteristics} />
         </StyledDiv>

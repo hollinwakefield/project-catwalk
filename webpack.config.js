@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     index: './client/src/index.jsx',
   },
@@ -12,7 +12,6 @@ module.exports = {
       keep: 'index.html',
     },
   },
-  devtool: 'eval-source-map',
   module: {
     rules: [
       {
