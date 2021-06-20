@@ -19,7 +19,7 @@ H.Wrapper = styled.div`
 H.BackHeartDiv = styled.button`
   display: flex;
   position: absolute;
-  color: ${(props) => (props.selected ? 'coral' : 'gray')};
+  color: ${(props) => (props.selected ? '#FF5A5F' : 'gray')};
   border: none;
   background: none;
 
@@ -130,11 +130,10 @@ const Card = ({
 }) => {
   const [currentCompare, setCurrentCompare] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedHearts, setSelectedHearts] = useState(false);
 
   const addOutfit = () => {
-    <H.BackHeartDiv selected>
-      <Heart />
-    </H.BackHeartDiv>;
+    setSelectedHearts(!selectedHearts);
   };
 
   const comparator = () => {
@@ -199,6 +198,21 @@ const Card = ({
   // }
 
   let modal;
+  let hearts;
+
+  if (!selectedHearts) {
+    hearts = (
+      <H.BackHeartDiv className="outfit" onClick={addOutfit}>
+        <Heart />
+      </H.BackHeartDiv>
+    );
+  } else {
+    hearts = (
+      <H.BackHeartDiv selected className="outfit" onClick={addOutfit}>
+        <Heart />
+      </H.BackHeartDiv>
+    );
+  }
 
   if (showModal) {
     modal = (
@@ -226,9 +240,7 @@ const Card = ({
       {modal}
       <Wrapper data-testid="card">
         <H.Wrapper>
-          <H.BackHeartDiv className="outfit" onClick={addOutfit}>
-            <Heart />
-          </H.BackHeartDiv>
+          {hearts}
         </H.Wrapper>
         <Image src={image} alt="empty" onClick={() => { compare(); setShowModal(!showModal); }} />
         <div><Line /></div>
