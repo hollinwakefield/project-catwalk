@@ -10,30 +10,19 @@ const ImageGalleryArea = styled.div`
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
-const MainImage = styled.img`
-  max-width: 90%;
-  max-height: 90%;
-  align-self: center;
-  margin-left: 30px;
-  margin-right: 50px;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-    cursor: zoom-in;
-  }
-`;
-
 const ThumbnailWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2px;
   margin-top: 30px;
+  margin-right: 30px;
 `;
 
 const Thumbnail = styled.img`
   width: 50px;
   height: 65px;
-  border: 2px solid #ddd;
+  border: 2px solid;
+  border-color: ${(props) => (props.selected ? '#FF5A5F' : '#ddd')};
   border-radius: 7%;
   padding: 3px;
   margin: 2px;
@@ -41,6 +30,38 @@ const Thumbnail = styled.img`
   &:hover {
     border-color: #FF5A5F;
   }
+`;
+
+const MainImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: scale-down;
+  align-self: center;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover {
+    opacity: 0.8;
+    cursor: zoom-in;
+  }
+`;
+
+const Modal = styled.div`
+  display: flex;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+`;
+
+const ModalImage = styled.img`
+  position: relative;
+  background-color: white;
+  margin: auto;
+  width: 85%;
 `;
 
 // //////////////// HELPER FUNCTIONS //////////////// //
@@ -55,20 +76,35 @@ const ImageGallery = (props) => {
   const thumbnailUrls = getThumbnailUrls(photos);
   const [expandedView, setExpandedView] = useState(false);
   const [mainImage, setMainImage] = useState(photos[0].url);
-  const handleClick = (index) => {
+  const [thumbnailIndex, setThumbnailIndex] = useState(0);
+  const handleThumbnailClick = (index) => {
+    setThumbnailIndex(index);
     setMainImage(photos[index].url);
+  };
+  const handleImageClick = () => {
+    setExpandedView(!expandedView);
   };
 
   useEffect(() => {
     setMainImage(photos[0].url);
+    setThumbnailIndex(0);
   }, [style]);
 
   return (
     <ImageGalleryArea>
       <ThumbnailWrapper>
-        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} alt="fitting" onClick={() => handleClick(index)} />))}
+        {thumbnailUrls.map((thumbnailUrl, index) => (index === thumbnailIndex ? (
+          <Thumbnail key={index} selected src={thumbnailUrl} alt="thumbnail" onClick={() => handleThumbnailClick(index)} />
+        ) : (
+          <Thumbnail key={index} src={thumbnailUrl} alt="thumbnail" onClick={() => handleThumbnailClick(index)} />
+        )))}
       </ThumbnailWrapper>
-      <MainImage src={mainImage} alt="thumbnail" />
+      <MainImage src={mainImage} alt="main-image" onClick={handleImageClick} />
+      {expandedView ? (
+        <Modal onClick={handleImageClick}>
+          <ModalImage src={mainImage} alt="modal" />
+        </Modal>
+      ) : null}
     </ImageGalleryArea>
   );
 };

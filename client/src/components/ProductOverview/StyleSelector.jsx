@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // //////////////// ASSIGNED GRID AREA //////////////// //
@@ -21,7 +21,8 @@ const ThumbnailWrapper = styled.div`
 const Thumbnail = styled.img`
   width: 50px;
   height: 50px;
-  border: 2px solid #ddd;
+  border: 2px solid;
+  border-color: ${(props) => (props.selected ? '#FF5A5F' : '#ddd')};
   border-radius: 50%;
   padding: 3px;
   margin-top: 5px;
@@ -44,17 +45,23 @@ const StyleSelector = (props) => {
   const { styles, style, setStyle } = props;
   const { name } = style;
   const thumbnailUrls = getThumbnailUrls(styles);
+  const [styleIndex, setStyleIndex] = useState(0);
   const handleClick = (index) => {
+    setStyleIndex(index);
     setStyle(styles.results[index]);
   };
 
   return (
     <StyleSelectorArea>
       <StyleName>
-        {'Selected Style > ' + name}
+        {`Selected Style > ${name}`}
       </StyleName>
       <ThumbnailWrapper>
-        {thumbnailUrls.map((thumbnailUrl, index) => (<Thumbnail key={index} src={thumbnailUrl} onClick={() => handleClick(index)} />))}
+        {thumbnailUrls.map((thumbnailUrl, index) => (index === styleIndex ? (
+          <Thumbnail key={index} selected src={thumbnailUrl} onClick={() => handleClick(index)} />
+        ) : (
+          <Thumbnail key={index} src={thumbnailUrl} onClick={() => handleClick(index)} />
+        )))}
       </ThumbnailWrapper>
     </StyleSelectorArea>
   );

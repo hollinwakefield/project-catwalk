@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faFacebook, faPinterest, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 // //////////////// ASSIGNED GRID AREA //////////////// //
 const AddToCartArea = styled.div`
@@ -10,57 +13,54 @@ const AddToCartArea = styled.div`
 // //////////////// STYLED COMPONENTS //////////////// //
 const DropdownWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
+
+  .empty-div {
+    margin: 10px;
+  }
 `;
 
-const StyledSelect = styled.select`
-  max-width: 100%;
+const StyledDropdown = styled.select`
+  width: 100%;
+  height: 70%;
   padding: 0.5rem;
-  border-radius: 0.5em;
-  margin-bottom: 1rem;
+  margin-bottom: 15px;
   cursor: pointer;
-`;
-
-const StyledOption = styled.option`
-  color: ${(props) => (props.notSelected ? 'lightgrey' : 'black')};
 `;
 
 const Button = styled.button`
-  max-width: 100%;
-  height: 25%;
+  width: 100%;
+  height: 30%;
   display: flex;
   justify-content: center;
   padding: 0.5rem;
+  font-size: 15px;
+  align-items: center;
   color: white;
   background-color: #FF5A5F;
   border: 2px solid #FF5A5F;
-  border-radius: 7px;
+  border-radius: 1.5em;
   cursor: pointer;
+  transition-duration: 0.3s;
   &:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 `;
 
+const SocialMediaShare = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+
+  .fa-icon {
+    cursor: pointer;
+  }
+`;
+
 const Dropdown = (props) => (
-  <form>
-    <StyledSelect onChange={props.onChange} disabled={props.disabled}>
-      {props.children}
-    </StyledSelect>
-  </form>
+  <StyledDropdown className={props.className} onChange={props.onChange} disabled={props.disabled}>
+    {props.children}
+  </StyledDropdown>
 );
-
-const Option = (props) => (
-  <StyledOption notSelected={props.notSelected}>
-    {props.value}
-  </StyledOption>
-);
-
-// const Button = (props) => (
-//   <form action={props.action}>
-//     <StyledButton type="submit" value={props.buttonText} />
-//   </form>
-// );
 
 // //////////////// HELPER FUNCTIONS //////////////// //
 // input: skus <- an object with sku id as it's key and a nested object containing size and quantity
@@ -114,33 +114,38 @@ const AddToCart = (props) => {
     <AddToCartArea>
       <DropdownWrapper>
         <Dropdown
-          id="size-selector"
+          className="size-selector"
           onChange={handleSizeSelect}
-          action="/"
         >
-          <Option notSelected value="SELECT SIZE" />
-          {sizes.map((size, index) => (<Option key={index} value={size} />))}
+          <option>SELECT SIZE</option>
+          {sizes.map((size, index) => (<option key={index}>{size}</option>))}
         </Dropdown>
+        <div className="empty-div" />
         {(size === 'SELECT SIZE') ? (
           <Dropdown
-            id="qty-selector"
+            className="qty-selector"
             onChange={handleQuantitySelect}
-            action="/"
             disabled
           >
-            <Option value="1" />
+            <option>1</option>
           </Dropdown>
         ) : (
           <Dropdown
-            id="qty-selector"
+            className="qty-selector"
             onChange={handleQuantitySelect}
             action="/"
           >
-            {getArrayOneToN(getMaxQuantity(skus, size)).map((quantity, index) => (<Option key={index} value={quantity} />))}
+            {getArrayOneToN(getMaxQuantity(skus, size)).map((quantity, index) => (<option key={index}>{quantity}</option>))}
           </Dropdown>
         )}
       </DropdownWrapper>
       <Button onClick={handleSubmit}>ADD TO BAG</Button>
+      <SocialMediaShare>
+        <FontAwesomeIcon className="fa-icon" icon={faInstagram} size="2x" color="#FF5A5F" onClick={() => window.open('http://www.instagram.com/')} />
+        <FontAwesomeIcon className="fa-icon" icon={faFacebook} size="2x" color="#FF5A5F" onClick={() => window.open('http://www.facebook.com/')} />
+        <FontAwesomeIcon className="fa-icon" icon={faPinterest} size="2x" color="#FF5A5F" onClick={() => window.open('http://www.pinterest.com/')} />
+        <FontAwesomeIcon className="fa-icon" icon={faTwitter} size="2x" color="#FF5A5F" onClick={() => window.open('http://www.twitter.com/')} />
+      </SocialMediaShare>
     </AddToCartArea>
   );
 };
