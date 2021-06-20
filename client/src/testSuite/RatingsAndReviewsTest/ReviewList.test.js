@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { render, screen } from '@testing-library/react';
+import { render, screen, wait } from '@testing-library/react';
 import ReviewList from '../../components/RatingsAndReviews/ReviewList';
 import '@testing-library/jest-dom';
 
@@ -72,12 +72,12 @@ const dummyData = {
 };
 
 describe('ReviewList tests', () => {
-  test('renders successfully', () => {
+  test('renders successfully', async () => {
     axios.get.mockImplementation(() => Promise.resolve(dummyData));
 
     render(<ReviewList totalReviews={5} productId={25167} sort={''} loaded={true} />);
 
-    screen.debug();
+    await wait(() => expect(screen.queryAllByTestId('Tile')).toHaveLength(2));
   });
 });
 

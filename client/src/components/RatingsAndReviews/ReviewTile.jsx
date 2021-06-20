@@ -161,9 +161,9 @@ const Tile = (props) => {
 
   if (body.length > 250) {
     if (expand) {
-      showButton = <button type="button" onClick={() => { setExpand(!expand); }}>Show Less</button>;
+      showButton = <button aria-label="shrink review body" type="button" onClick={() => { setExpand(!expand); }}>Show Less</button>;
     } else {
-      showButton = <button type="button" onClick={() => { setExpand(!expand); }}>Show More</button>;
+      showButton = <button aria-label="expand review body" type="button" onClick={() => { setExpand(!expand); }}>Show More</button>;
     }
   } else {
     showButton;
@@ -202,7 +202,7 @@ const Tile = (props) => {
   // console.log(data);
 
   return (
-    <TileArea>
+    <TileArea data-testid="Tile">
       <RatingArea>
         <Stars stars={rating} />
       </RatingArea>
