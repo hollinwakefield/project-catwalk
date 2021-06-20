@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Banner from './Banner/Banner';
 import ProductOverview from './ProductOverview/ProductOverview';
 import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
 import RelatedItems from './RelatedItems/RelatedItems';

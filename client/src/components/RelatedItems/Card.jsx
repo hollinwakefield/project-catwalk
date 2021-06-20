@@ -33,8 +33,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 250px;
-  max-width: 250px;
+  min-width: 240px;
+  max-width: 240px;
   min-height: 500px;
   border-radius: 4px;
   border: solid 2px #767676;
