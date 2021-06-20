@@ -1,10 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import Banner from './Banner/Banner';
 import ProductOverview from './ProductOverview/ProductOverview';
 import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
 import RelatedItems from './RelatedItems/RelatedItems';
 import LoadingSpinner from './SharedComponents/ElizabethDonatedSpinner';
+
+const VerticalContainer = styled.div`
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -54,7 +61,8 @@ class App extends React.Component {
     } = this.state;
     if (product && styles && cart && related) {
       return (
-        <>
+        <VerticalContainer>
+          <Banner />
           <ProductOverview
             product={product}
             styles={styles}
@@ -71,7 +79,7 @@ class App extends React.Component {
             productId={productId}
             passBackAvgAndTotalReviews={this.setRatingAndTotalRev}
           />
-        </>
+        </VerticalContainer>
       );
     }
     return <LoadingSpinner />;

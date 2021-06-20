@@ -4,6 +4,8 @@ import logo from './cat-face.jpg';
 
 const RowContainer = styled.div`
     display: flex;
+    place-self: center;
+    position: relative;
     flex-direction: row;
     justify-content: center;
     align-items: center;
