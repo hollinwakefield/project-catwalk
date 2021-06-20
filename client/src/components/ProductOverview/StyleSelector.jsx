@@ -58,9 +58,9 @@ const StyleSelector = (props) => {
       </StyleName>
       <ThumbnailWrapper>
         {thumbnailUrls.map((thumbnailUrl, index) => (index === styleIndex ? (
-          <Thumbnail key={index} selected src={thumbnailUrl} loading="lazy" onClick={() => handleClick(index)} />
+          <Thumbnail key={index} selected src={thumbnailUrl} loading="lazy" height="200" width="200" onClick={() => handleClick(index)} />
         ) : (
-          <Thumbnail key={index} src={thumbnailUrl} loading="lazy" onClick={() => handleClick(index)} />
+          <Thumbnail key={index} src={thumbnailUrl} loading="lazy" width="200" height="200" onClick={() => handleClick(index)} />
         )))}
       </ThumbnailWrapper>
     </StyleSelectorArea>

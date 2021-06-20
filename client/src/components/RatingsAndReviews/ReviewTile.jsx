@@ -157,7 +157,7 @@ const Tile = (props) => {
   let modalImage;
   let recommended;
 
-  const showImages = (photo) => <img className="photo thumbnail" key={photo.id} loading="lazy" alt={photo.id} src={photo.url} />;
+  const showImages = (photo) => <img className="photo thumbnail" key={photo.id} loading="lazy" height="200" width="200" alt={photo.id} src={photo.url} />;
 
   if (body.length > 250) {
     if (expand) {

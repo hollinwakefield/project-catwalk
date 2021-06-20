@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Banner from './Banner/Banner';
 import ProductOverview from './ProductOverview/ProductOverview';
-import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
-import RelatedItems from './RelatedItems/RelatedItems';
 import LoadingSpinner from './SharedComponents/ElizabethDonatedSpinner';
+
+const RatingAndReviews = React.lazy(() => import('./RatingsAndReviews/RatingAndReviews'));
+const RelatedItems = React.lazy(() => import('./RelatedItems/RelatedItems'));
 
 const VerticalContainer = styled.div`
     display: flex;
@@ -24,9 +25,7 @@ class App extends React.Component {
       related: null,
       rating: 0,
       totalReviews: 0,
-      // reviews: null,
     };
-    // initializer();
     this.setRatingAndTotalRev = this.setRatingAndTotalRev.bind(this);
   }
 
@@ -70,15 +69,17 @@ class App extends React.Component {
             rating={rating}
             totalReviews={totalReviews}
           />
-          <RelatedItems
-            related={related}
-            styles={styles}
-            product={product}
-          />
-          <RatingAndReviews
-            productId={productId}
-            passBackAvgAndTotalReviews={this.setRatingAndTotalRev}
-          />
+          <Suspense fallback={<LoadingSpinner />}>
+            <RelatedItems
+              related={related}
+              styles={styles}
+              product={product}
+            />
+            <RatingAndReviews
+              productId={productId}
+              passBackAvgAndTotalReviews={this.setRatingAndTotalRev}
+            />
+          </Suspense>
         </VerticalContainer>
       );
     }
@@ -87,25 +88,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// attempted to initialize the state via initializing inside the constructor,
-// which runs before the component... but failed.
-// const initializer = () => {
-//   axios.get('/products/25168')
-//   .then((res) => {
-//     const product = res.data;
-//     this.setState({ product: product });
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
-// // fetch reviews from API - Steven
-// axios.get('/reviews/25168')
-//   .then((res) => {
-//     this.setState({ reviews: res.data });
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   })
-// }

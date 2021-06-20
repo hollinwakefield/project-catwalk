@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import Stars from '../SharedComponents/Stars';
 import SelectableStar from './SelectableStar';
 
 const sheen = keyframes`
@@ -133,13 +132,6 @@ const StyledInput = styled.input`
     font-family: 'Montserrat', sans-serif;
 `;
 
-const GreyBorder = styled.div`
-    width: 100%;
-    overflow: hidden;
-    border: 1px solid #DDD;
-    border-radius: 5px;
-`;
-
 const ReviewTextArea = styled.textarea`
     width: 100%;
     height: 120px;
@@ -148,15 +140,6 @@ const ReviewTextArea = styled.textarea`
     border-radius: 3px;
     font-family: 'Montserrat', sans-serif;
 
-`;
-
-const RadioButtonGrouped = styled.fieldset`
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    border: 0;
-    padding: 0;
-    min-width: 0;
 `;
 
 const CoralStyledButton = styled.button`
@@ -254,10 +237,6 @@ const InputNoPadding = styled.input`
 //     box-sizing: border-box !important;
 //   };
 // };
-
-const displayCharacteristicOptions = (attribute) => (
-  <div></div>
-);
 
 const attributeValues = {
   rating: '',

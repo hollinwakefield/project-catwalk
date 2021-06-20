@@ -21,13 +21,6 @@ const RatingBreakdownArea = styled.div`
 
 const RatingBreakdown = (props) => {
   const { avg, recommended } = props;
-  const [filterOneStars, setFilterOneStars] = useState(false);
-  const [filterTwoStars, setFilterTwoStars] = useState(false);
-  const [filterThreeStars, setFilterThreeStars] = useState(false);
-  const [filterFourStars, setFilterFourStars] = useState(false);
-  const [filterFiveStars, setFilterFiveStars] = useState(false);
-  const [totalReviews, setTotalReviews] = useState(0);
-
   // useEffect() {
   //   axios.get('/')
   // }
