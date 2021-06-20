@@ -13,20 +13,23 @@ const AddToCartArea = styled.div`
 // //////////////// STYLED COMPONENTS //////////////// //
 const DropdownWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+
+  .empty-div {
+    margin: 10px;
+  }
 `;
 
-const StyledSelect = styled.select`
+const StyledDropdown = styled.select`
   width: 100%;
+  height: 70%;
   padding: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 15px;
   cursor: pointer;
 `;
 
 const Button = styled.button`
   width: 100%;
-  height: 35%;
+  height: 30%;
   display: flex;
   justify-content: center;
   padding: 0.5rem;
@@ -46,7 +49,7 @@ const Button = styled.button`
 const SocialMediaShare = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-top: 15px;
+  margin-top: 20px;
 
   .fa-icon {
     cursor: pointer;
@@ -54,11 +57,9 @@ const SocialMediaShare = styled.div`
 `;
 
 const Dropdown = (props) => (
-  <form>
-    <StyledSelect onChange={props.onChange} disabled={props.disabled}>
-      {props.children}
-    </StyledSelect>
-  </form>
+  <StyledDropdown className={props.className} onChange={props.onChange} disabled={props.disabled}>
+    {props.children}
+  </StyledDropdown>
 );
 
 // //////////////// HELPER FUNCTIONS //////////////// //
@@ -113,25 +114,24 @@ const AddToCart = (props) => {
     <AddToCartArea>
       <DropdownWrapper>
         <Dropdown
-          id="size-selector"
+          className="size-selector"
           onChange={handleSizeSelect}
-          action="/"
         >
           <option>SELECT SIZE</option>
           {sizes.map((size, index) => (<option key={index}>{size}</option>))}
         </Dropdown>
+        <div className="empty-div" />
         {(size === 'SELECT SIZE') ? (
           <Dropdown
-            id="qty-selector"
+            className="qty-selector"
             onChange={handleQuantitySelect}
-            action="/"
             disabled
           >
             <option>1</option>
           </Dropdown>
         ) : (
           <Dropdown
-            id="qty-selector"
+            className="qty-selector"
             onChange={handleQuantitySelect}
             action="/"
           >
