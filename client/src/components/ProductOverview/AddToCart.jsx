@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faFacebook, faPinterest, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 // //////////////// ASSIGNED GRID AREA //////////////// //
 const AddToCartArea = styled.div`
@@ -37,6 +40,16 @@ const Button = styled.button`
   transition-duration: 0.3s;
   &:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+`;
+
+const SocialMediaShare = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+
+  .fa-icon {
+    cursor: pointer;
   }
 `;
 
@@ -127,6 +140,12 @@ const AddToCart = (props) => {
         )}
       </DropdownWrapper>
       <Button onClick={handleSubmit}>ADD TO BAG</Button>
+      <SocialMediaShare>
+        <FontAwesomeIcon className="fa-icon" icon={faInstagram} size="2x" color="#FF5A5F" onClick={() => window.open('http://www.instagram.com/')} />
+        <FontAwesomeIcon className="fa-icon" icon={faFacebook} size="2x" color="#FF5A5F" onClick={() => window.open('http://www.facebook.com/')} />
+        <FontAwesomeIcon className="fa-icon" icon={faPinterest} size="2x" color="#FF5A5F" onClick={() => window.open('http://www.pinterest.com/')} />
+        <FontAwesomeIcon className="fa-icon" icon={faTwitter} size="2x" color="#FF5A5F" onClick={() => window.open('http://www.twitter.com/')} />
+      </SocialMediaShare>
     </AddToCartArea>
   );
 };
