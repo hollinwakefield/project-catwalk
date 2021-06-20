@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 // /////////////// ASSIGNED GRID AREA //////////////// //
 const ImageGalleryArea = styled.div`
+  position: relative;
   grid-area: ImageGallery;
   display: flex;
   align-items: flex-start;
   max-height: 70vh;
+  overflow: hidden;
 `;
 
 // //////////////// STYLED COMPONENTS //////////////// //
