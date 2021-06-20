@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Banner from './Banner/Banner';
 import ProductOverview from './ProductOverview/ProductOverview';
 import RatingAndReviews from './RatingsAndReviews/RatingAndReviews';
 import RelatedItems from './RelatedItems/RelatedItems';
@@ -9,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 25169,
+      productId: 25170,
       product: null,
       styles: null,
       cart: null,
@@ -48,6 +49,7 @@ class App extends React.Component {
     if (product && styles && cart && related) {
       return (
         <>
+          <Banner />
           <ProductOverview product={product} styles={styles} cart={cart} />
           <RelatedItems related={related} product={product} />
           <RatingAndReviews />

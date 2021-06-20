@@ -4,7 +4,7 @@ import OutfitCard from './OutfitCard';
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: Center;
   text-align: center;
   width: 95%;
 `;
