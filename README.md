@@ -44,3 +44,6 @@ Contributors names and contact info
 * Kate Jeon
 * Steven Lam
 * Chhuong Le
+* Chris Pak
+* Elizabeth Phung
+* Hollin Wakefield
