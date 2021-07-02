@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import Tile from './ReviewTile';
-import DownArrow from '../SharedComponents/downArrows';
+import React from "react";
+import styled from "styled-components";
+import axios from "axios";
+import Tile from "./ReviewTile";
+import DownArrow from "../SharedComponents/downArrows";
 
 const ReviewArea = styled.div`
   grid-area: ReviewList;
@@ -13,7 +13,7 @@ const ReviewArea = styled.div`
   padding: 30px;
   overflow: auto;
   max-height: 80vh;
-  `;
+`;
 
 const VerticalContainer = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ const CoralStyledButton = styled.button`
     }
 `;
 
-const formatTile = (data) => <Tile key={data.review_id} data={data} />;
+const formatTile = (data) => <Tile key={data.id} data={data} />;
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -60,11 +60,51 @@ class ReviewList extends React.Component {
     this.onShowMore = this.onShowMore.bind(this);
   }
 
+  //   {
+  //     "data": [
+  //         {
+  //             "review_id": 407324,
+  //             "rating": 5,
+  //             "summary": "tips for FEC",
+  //             "recommend": true,
+  //             "response": null,
+  //             "body": "use hooks, maybe redux, before all that make sure you know how git workflow works. Good luck!!!!",
+  //             "date": "2021-06-20T00:00:00.000Z",
+  //             "reviewer_name": "friendly Yuki",
+  //             "helpfulness": 3,
+  //             "photos": []
+  //         }
+  //     ]
+  // }
+
+  // {
+  //   "characteristics": [],
+  //   "_id": "60dbb3fffdf25ef19ada0124",
+  //   "id": 5774940,
+  //   "product_id": 1000011,
+  //   "rating": 3,
+  //   "date": "2021-03-25T01:20:58.122Z",
+  //   "summary": "Et sunt maiores eos.",
+  //   "body": "Excepturi sed porro. Ut qui alias enim quia. Ab dolorum nostrum. Dolores tenetur nostrum sint ut aliquam. Distinctio harum at culpa natus officia similique quasi iste. Quos magni distinctio rerum inventore voluptatem quo eos.",
+  //   "recommend": true,
+  //   "reported": false,
+  //   "reviewer_name": "Katrina.Breitenberg",
+  //   "reviewer_email": "Lourdes.Davis36@hotmail.com",
+  //   "response": "null",
+  //   "helpfulness": 1,
+  //   "photos": []
+  // },
+
   componentDidMount() {
     const { productId, totalReviews, sort } = this.props;
-    axios.get(`/reviews/getReviews/${productId}/${totalReviews}/${sort}`)
-      .then((data) => this.setState({ reviews: data.data }))
-      .catch((err) => console.log('error: ', err));
+    axios
+      // .get(`/reviews/getReviews/${productId}/${totalReviews}/${sort}`)
+      .get(`http://localhost:3158/api/reviews/${productId}`)
+      .then((data) => {
+        this.setState({ reviews: data.data });
+        console.log(data);
+      })
+      .catch((err) => console.log("error: ", err));
   }
 
   // static getDerivedStateFromError(err) {

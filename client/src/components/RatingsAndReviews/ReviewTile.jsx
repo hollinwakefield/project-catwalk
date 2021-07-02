@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Stars from '../SharedComponents/Stars';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import Stars from "../SharedComponents/Stars";
 
 const TileArea = styled.div`
   display: grid;
-  grid-template-areas: "StarRating ReviewerName Date"
-                       "Summary Summary Summary"
-                       "ReviewBody ReviewBody ReviewBody"
-                       "Response Response Response"
-                       "Helpful Helpful Helpful";
+  grid-template-areas:
+    "StarRating ReviewerName Date"
+    "Summary Summary Summary"
+    "ReviewBody ReviewBody ReviewBody"
+    "Response Response Response"
+    "Helpful Helpful Helpful";
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   grid-gap: 5px;
@@ -39,7 +40,7 @@ const ReviewSummary = styled.div`
   grid-area: Summary;
   place-self: center start;
   font-size: 20px;
- `;
+`;
 
 const ReviewBody = styled.div`
   grid-area: ReviewBody;
@@ -61,30 +62,30 @@ const ReviewBody = styled.div`
     color: black;
     text-decoration: underline;
     cursor: pointer;
-  };
+  }
 `;
 
 const Photos = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-.photo {
-  margin-left: 10px;
-  border: none;
-  border-radius: 4px;
-  background: white;
-  display: block;
-  object-fit: contain;
-  width: 5%;
-  max-height: 69px;
-  min-height: 0;
-  transition-duration: 0.3s;
-  &:hover {
-    border: 1px solid black;
-    cursor: pointer;
-  };
-}
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .photo {
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    background: white;
+    display: block;
+    object-fit: contain;
+    width: 5%;
+    max-height: 69px;
+    min-height: 0;
+    transition-duration: 0.3s;
+    &:hover {
+      border: 1px solid black;
+      cursor: pointer;
+    }
+  }
 `;
 
 const ReviewResponse = styled.div`
@@ -117,7 +118,7 @@ const Modal = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 
   .modal-content {
     position: relative;
@@ -137,10 +138,23 @@ const Container = styled.div`
 const Tile = (props) => {
   // const [productInfo, setProductInfo] = useState(props.); NOOOOooooooo
   const { data } = props;
-  const { body, date, helpfulness, photos, rating,
-    recommend, response, reviewer_name, summary } = data;
+  const {
+    body,
+    date,
+    helpfulness,
+    photos,
+    rating,
+    recommend,
+    response,
+    reviewer_name,
+    summary,
+  } = data;
   const formattedDate = new window.Date(date);
-  const prettyDate = formattedDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+  const prettyDate = formattedDate.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
   const [expand, setExpand] = useState(false);
   const [helpful, setHelpful] = useState(0);
   const [notHelpful, setNotHelpful] = useState(0);
@@ -157,19 +171,47 @@ const Tile = (props) => {
   let modalImage;
   let recommended;
 
-  const showImages = (photo) => <img className="photo thumbnail" key={photo.id} loading="lazy" alt={photo.id} src={photo.url} />;
+  const showImages = (photo) => (
+    <img
+      className="photo thumbnail"
+      key={photo.id}
+      loading="lazy"
+      alt={photo.id}
+      src={photo.url}
+    />
+  );
 
   if (body.length > 250) {
     if (expand) {
-      showButton = <button aria-label="shrink review body" type="button" onClick={() => { setExpand(!expand); }}>Show Less</button>;
+      showButton = (
+        <button
+          aria-label="shrink review body"
+          type="button"
+          onClick={() => {
+            setExpand(!expand);
+          }}
+        >
+          Show Less
+        </button>
+      );
     } else {
-      showButton = <button aria-label="expand review body" type="button" onClick={() => { setExpand(!expand); }}>Show More</button>;
+      showButton = (
+        <button
+          aria-label="expand review body"
+          type="button"
+          onClick={() => {
+            setExpand(!expand);
+          }}
+        >
+          Show More
+        </button>
+      );
     }
   } else {
     showButton;
   }
 
-  if (response) {
+  if (response && response !== "null") {
     if (response.length > 0) {
       sellerResponse = (
         <div className="response">
@@ -182,8 +224,17 @@ const Tile = (props) => {
 
   if (showModal) {
     modalImage = (
-      <Modal onClick={() => { setShowModal(!showModal); }}>
-        <img alt="modal" loading="lazy" className="modal-content" src={clickedImage} />
+      <Modal
+        onClick={() => {
+          setShowModal(!showModal);
+        }}
+      >
+        <img
+          alt="modal"
+          loading="lazy"
+          className="modal-content"
+          src={clickedImage}
+        />
       </Modal>
     );
   }
@@ -191,10 +242,8 @@ const Tile = (props) => {
   if (recommend) {
     recommended = (
       <span className="leftSide">
-        <span className="green">
-          &#10003;
-        </span>
-        {' I recommend this product'}
+        <span className="green">&#10003;</span>
+        {" I recommend this product"}
       </span>
     );
   }
@@ -209,35 +258,48 @@ const Tile = (props) => {
       <ReviewerName>{reviewer_name}</ReviewerName>
       <Date>{prettyDate}</Date>
       <ReviewSummary>
-        <b>
-          {summary}
-        </b>
+        <b>{summary}</b>
       </ReviewSummary>
       <ReviewBody>
-        <Container>
-          {expand ? body : (`${body.slice(0, 250)}`)}
-        </Container>
+        <Container>{expand ? body : `${body.slice(0, 250)}`}</Container>
         {showButton}
         <br />
-        <Photos onClick={(e) => { setClickedImage(e.target.src); setShowModal(!showModal); }}>
+        <Photos
+          onClick={(e) => {
+            setClickedImage(e.target.src);
+            setShowModal(!showModal);
+          }}
+        >
           {photos.map(showImages)}
           {modalImage}
         </Photos>
       </ReviewBody>
-      <ReviewResponse>
-        {sellerResponse}
-      </ReviewResponse>
+      <ReviewResponse>{sellerResponse}</ReviewResponse>
       <Helpful>
         {recommended}
         <br />
         Was this review helpful?
-        <span onClick={() => { if (!rated) {
-          setHelpful(helpful + 1);
-          setRated(true); }
-        }}> Yes: {helpful}
+        <span
+          onClick={() => {
+            if (!rated) {
+              setHelpful(helpful + 1);
+              setRated(true);
+            }
+          }}
+        >
+          {" "}
+          Yes: {helpful}
         </span>
-        <span onClick={() => {
-          if (!rated) { setNotHelpful(notHelpful + 1); setRated(true); }}}> No: {notHelpful}
+        <span
+          onClick={() => {
+            if (!rated) {
+              setNotHelpful(notHelpful + 1);
+              setRated(true);
+            }
+          }}
+        >
+          {" "}
+          No: {notHelpful}
         </span>
       </Helpful>
     </TileArea>
